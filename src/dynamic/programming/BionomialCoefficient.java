@@ -21,7 +21,7 @@ package dynamic.programming;
  */
 public class BionomialCoefficient {
 
-    private static int binomialCoeff(int n, int k) {
+    public static int binomialCoeff(int n, int k) {
         int res = 1;
 
         // Since C(n, k) = C(n, n-k)//eg C(5,2) = C(5,3), so if K < (n-k) use K else (n-k)
@@ -37,9 +37,46 @@ public class BionomialCoefficient {
         return res;
     }
 
+    public static int binomialCoeffRec(int n, int k) {
+
+        if (k == 0) {
+            return 1;
+        } else if (k == n) {
+            return 1;
+        }
+
+        if (n - k < k) {
+            k = n - k;
+        }
+
+        return binomialCoeffRec(n - 1, k - 1) + binomialCoeffRec(n - 1, k);
+
+    }
+
+    public static int binomialCoeffDyn(int n, int k) {
+
+        int res[][] = new int[n + 1][k + 1];
+
+        for (int i = 0; i <= n; i++) {
+            for (int j = 0; j <= Integer.min(i, k); j++) {
+
+                if (j == 0 || i == j) {
+                    res[i][j] = 1;
+                } else {
+                    res[i][j] = res[i - 1][j - 1] + res[i - 1][j];
+                }
+            }
+        }
+
+        return res[n][k];
+
+    }
+
     public static void main(String[] args) {
 
         System.out.println(binomialCoeff(5, 2)); //output :10
+        System.out.println(binomialCoeffRec(5, 2));
+        System.out.println(binomialCoeffDyn(5, 2));
 
     }
 }
