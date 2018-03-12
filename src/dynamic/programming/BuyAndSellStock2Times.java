@@ -10,7 +10,7 @@ package dynamic.programming;
  * max profit with one transaction and aubarray price[i+1..n-1]  }
  * i varies from 0 to n-1.
  *
- * Time Complexity : O(n)
+ * Time Complexity : O(n*n)
  *
  * Method 2:Dynamic Programming
  *
