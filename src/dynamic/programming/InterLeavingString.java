@@ -47,7 +47,7 @@ public class InterLeavingString {
         dp[0][0] = true;
 
         //if s1 is empty compare  s2 and s3
-        for (int j = 1; j < dp.length; j++) {
+        for (int j = 1; j < dp[0].length; j++) {
             dp[0][j] = s2.charAt(j - 1) == s3.charAt(j - 1) ? true : false;
         }
 
