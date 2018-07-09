@@ -1,7 +1,3 @@
-package com.macquarie.shiner.batch.gcs.tasklet;
-
-import com.macquarie.mts.ddl.test.S;
-
 /**
  * @author vsingh16
  *         <p>
@@ -91,6 +87,26 @@ public class Trie {
 
     }
 
+    /**
+     * To delete a word from trie, simply set end of word flag to false,
+     * so that this word cant ne seached
+     */
+    public Boolean delete(String word) {
+
+        Node node = root;
+        for (int i = 0; i < word.length(); i++) {
+            int index = word.charAt(i) - 'a';
+            node = node.children[index];
+        }
+
+        if (node.isWordEnd) {
+            node.isWordEnd = false;
+            return true;
+        }
+
+        return false;
+    }
+
 
     public static void main(String[] args) {
 
@@ -103,8 +119,12 @@ public class Trie {
         //System.out.println(trie.search("throw"));
         //System.out.println(trie.search("the"));
 
-        trie.searchWordsByPrefix("tha");
-        trie.searchWordsByPrefix("th");
-        trie.searchWordsByPrefix("thr");
+        //trie.searchWordsByPrefix("tha");
+        //trie.searchWordsByPrefix("th");
+        //trie.searchWordsByPrefix("thr");
+
+        System.out.println("Deleting their");
+        System.out.println(trie.delete("their"));
+        System.out.println(trie.search("their"));
     }
 }
