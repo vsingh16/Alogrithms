@@ -39,8 +39,7 @@ public class SprialTraversal {
         public Tree(Node root) {
             this.root = root;
         }
-
-        public void sprialTraversal(Node root) {
+public void sprialTraversal(Node root) {
 
             Stack<Node> s1 = new Stack();
             Stack<Node> s2 = new Stack<>();
@@ -67,6 +66,41 @@ public class SprialTraversal {
                     }
                     if (node.getRight() != null) {
                         s1.push(node.getRight());
+                    }
+                }
+
+            }
+
+        }
+
+        public void sprialTraversal2(Node root) {
+
+            Stack<Node> s = new Stack();
+            Queue<Node> q = new LinkedList<>();
+
+            s.push(root);
+            while (!s.isEmpty() || !q.isEmpty()) {
+
+
+                while (!s.isEmpty()) {
+                    Node node = s.pop();
+                    System.out.println(node.data);
+                    if (node.getLeft() != null) {
+                        q.add(node.getLeft());
+                    }
+                    if (node.getRight() != null) {
+                        q.add(node.getRight());
+                    }
+                }
+
+                while (!q.isEmpty()) {
+                    Node node = q.poll();
+                    System.out.println(node.data);
+                    if (node.getLeft() != null) {
+                        s.push(node.getLeft());
+                    }
+                    if (node.getRight() != null) {
+                        s.push(node.getRight());
                     }
                 }
 
