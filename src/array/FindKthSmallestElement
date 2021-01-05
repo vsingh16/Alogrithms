@@ -1,0 +1,73 @@
+/**
+* Find kth smallest element in given array.
+* There are two methods: 
+* Method 1: First sort element.
+* Return kth element. Time Complexity : O(n log n) : 
+*
+* Method 2: With below approach, you can find kth smallest element in O(n) time in average case.
+* But in worst case scenario, Time Complexity : O(n^2) i.e if array is already sorted in reverse order.
+* This method is simialr to quick sort, where we find pivot index.( i.e less < pivot < greater)
+* Step 1: Find Pivot Index
+*  Step 1.1: Traverse from left to right, keep i  = l, pivot = r
+*  Step 1.2: if element is less than pivot , move it to extreme left 
+* Step 2: if element at index is the dersired kth, return element 
+* Step 3: if k is less  than pivot index, it means we need to go on left side else on right
+* Step 4: when we go on right side, we need to update k as we have discarded pivot - l +1 elements.
+**/
+class Solution {
+    
+public static int findKthElement(int a[],int l, int r, int k){
+
+  //Base Condition: array must have elements greater or equal to k
+  if(k<=0 && k > (r-l + 1)){
+    return -1;
+  }
+
+  else if(l == r & k == 1){
+    return a[l];
+  }
+
+  int index = findPivotIndex(a,l,r);
+  System.out.println("Pivot Index: "+ index);
+  //case 1 : i.e when pivot index is equal to kth element
+  //index - l becuase l can change from 0 to 1 and so, in that case array's starting index will be index - l 
+  if(index - l == k-1){
+	  return a[index];
+  }
+  
+  //case 2 : 
+  else if(k-1 < index-l ){
+   return findKthElement(a,l, index -1, k);
+  }
+  
+  //case 3:
+  else {
+    System.out.println("Kth :"+ (k - (index -l + 1)));
+   return findKthElement(a,index +1 , r , k - (index -l + 1));
+  }
+}
+
+public static int findPivotIndex(int a[], int l, int r){
+
+  int i = l;
+  int pivot = r;
+  for(int j = l;j<=pivot-1;j++){
+    if(a[j]< a[pivot]){
+      swap(a,i,j);
+      i++;
+    }
+  }
+  swap(a,i,pivot);
+  return i;
+}
+
+public static void swap(int a[], int i, int j){
+  int temp = a[i];
+  a[i] = a[j];
+  a[j] = temp;
+}
+       
+    public static int findKthSmallest(int[] nums, int k) {
+        return findKthElement(nums,0,nums.length-1,k);       
+    }
+}
