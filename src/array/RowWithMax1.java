@@ -17,7 +17,7 @@ Time Complexity: O(m*n)
 Approach 2: Since each row is sorted, we can apply binary search and find index of 1st one, from there we can calculate no of 1 in a row.
 Time Complexity: O(m logn)
 
-Approach2: First count no. of 1 from right in 1st row.
+Approach3: First count no. of 1 from right in 1st row.
 Then only look for 1 in next row from previous row index of 1.
 Time Complexity : O(m + n)
 First row col traversal n, then in each ro we need to have 1 or few 
@@ -57,7 +57,7 @@ public class Main {
 // } Driver Code Ends
 
 
-//User function Template for Java
+//User function Template for Java : Approach 3 
 
 class Solution {
     int rowWithMax1s(int arr[][], int n, int m) {
@@ -80,3 +80,41 @@ class Solution {
         return (pos==m-1 && row ==0) ? -1: row;
     }
 }
+
+int findIndexWithBinarySearch(int arr[][], int row, int m){
+        
+        int l =0, h=m-1;
+        while(l <= h){
+            
+            int mid = l + (h-l)/2;
+            if(mid >0 && arr[row][mid -1] == 0 && arr[row][mid] == 1){ //when no is 1 and its left element is zero, it means we have all 1 on its right
+                return mid;
+            }else if (arr[row][mid] == 0){ //when no is zero, it  means on left side we have all zero
+                l = mid+1;
+            }else{ //when no. is 1 and its left no is also 1
+                h = mid-1;
+            }            
+        }
+        
+        //left side crossing means, its all 1 
+        //right side crossing means, its all 0
+        return h == -1 ? 0 : -1;
+    }
+    
+    //Approach 2:
+    int rowWithMax1sWithBinarySearch(int arr[][], int n, int m) {
+        
+        int minIndex = Integer.MAX_VALUE;
+        int row = -1;
+     for(int i=0;i<n;i++){
+         int index = findIndexWithBinarySearch(arr, i, m);
+         if(index>=0){
+             if(index < minIndex){ //lesser index means more 1 starting from left
+                 minIndex = index;
+                 row = i;
+             }
+         }
+     }
+     
+     return row;
+    }
