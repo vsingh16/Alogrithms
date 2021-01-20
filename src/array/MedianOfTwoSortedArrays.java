@@ -15,7 +15,7 @@ Output: 2.50000
 Explanation: merged array = [1,2,3,4] and median is (2 + 3) / 2 = 2.5.
 
 https://leetcode.com/problems/median-of-two-sorted-arrays/
-https://github.com/mission-peace/interview/blob/master/src/com/interview/binarysearch/MedianOfTwoSortedArrayOfDifferentLength.java
+https://www.youtube.com/watch?v=LPFhl65R7ww&t=60s
 
 Approach1: Merge the two sorted arrays as we do in Merge sort.
 Median of odd length array = mid element
