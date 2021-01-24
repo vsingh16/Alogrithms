@@ -1,6 +1,7 @@
 /**
 Find kth smallest element in two sorted array.
-https://www.geeksforgeeks.org/k-th-element-two-sorted-arrays/
+https://www.geeksforgeeks.org/k-th-element-two-sorted-arrays
+https://www.baeldung.com/java-kth-smallest-element-in-sorted-arrays 
 
 Given two sorted arrays of size m and n respectively, you are tasked with finding the element that would be at the k’th position of the final sorted array.
 Input : Array 1 - 2 3 6 7 9
