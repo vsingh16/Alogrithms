@@ -81,7 +81,7 @@ class MyStack{
     void push(int a)
 	{
 		//if stack is full throw overflow exception
-		if(top == size){
+		if(top == size -1){
 			throw new RuntimeException("Oveflow");
 		}
 		top++;		
