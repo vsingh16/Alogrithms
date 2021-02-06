@@ -21,7 +21,7 @@ public class MaxElementIncreasingDecreasingArray {
 
     /**
      * Method 2: Look for  mid element.
-     * If left<mid<right, then mid element is the max
+     * If left>mid>right, then mid element is the max
      * if mid>right, series is increasing , so we can ignore left part
      * if mid<right, series is decreasing , so we can ignore right part
      * if there is only one element, then that element is max
