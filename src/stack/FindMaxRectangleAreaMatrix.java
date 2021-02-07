@@ -44,46 +44,38 @@ O(m*n)
 
 https://practice.geeksforgeeks.org/problems/max-rectangle/1#
 https://github.com/vsingh16/Alogrithms/blob/master/src/stack/FindMaxAreaHistogram.java
+https://leetcode.com/problems/maximal-rectangle/submissions/
+https://leetcode.com/submissions/detail/453163890/
 /**
 
-// { Driver Code Starts
-import java.util.*;
-import java.lang.*;
-class MaxRect {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int t = sc.nextInt();
-        while (t-- > 0) {
-            int m = sc.nextInt();
-            int n = sc.nextInt();
-            int[][] a = new int[1000][1000];
-            for (int i = 0; i < m; i++)
-                for (int j = 0; j < n; j++) a[i][j] = sc.nextInt();
-            GfG g = new GfG();
-
-            System.out.println(g.maxArea(a, m, n));
-        }
-    }
-}
-// } Driver Code Ends
-
-
-/*Complete the function given below*/
-class GfG {
-    public int maxArea(int M[][], int m, int n) {
-        // add code here.
+class Solution {
+    
+    public int maximalRectangle(char[][] matrix) {
+    
+        int m = matrix.length;
+        int n = m > 0 ? matrix[0].length : 0;
+        int M[][] = new int[m][n];
+                
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(matrix[i][j] == '1'){
+                    M[i][j] = 1;
+                }                
+            }            
+        }        
         
-        for(int i=1;i<m;i++){
+       for(int i=1;i<m;i++){
             for(int j=0;j<n;j++){
                 if(M[i][j] == 1){
                     M[i][j] = M[i][j] + M[i-1][j];
-                }
-            }
+                }         
+            }          
         }
     
-        int maxArea = Integer.MIN_VALUE;
+        int maxArea = 0;
         for(int i=0;i<m;i++){
             int area = findAreaHistogram(M[i]);
+            System.out.println(area);
             if(area > maxArea){
                 maxArea = area;
             }
@@ -97,10 +89,10 @@ class GfG {
         
         Stack<Integer> stack  = new Stack();
         int i=0;
-        int maxArea = Integer.MIN_VALUE;
+        int maxArea = 0;
         while(i< hist.length){
             //push
-            if(stack.empty() || hist[stack.peek()] < hist[i]){
+            if(stack.empty() || hist[stack.peek()] <= hist[i]){
                 stack.push(i++);
             }else{
                 //discontinue area
@@ -113,7 +105,7 @@ class GfG {
             }
         }
         
-        while(stack.empty()){
+        while(!stack.empty()){
             int top = stack.pop();
             int area = stack.empty() ? hist[top] * i 
                 : hist[top] * (i-1 - stack.peek());
