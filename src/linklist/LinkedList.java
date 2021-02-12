@@ -103,5 +103,24 @@ Class LinkedList{
 	   
 	   return head;
     }
+	
+ /**
+    Search node with value x.
+    Time Complexity: O(n)
+   **/
+  boolean searchNode(Node head, int x)
+    {	   	 
+	  Node current = head;
+	  while(current!=null ){
+		  if(current.value == x){
+			  return true;
+		  }	  
+		  current = current.next;
+	  }
+	  
+	  return false;
+    }	
+	
+	
     
  }
