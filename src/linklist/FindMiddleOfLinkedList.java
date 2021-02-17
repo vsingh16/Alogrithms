@@ -29,6 +29,8 @@ Since the list has two middle nodes with values 3 and 4, we return the second on
  *     ListNode(int val) { this.val = val; }
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
+ 
+ Time Complexity: O(n)
  */
 class Solution {
     public ListNode middleNode(ListNode head) {
