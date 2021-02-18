@@ -49,4 +49,26 @@ class Solution {
         return slow;
         
     }
+ 
+ /**
+ 1->2->3-4>5->6
+ If the expectation in case of even no of list is that we need to return mid1 i.e 3,
+ So f.next!= null && f.next.next!=null
+ **/
+ public ListNode middleNode2(ListNode head) {
+        
+        if(head == null){
+            return head;
+        }
+        
+        ListNode slow = head;
+        ListNode fast = head;
+        while(f.next!= null && f.next.next!=null){ 
+            slow = slow.next;
+            fast = fast.next.next;                        
+        }
+        
+        return slow;
+        
+    }
 }
