@@ -17,6 +17,8 @@ Step 3: Segregate original and clone linked list.
 
 Time Complexity: O(n)
 Space Compmlexit: O(1)
+
+With extra space :https://github.com/vsingh16/Alogrithms/blob/master/src/linklist/LinkListClone.java
 **/
 
 class Node {
