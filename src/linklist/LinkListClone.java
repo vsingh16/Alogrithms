@@ -9,6 +9,9 @@ import java.util.Map;
  *
  * Time Complexity : O(n)
  * Space Complexity : O(n)
+ 
+ We can optimise this further and solev this without extra space.
+ https://github.com/vsingh16/Alogrithms/blob/master/src/linklist/CloneLinkedList.java
  */
 public class LinkListClone {
 
