@@ -25,6 +25,9 @@ Previous List. tail.next =  current List head
 
 Time Complexity : O(n)
 Space Complexity: O(n) //result linked list of size n
+
+Since in the below code, we are creating new node , space compleity: O(n)
+We can optimize this by removing node from original list and use that node in the result list rather than creating new node, therefore Space Complexity : O(1)
 **/
 
 /**
