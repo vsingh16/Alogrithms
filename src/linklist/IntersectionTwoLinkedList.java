@@ -67,9 +67,8 @@ public class IntersectionTwoLinkedList {
     }
 
     /**
-     * Traverse Linked List and mark visited node
-     * Again traverse second list, if u find any node which is already visisted
-     * that is the intersection
+     * 
+     * Method 3: with length diff     
      */
     public static Integer findIntersectionByDistance(LinkedList l1, LinkedList l2) {
 
