@@ -26,6 +26,9 @@ class Node {
         left = right = null;
     }
 } */
+
+//Time Complexity: O(n)
+//Space Complexity: O(1)
 class Tree
 {
     
@@ -42,6 +45,32 @@ class Tree
         
         return result;
     }
+        
+    ArrayList<Integer> preOrder(Node root)
+    {
+       if(root == null){
+            return new ArrayList();
+        }
+        
+        result.add(root.data);
+        preOrder(root.left);
+        preOrder(root.right);        
+        
+        return result;
+    }
+        
+    ArrayList<Integer> postOrder(Node root)
+    {
+       if(root == null){
+            return new ArrayList();
+        }
+        
+        postOrder(root.left);
+        postOrder(root.right);
+        result.add(root.data);
+        
+        return result;
+    }    
     
     
 }
