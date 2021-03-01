@@ -5,6 +5,11 @@ import java.util.Queue;
 
 /**
  * Created by vishal on 01-Jul-18.
+ * https://www.geeksforgeeks.org/level-order-tree-traversal/
+ * Approach : Order Level Traversal or Breadth First Traversal requires us to print root first then its left and right children.
+ * So we will take a queue and follows R P A (remove print add)
+ * Time Complexity : O(n)
+ * Space Complexity : O(n) // extra queue
  */
 public class LevelOrderTraversal {
 
