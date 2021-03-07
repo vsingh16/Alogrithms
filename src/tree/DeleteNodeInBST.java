@@ -1,6 +1,7 @@
 /**
 ** https://leetcode.com/problems/delete-node-in-a-bst/submissions/
 ** https://www.geeksforgeeks.org/binary-search-tree-set-2-delete/
+** https://www.youtube.com/watch?v=5_AZcOOc-kM
 ** Given a root node reference of a BST and a key, delete the node with the given key in the BST. Return the root node reference (possibly updated) of the BST.
 
 Basically, the deletion can be divided into two stages:
