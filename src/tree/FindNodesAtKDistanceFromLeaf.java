@@ -7,6 +7,7 @@
 **
 ** Approach: We will maintain two arrays, ancestor[], and visited[]
 ** At evry node, we will add node to both array.
+** One thing to note is visited array is representing node position in tree not ndoe data.
 ** On leaf node, after adding node to above arrays, we check if it is not in visited array, print result.
 ** Time Complexity : O(n)
 ** Space Complexity : O(h) // height of tree becuase we can have max h no. of elements at max in arrays.
