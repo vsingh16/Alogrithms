@@ -31,7 +31,7 @@ Level : at one level down , +1
 In map, we will check if there is any node at same distance, and the level of new node is greater or equal to existing, we will update.
 
 Time Complexity : O(nlogn) // n nodes trversal and tree map insertion is logn becuase it is sorted so either left or right
-Space Complexity : O(1) Hashmap which is not n but no of distance.
+Space Complexity : O(n) Here n is not the total no of nodes but no of possible distance which will be somehow proportional to no of nodes.
 **/
 
 // { Driver Code Starts
