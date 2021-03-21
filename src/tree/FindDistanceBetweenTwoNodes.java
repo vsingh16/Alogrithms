@@ -2,7 +2,11 @@
 ** https://www.geeksforgeeks.org/find-distance-between-two-nodes-of-a-binary-tree
 ** Find the distance between two keys in a binary tree, no parent pointers are given.
 ** The distance between two nodes is the minimum number of edges to be traversed to reach one node from another.
-** Approach :  
+** Approach : Find LCA first and then find distance b/w LCA and Node A.
+** Then b/w LCA and Node B.
+** x + y - 2 becuase root node is repated and x includes source root.
+** Time Complexity : O(n)
+** Space Complexity: O(h) , stack recurive call
 **/
 
 class GfG {
