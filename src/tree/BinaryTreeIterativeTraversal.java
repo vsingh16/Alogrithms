@@ -10,6 +10,12 @@ eg:        1
 (a) Inorder (Left, Root, Right) : 4 2 5 1 3
 (b) Preorder (Root, Left, Right) : 1 2 4 5 3
 (c) Postorder (Left, Right, Root) : 4 5 2 3 1
+https://www.youtube.com/watch?v=12aMTS0L6WI&t=170s
+
+Approach : We will maintain Pair(node, counter)
+Case 1: counter == 1, Pre , counter ++, left
+Case 2: counter == 2, Inorder, counter ++, right
+Case 3: counter == 3, Post, poll
 **/
 
 // { Driver Code Starts
@@ -30,71 +36,39 @@ class Node {
 class Tree
 {
         
-    // Return a list containing the inorder traversal of the given tree
-  public List<Integer> inorderTraversal(TreeNode root) {
-    
-        Stack<TreeNode> stack = new Stack();
-        List<Integer> result = new ArrayList();
-        while(root!= null || !stack.isEmpty()){ // root!=null for first time
-                        
-            if(root !=null ){
-                 stack.push(root);
-                 root = root.left;
-            }else{
-                TreeNode temp = stack.pop();
-                result.add(temp.val);
-                root = temp.right;
-            }
+  public void postorderTraversal(TreeNode root) {
+        
+        Stack<Pair> stack = new Stack();
+        List<Integer> pre = new ArrayList();
+        List<Integer> in = new ArrayList();
+        List<Integer> post = new ArrayList();
+        if(root != null){
+            stack.push(new Pair(root));
+        }
+        
+        while(!stack.isEmpty()){
             
+            Pair temp = stack.peek();
+            if(temp.counter == 1){
+                pre.add(temp.node.val);
+                temp.counter++;
+                if(temp.node.left != null){
+                    stack.push(new Pair(temp.node.left));
+                }
+            }else if(temp.counter == 2){
+                in.add(temp.node.val);
+                temp.counter++;
+                if(temp.node.right != null){
+                    stack.push(new Pair(temp.node.right));
+                }
+            }else if(temp.counter == 3){
+                post.add(temp.node.val);
+                stack.pop();
+            }
+                        
         }
-        
-        return result;
-        
+        // Print Result : pre list, in and post list                            
     }
-        
-    ArrayList<Integer> preOrder(Node root)
-    {
-      Stack<TreeNode> stack = new Stack();
-        List<Integer> result = new ArrayList();
-        
-        if(root != null){
-            stack.push(root);
-        }
-        while(!stack.isEmpty()){
-            TreeNode temp = stack.pop();            
-            result.add(temp.val);            
-            if(temp.right != null){
-                stack.push(temp.right);
-            }
-            if(temp.left != null ){
-                stack.push(temp.left);
-            }
-        }
-        
-        return result;
-    }
-        
-    ArrayList<Integer> postOrder(Node root)
-    {
-      Stack<TreeNode> stack = new Stack();
-        List<Integer> result = new ArrayList();
-        
-        if(root != null){
-            stack.push(root);
-        }
-        while(!stack.isEmpty()){
-            TreeNode temp = stack.pop();            
-            result.add(temp.val);                        
-            if(temp.left != null ){
-                stack.push(temp.left);
-            }
-          if(temp.right != null){
-                stack.push(temp.right);
-            }
-        }
-        
-        return result;
-    }    
-    
+
     
 }
