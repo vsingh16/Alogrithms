@@ -4,7 +4,9 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * @author vsingh16
+ * Mirror Image : if left node of a root == right node of root2 and vice versa.
+ * https://leetcode.com/problems/symmetric-tree/submissions/
+ ** 
  */
 public class MirrorTree {
 
