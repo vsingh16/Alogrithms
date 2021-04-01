@@ -1,9 +1,7 @@
 /**
 ** https://www.geeksforgeeks.org/check-mirror-n-ary-tree/
 ** Since it is not binary tree, we will have n no of children.
-** Approach : We can push elements of first tree in stack
-** and second tree in queue, then we will compare if elements match,
-** then it is mirror else not.
+** Approach : We can enhance mirror tree queue method.
 ** Time Complexity :O(n)
 ** Space Complexity :O(n)
 **/
@@ -16,59 +14,38 @@ Class TreeNode{
 
 class Soltuion{
 
-Stack<Integer> stack = new Stack();
-Queue<Integer> queue = new LinkedList();
-boolean isMirror(Node a, Node b){
+//Time Complexity : O(n),Space Complexity : O(n)
+    public Boolean isMirrorIterative(Node root1, Node root2) {
 
-  pushToStack(a,n1);
-  addToQueue(b,n2);
-  
-  return isEqual(stack,queue);  
-}
+        Queue<Node> q1 = new LinkedList<>();
+        Queue<Node> q2 = new LinkedList<>();
 
-void pushToStack(Node root){
+        q1.offer(root1);
+        q2.offer(root2);
+        while (!q1.isEmpty() && !q2.isEmpty()) {
 
-	if(root == null){
-	   return; 
-	}
-	
-	st.push(root.data);
-	for(int i=0;i<root.children.size();i++){
-		pushToStack(root.children[i])
-	}
-} 
+            Node node1 = q1.poll();
+            Node node2 = q2.poll();
 
+            if (node1 == null && node2 == null) {
+                return true;
+            } else if (node1 == null || node2 == null) {
+                return false;
+            }
 
-void addToQueue(Node root){
+            if (node1.data != node2.data) {
+                return false;
+            } else {
+		for(int i=0;i<node1.children.size();i++){
+			q1.offer(node1.children.get(i));
+		}		
 
-	if(root == null){
-	   return; 
-	}
-	
-	queue.add(root.data);
-	for(int i=0;i<root.children.size();i++){
-		addToQueue(root.children[i])
-	}
-} 
+                for(int i=node2.children.size-1;i>=0;i--){
+			q2.offer(node2.children.get(i));
+		}
+            }
+        }
 
+        return true;
 
-boolean isEqual(stack,queue){
- 
-  While(!stack.isEmpty() && queue.isEmpty()){
-      if(!stack.pop().equals(queue.dequeu())){
-	    return false;
-	  }
-  }   
-   
-  if(!stack.isEmpty()){
-  return false;
-  } 
-  
-  if(!queue.isEmpty()){
-  return false;
-  } 
-  
-  return true;
-}
-
-}
+    }
