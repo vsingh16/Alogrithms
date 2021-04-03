@@ -81,4 +81,53 @@ class Solution {
         return finalList;
         
     }
+    
+    //Approach 2: Stack<List> because we only need to print level wise result in reverse order
+     public List<List<Integer>> levelOrderBottom(TreeNode root) {
+        
+        Queue<TreeNode> queue = new LinkedList();
+        Stack<List<Integer>> finalStack = new Stack();
+        
+        if(root != null){
+            queue.add(root);
+        }
+        
+        
+        while(!queue.isEmpty()){
+            
+            int n = queue.size();
+            List list = new ArrayList();
+            
+            for(int i = 0;i<n;i++){
+               TreeNode node = queue.poll();
+               lsit.push(node.val); 
+               
+                if(node.left != null){
+                    queue.add(node.left);    
+                }
+                
+                if(node.right != null){
+                    queue.add(node.right);    
+                }
+                                                                
+            }
+            finalStack.push(list);            
+        }
+        
+        return printResult2(finalStack);
+        
+    }
+    
+    
+    private List<List<Integer>> printResult2(Stack<List<Integer>> finalStack){
+        
+        List<List<Integer>> finalList = new ArrayList();
+        while(!finalStack.isEmpty()){            
+          List<Integer> list = finalStack.pop();                    
+          finalList.add(list);  
+        }
+        
+        return finalList;
+        
+    }
 }
