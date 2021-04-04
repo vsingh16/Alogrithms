@@ -7,7 +7,7 @@
 ** 
 ** Approach: At every node, we maintain : isBST, min, miax, count
 ** if left is bst and right is bst and left.min < root && root > right.max, then this root in also BST.
-** for this node, min = min (left.max, root), max = max(right.max, root)
+** for this node, min = min (left.max, root), max = max(right.min, root)
 ** if not BST, no need to update min , max, count will max of left and right
 ** Time Complexity : O(n)
 ** Space Complexity : O(h), recursive call stack
