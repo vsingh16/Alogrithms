@@ -28,7 +28,7 @@ class Solution {
        int bLevel = findLevel(root, b, 0);
        
       return (aLevel == bLevel) 
-       && !isSibling(root, a , b);
+       && !isSameParent(root, a , b);
         
     }
     
@@ -50,7 +50,7 @@ class Solution {
         return findLevel(root.right, a, level + 1);
     }
     
-     private boolean isSibling(TreeNode node, int a , int b){
+     private boolean isSameParent(TreeNode node, int a , int b){
         
         if (node == null)
             return false;
@@ -63,7 +63,7 @@ class Solution {
        
         return  check1  ||
                 check2 ||
-                isSibling(node.left, a, b) ||
-                isSibling(node.right, a, b);
+                isSameParent(node.left, a, b) ||
+                isSameParent(node.right, a, b);
     }
 }
