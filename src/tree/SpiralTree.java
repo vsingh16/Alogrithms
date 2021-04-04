@@ -3,7 +3,7 @@
 ** Write a function to print spiral order traversal of a tree. For below tree, function should print 1, 2, 3, 4, 5, 6, 7. 
 **                               1
 **                      2                 3
-**                4          5        6        7
+**                7          6        4       5
 ** Ouput: 1, 2, 3, 4, 5, 6, 7
 ** Time Complexity : O(n)
 ** Space Complexity : O(n)
