@@ -5,6 +5,21 @@ import java.util.Set;
 
 /**
  * Created by vishal on 09-Jul-18.
+ * https://www.geeksforgeeks.org/write-a-function-to-get-the-intersection-point-of-two-linked-lists/
+ * https://www.youtube.com/watch?v=B4aqNarb0QQ
+ * https://leetcode.com/problems/intersection-of-two-linked-lists/submissions/
+ * There are two singly linked lists in a system. By some programming error, the end node of one of the linked list got linked to the second list, forming an inverted Y shaped list. Write a program to get the point where two linked list merge. 
+ * 
+ * Approach 1: Find all possible combination with two pointers, its like two loops and see if two nodes are same.
+ * Time Complexity: O(n*m)
+ *
+ * Approach2: Hashing. Traverse first linked list and store visited nodes in hashset.
+ * Traverse linked list2 ans see if node is there in visited nodes hashset.
+ * Time Complexity: O(n+m), Space : O(n)
+ * 
+ * Approach3: Since they are intersecting, we can say after intersection point, they have common nodes.
+ * So we find length and move extra length nodes in longest linked list.
+ * Now until pointers doesn't match , keep iterating and the moment two nodes are same is the intersection point.
  */
 public class IntersectionTwoLinkedList {
 
@@ -53,9 +68,8 @@ public class IntersectionTwoLinkedList {
     }
 
     /**
-     * Traverse Linked List and mark visited node
-     * Again traverse second list, if u find any node which is already visisted
-     * that is the intersection
+     * 
+     * Method 3: with length diff     
      */
     public static Integer findIntersectionByDistance(LinkedList l1, LinkedList l2) {
 

@@ -4,7 +4,7 @@ package tree;
  * Created by vishal on 01-Jul-18.
  *
  * Calculate Binary Tree height
- * Time Complexity : O(log n)
+ * Time Complexity : O(n)
  */
 public class TreeHeight {
 

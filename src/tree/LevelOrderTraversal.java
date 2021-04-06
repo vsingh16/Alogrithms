@@ -5,6 +5,19 @@ import java.util.Queue;
 
 /**
  * Created by vishal on 01-Jul-18.
+ * https://www.geeksforgeeks.org/level-order-tree-traversal/
+ * Approach : Order Level Traversal or Breadth First Traversal requires us to print root first then its left and right children.
+ * So we will take a queue and follows R P A (remove print add)
+ * Time Complexity : O(n)
+ * Space Complexity : O(n) // extra queue
+ *
+ Approach2: 
+ https://leetcode.com/problems/binary-tree-level-order-traversal/
+ https://www.youtube.com/watch?v=U7rLw0jXI0E
+ * SOmetimes, we also need to track nodes at same level in Level Order Traversal
+ * To do so, we need to  modify our approach1 a bit. At any time, elements in queue belongs to same level. So we will remove elements of a level together and then add.
+ * Time Complexity : O(n)
+ * Space Complexity : O(n) // extra queue
  */
 public class LevelOrderTraversal {
 
@@ -65,8 +78,42 @@ public class LevelOrderTraversal {
                     q.offer(node.right);
                 }
             }
-
+            
+        
+        // Approach 2: Where we need to track elements at same level
+        public List<List<Integer>> levelOrder(TreeNode root) {
+        
+        List<List<Integer>> result = new ArrayList();
+        Queue<TreeNode> queue = new LinkedList();
+        
+        if(root !=null){
+            queue.add(root);
         }
+        
+        
+        while(!queue.isEmpty()){
+            // currently elements in queue are of same level
+            List<Integer> levelResult = new ArrayList();
+            //System.out.println("Size:" +queue.size());
+            int children = queue.size(); // PS: loop will run as per children in a level
+            for(int i= 0;i < children; i++){                
+                TreeNode node = queue.poll();
+                //System.out.println("Adding:" +node.val);
+                levelResult.add(node.val);
+                if(node.left != null){
+                    queue.add(node.left);    
+                }
+                if(node.right != null){
+                    queue.add(node.right);    
+                }                                
+            }
+            result.add(levelResult);
+        }
+        
+        return result;
+    }
+
+  }
 
         public static void main(String[] args) {
             Node root = new Node(1);

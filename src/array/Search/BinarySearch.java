@@ -12,7 +12,7 @@ public class BinarySearch {
         if (l > h) {
             return -1;
         }
-        int mid = (l + h) / 2;
+        int mid = l + ((h-l) / 2);
         if (search == a[mid]) {
             return mid;
         } else if (search < a[mid]) {
@@ -26,7 +26,7 @@ public class BinarySearch {
 
         int mid;
         while (l <= h) {
-            mid = (l + h) / 2;
+                  mid = l + ((h-l) / 2);
             if (a[mid] == search) {
                 return mid;
             } else if (search < a[mid]) {

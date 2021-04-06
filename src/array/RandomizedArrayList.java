@@ -29,84 +29,77 @@ getRandom() : find random index wiht array list size and return element at that 
 import java.util.*; 
 import java.lang.*;
   
-public class Main 
-{ 
-   //My first Data Structure to perform all operations in O(1) Time
-   ArrayList<Integer> array;   
-   //My second Data Structure to perform all operations in O(1) Time
-   HashMap<Integer, Integer>  hash; 
-  
-   public Main() 
-   { 
-       array = new ArrayList<Integer>(); 
-       hash = new HashMap<Integer, Integer>(); 
-   } 
-  //Inserting value in data structure involve two operations
-  //addition in the arraList and inserting entry in HashMap
-   void insert(int num) 
-   { 
-      Integer index = hash.get(num);
-      if(index != null){
-          return ; //i.e element is already present in array list
-      }
-      
-      array.add(num);
-      hash.put(num, array.size()-1);
-      
-   } 
-  //Removing element is Tricky and most imp 
-   void remove(int num) 
-   { 
-      Integer index = hash.get(num);
-      if(index == null){
-          return ; //i.e element is not present
-      }
-      
-      hash.remove(num);
-      //swap num at index with last element, because we can delete last element in O(1) time
-      int temp = array.get(index);
-      int lastIndex = array.size() -1;
-      array.add(index, array.get(lastIndex));
-      array.add(lastIndex, temp);
-      //remove lastIndex pos
-      array.remove(lastIndex);
-      
-      //update index in map
-      hash.put(array.get(index), index);
-    } 
-    //Returns the ransom element from array 
-    int getRandom() 
-    { 
-     Random random = new Random();
-     int index = random.nextInt(array.size());
-     
-     return array.get(index);
-    } 
-  
-    Integer search(int num) 
-    { 
-      Integer index = hash.get(num);
-      if(index == null){
-          return -1; //i.e element is not present
-      }
-      
-      return index;
-    } 
-    
-    
+import java.util.*;
 
-  
-public static void main (String[] args) 
-{ 
-    Main ds = new Main(); 
-    ds.insert(12); 
-    ds.insert(16); 
-    ds.insert(14); 
-    ds.insert(20);
-    ds.insert(30);
-    System.out.println(ds.search(30)); 
-    ds.remove(14); 
-    System.out.println(ds.search(20)); 
-    System.out.println(ds.getRandom()); 
-} 
-} 
+class RandomizedSet {
+
+    private List<Integer> arrayList;
+    private Map<Integer,Integer> map;
+    private Random random;
+
+    /** Initialize your data structure here. */
+    public RandomizedSet() {
+        arrayList = new ArrayList();
+        map = new HashMap<>();
+        random = new Random();
+    }
+    
+    /** Inserts a value to the set. Returns true if the set did not already contain the specified element. */
+    public boolean insert(int val) {
+        
+        if (map.containsKey(val)) {
+            return false;
+        }
+         
+        int index = arrayList.size();
+        arrayList.add(val);
+        map.put(val, index);
+         
+        return true;
+        
+    }
+    
+    /** Removes a value from the set. Returns true if the set contained the specified element. */
+    public boolean remove(int val) {
+        
+        if (!map.containsKey(val)) {
+            return false;
+        }
+         
+        map.remove(val);
+        
+        int indexRemove = map.get(val);
+        int tail = arrayList.get(arrayList.size() - 1);
+         
+        swap(indexRemove, arrayList.size() - 1);      
+        arrayList.remove(arrayList.size() - 1); 
+         map.put(tail, indexRemove);
+         
+        return true;
+    }
+    
+    /** Get a random element from the set. */
+    public int getRandom() {
+         if (arrayList.isEmpty()) {
+            return 0;
+        }
+         
+        int index = random.nextInt(arrayList.size());
+         
+        return arrayList.get(index);
+    }
+    
+    private void swap(int i, int j) {
+        int temp = arrayList.get(i);
+        arrayList.set(i, arrayList.get(j)); //keep in mind while set() is used to place elment at index . add() is used to add element.
+        arrayList.set(j, temp);
+    }
+}
+
+/**
+ * Your RandomizedSet object will be instantiated and called as such:
+ * RandomizedSet obj = new RandomizedSet();
+ * boolean param_1 = obj.insert(val);
+ * boolean param_2 = obj.remove(val);
+ * int param_3 = obj.getRandom();
+ */
