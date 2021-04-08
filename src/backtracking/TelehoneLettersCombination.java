@@ -7,6 +7,18 @@
 ** Else consdier first character of digits.
 ** Get all letters for digit
 ** Iterate through letters and for individual letter concanate it to currentResult ie leters formed from previous call
+** Time Complexity : O(n^2 * k^n) , n = dgits size, k = letters mapped to dgit.
+** Firts think how many output strings are there.
+** Suppose k = 3, n =2
+** for n = 1, r1, r2, r3
+** for n = 2, r1, r2, r3 and these will be lined up for each indivisual n =1, k^n
+**
+** for every input,we have loop where we are buiding substring.
+** Time complexity to append letter at end of string, 
+** if string size is 1, 1
+** if string size is n, n
+** n^2
+** Total Time Complexity : O(k^n * n^2)
 **/
 class Solution {
     
