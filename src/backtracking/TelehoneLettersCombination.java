@@ -15,10 +15,11 @@
 **
 ** for every input,we have loop where we are buiding substring.
 ** Time complexity to append letter at end of string, 
-** if string size is 1, 1
+** if result sitring is of size n , then 1 + 2 + 3 + 4+ ....n = sum of n = n(n-1)/2 = O(n^2)
 ** if string size is n, n
 ** n^2
 ** Total Time Complexity : O(k^n * n^2)
+** https://stackoverflow.com/questions/50442319/time-complexity-for-recursive-algorithm-mapping-digits-to-letters-phone-keypad
 **/
 class Solution {
     
