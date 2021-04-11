@@ -27,6 +27,7 @@ public static void permutation(int places[], int ci, int ti){
       System.out.print(places[i]);
     }
     System.out.println();
+    return;
   }
   
   for(int i=0;i<places.length;i++){
