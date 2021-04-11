@@ -13,6 +13,7 @@ For combination, at each box we are making slection i.e either selected or not?
 We only need to print ans. where items in (n)box == r i.e 2
 ans: {1,1,,}{1,1,,} {,1,1,}{1,1,,} {,1,,1}{,,1,1}
 ncr = npr/r!
+Below is recursive method for combinations i.e only two case possible either select or not.
 **/
 
 public static void combinations(int cb, int tb, int ssf, int ts, String asf){
