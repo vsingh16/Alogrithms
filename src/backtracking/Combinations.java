@@ -1,5 +1,6 @@
 /**
 ** https://byjus.com/permutations-and-combinations-formulas/
+** https://www.youtube.com/watch?v=wOaxJAtJ2Mo&list=PL-Jc9J83PIiHO9SQ6lxGuDsZNt2mkHEn0&index=20
 ** Permutation is the way we can arrange r items in n boxes. Here order matters eg : 12, 21 . Non Identocal items
 ** Combination is the way to select r items and then place them in n boxes. eg: 12 . Here we dont consider there order. Identical items. i.e 12 = 21 is same and consider as
 ** once combination of 1 and 2.
