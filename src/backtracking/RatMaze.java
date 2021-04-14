@@ -6,10 +6,10 @@
 ** Approach : There are few cases where we will not move : if (i,j) is out of matrix, if (i,j) = obstacle , if(i,j) = is alreayd included in path
 ** To track moves we already have , path[][] matrix is maintained.
 
-Time Complexity: O(3^(n^2)). 
-As there are N^2 cells from each cell there are 3 unvisited neighbouring cells. So the time complexity O(3^(N^2).
-Auxiliary Space: O(3^(n^2)). // n * n = path matrix, else 3^(n*n) recursive call
-As there can be atmost 3^(n^2) cells in the answer so the space complexity is O(3^(n^2))
+Time Complexity: O(4^(n^2)). 
+As there are N^2 cells from each cell there are 4 unvisited neighbouring cells. So the time complexity O(4^(N^2).
+Auxiliary Space: O(4^(n^2)). // n * n = path matrix, else 3^(n*n) recursive call
+As there can be atmost 4^(n^2) cells in the answer so the space complexity is O(4^(n^2))
 **/
 
 class Solution {
