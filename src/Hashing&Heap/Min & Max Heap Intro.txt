@@ -19,7 +19,7 @@ Some of its common Application:
 3) Merge K sorted list.
 
 Ques) Why heap is stored in array?
-Ans) Any complete binary tree can easily stored in Array becuase index of each element can be found by 2 * i +1 .
+Ans) Any complete binary tree can easily stored in Array becuase index of each element can be found by (2 * i +1) & (2* i + 2).
 i is the index of root element.
 From wiki:
 Heaps are commonly implemented with an array. Any binary tree can be stored in an array,
