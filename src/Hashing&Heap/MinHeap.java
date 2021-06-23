@@ -19,7 +19,7 @@ class MinHeap{
   }
 
   private int parent(int index){
-    return (index - i)/2;
+    return (index - 1)/2;
   }
 
   private int left(int index){
@@ -43,7 +43,7 @@ class MinHeap{
     arr[lastPos++] = element;
     int currentPos = lastPos;
 
-    while(currentPos>=0 && arr[currentPos] < arr[parent(currentPos)]){
+    while(parent(currentPos)>=0 && arr[currentPos] < arr[parent(currentPos)]){
       swap(arr,currentPos, parent(currentPos));
       currentPos = parent(currentPos);
     }
