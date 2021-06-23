@@ -1,5 +1,9 @@
 /**
 ** https://www.geeksforgeeks.org/min-heap-in-java/
+** Below is the raw implementation of Min Heap.
+** In java, we can use PriorityQueue<Integer> to implement min heap.
+** add : will add element to queue and order is ascending order.
+** poll: will remove element from queue(min)
 **/
 
 class MinHeap{
