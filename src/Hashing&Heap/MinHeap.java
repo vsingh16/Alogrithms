@@ -67,7 +67,16 @@ class MinHeap{
 }
 
   private boolean isValid(int index){
-    return left(index) <= lastpos && right(index) <= lastpos; 
+    return index <= (lastpos - 1)/2 ;    
+  }
+  
+  //our left <= lastpos , 2 * i +1 < size
+  public void print(){
+    for(int i=0; i <= (lastpos - 1)/2;i++){
+      System.out.println("Parent : "+ arr[i]);
+      System.out.println("Left : "+ 2 * i + 1);
+      System.out.println("Right : "+ 2 * i + 2);
+    }
   }
 
 }
