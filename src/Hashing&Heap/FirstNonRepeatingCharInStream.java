@@ -1,5 +1,6 @@
 /**
 ** https://www.geeksforgeeks.org/find-first-non-repeating-character-stream-characters/
+** https://practice.geeksforgeeks.org/problems/first-non-repeating-character-in-a-stream1216/1#
 ** Given a stream of characters, find the first non-repeating character from stream. You need to tell the first non-repeating character in O(1) time at any moment.
 ** Appraoch 
 ** We need to maintain order of characters.
@@ -64,7 +65,7 @@ class Solution
     {
         Node nodeArr [] = new Node[26];
         boolean repeated [] = new boolean[26];
-        String result = new String();
+        StringBuffer result = new StringBuffer();
         char charArr[] = A.toCharArray();
         for(int i =0;i<charArr.length;i++){
             
@@ -81,13 +82,13 @@ class Solution
                
             }
             if(head!=null){
-                result += head.ch;
+                result.append(head.ch);
             }else{
-                result += '#';
+                 result.append('#');
             }
         }
         
-        return result;
+       return result.toString();
     }
     
 }
