@@ -70,4 +70,58 @@ class Solution {
     }
     return result;
   }
+ 
+ class Solution {
+  /**
+  ** Approach 2: Two pointer .
+  ** First sort
+  **  We have reduce loop 3 and loop 4 into two pointers.
+  ** left = j+1 and right = n-1
+  ** if sum found , l++
+  ** if sum < target, l++
+  ** if sum > target, r--
+  ** Skip same element.
+  ** Time Complexity: O(n^3)
+  **/
+  public List < List < Integer >> fourSum(int[] arr, int target) {
+    List < List < Integer >> result = new ArrayList();
+    Arrays.sort(arr);
+    int n = arr.length;
+    for (int i = 0; i < n - 3; i++) {
+      if (i > 0 && arr[i - 1] == arr[i]) {
+        continue;
+      }
+      for (int j = i + 1; j < n - 2; j++) {
+        if (j > i + 1 && arr[j - 1] == arr[j]) {
+          continue;
+        }
+
+        int left = j + 1;
+        int right = n - 1;
+        while (left < right) {
+          if(left > j+1 && arr[left] == arr[left-1]){
+              left++;
+          }  
+          else if(right < n-1 && arr[right] == arr[right+1]){
+              right --;
+          }else{
+          int sum = arr[i] + arr[j] + arr[left] + arr[right];
+          if (sum == target) {
+            List < Integer > list = List.of(arr[i], arr[j], arr[left], arr[right]);
+            result.add(list);
+            left++;
+          } else if (sum > target) {
+            right--;
+          } else {
+            left++;
+          }    
+          }
+          
+        }
+      }
+    }
+    return result;
+  }
+}
+ 
 }
