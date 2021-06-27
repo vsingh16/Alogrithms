@@ -123,5 +123,70 @@ class Solution {
     return result;
   }
 }
- 
-}
+ }
+
+PS: Sometimes it is asked to print one of such quads, then in that case we use Map but with hashmap usage we face problem of duplicates in result which are hard to 
+eliminate considering their order.
+Time Complexity of below solution is O(n^2) but will only work if we need to print one of such quad.
+class Solution {
+
+  class Pair {
+    private int x;
+    private int y;
+    public Pair(int x, int y) {
+      this.x = x;
+      this.y = y;
+    }
+  }
+
+  public List < List < Integer >> fourSum(int[] arr, int target) {
+    Arrays.sort(arr);
+    int n = arr.length;
+    Map < Integer, List < Pair >> map = new HashMap();
+    for (int i = 0; i < n - 3; i++) {
+      for (int j = i + 1; j < n - 2; j++) {
+        int sum = arr[i] + arr[j];
+        if (!map.containsKey(sum)) {
+          List < Pair > list = new ArrayList();
+          list.add(new Pair(i, j));
+          map.put(sum, list);
+        } else {
+          List < Pair > list = map.get(sum);
+          list.add(new Pair(i, j));
+        }
+      }
+    }
+
+    List < List < Integer >> result = new ArrayList();    
+    for (int k = 2; k < n - 1; k++) {
+      //if this arr[i] is same as previous one, skip
+      if (k > 2 && arr[k - 1] == arr[k]) {
+        continue;
+      }
+      for (int l = k + 1; l < n; l++) {
+        //if this arr[j] is same as previous one, skip
+        if (l > k + 1 && arr[l - 1] == arr[l]) {
+          continue;
+        }
+        int val = target - (arr[k] + arr[l]);
+        if (map.containsKey(val)) {
+          List < Pair > pairs = map.get(val);
+          for (Pair pair: pairs) {        
+                if (pair.x != k && pair.x != l && pair.y != k && pair.y != l) {
+                Set < Integer > list = new HashSet();
+                list.add(arr[pair.x]);
+                list.add(arr[pair.y]);
+                list.add(arr[k]);
+                list.add(arr[l]);            
+                resultSet.add(list);
+                }                
+              
+          }
+        }
+      }
+    }
+    
+    return result;
+
+  }
+} 
