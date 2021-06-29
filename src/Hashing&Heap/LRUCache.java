@@ -25,17 +25,18 @@ class LRUCache {
     
     public void insertAtLast(Node node){
                 
-        //queue is empty
-        if(rear == null){
-            rear = node;
-            front = node;
-        }else {
-         rear.next = node;
-         node.previous = rear;  
-         rear = node;
-        }                
-    }
+         if(rear!=null){
+            rear.next = node;
+            node.previous = rear;                 
+         }
+         rear = node; 
         
+        //single elemetn after insertion
+        if(front == null){
+            front = node;
+        }    
+    }
+    
     public void remove(Node node){
         
       //list  is empty  
