@@ -1,6 +1,14 @@
 /**
 ** https://leetcode.com/problems/lru-cache/submissions/
 ** https://nehajirafe.medium.com/implementing-lru-cache-leetcode-82e90ce63c3f
+** LRU : Leat recently used. Cache means key, value, so Map is a good choice.
+** Here we will be having a capcity of cache/map and once that capacity reaches,
+** we need to remove LRU element in O(1) time. We know that doubly linked list provides 
+** insetion and deletion in O(1) time. Map<key, Node> : Node will be reference of element
+** in DLL. 
+** Every time we get element from map, we need to remove element and add it to end of list.
+** When capacity excceds , we need to remove element from begining of list.
+** 
 **/
 
 class LRUCache {
@@ -24,11 +32,14 @@ class LRUCache {
     }
     
     public void insertAtLast(Node node){
-                
-         if(rear!=null){
-            rear.next = node;
-            node.previous = rear;                 
-         }
+        
+        node.previous = rear;              
+        //PS: its necessary to set null to right of node as it is same node which we there in the mid
+        //of list and pointing to some element.
+        node.next = null;
+        if(rear!=null){
+            rear.next = node;           
+         }         
          rear = node; 
         
         //single elemetn after insertion
@@ -102,6 +113,7 @@ class LRUCache {
         }
     }
 } 
+
 
 /**
  * Your LRUCache object will be instantiated and called as such:
