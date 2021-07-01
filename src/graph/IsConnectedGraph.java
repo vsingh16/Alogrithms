@@ -27,11 +27,15 @@ class Graph {
     graph.get(a).add(b);
   }
   
+  //Time Complexity: O(v)(V+E)
   public boolean ifDirectedGraphStronglyConnected() {
 
+    //Time Complexity : O(V)
     for(int i = 0; i < nodes; i++) {
+      //O(E), for a vertex checking all connected vertex
       dfs(i);  
       boolean visited [] = new boolean[nodes];      
+      //O(V)
       for(int j = 0; j < nodes; j++) {
         if(!visited[j]) {
           return false;
