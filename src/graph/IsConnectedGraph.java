@@ -1,5 +1,9 @@
 /**
 ** https://thecodingsimplified.com/check-if-directed-graph-is-strongly-connected/
+** Stronlgy Connected Graph : If we can reach from one vertex to any other vertext and it this is true for all vertexes.
+** Approach : Do DFS and check if any node is unreachbale , then return false.
+** Time Complexity: O(V)(V+E)
+** Space Complexity : O(V)
 **/
 import java.util.ArrayList;
 import java.util.Arrays;
