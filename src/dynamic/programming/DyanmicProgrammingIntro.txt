@@ -1,0 +1,14 @@
+1. What kind of problems be solved using DP?
+There are two categories of problem.
+a: Optimization : maximum, minimu, longest, smallest, least, most
+b: Overlapping Subproblem: Reuse the sub result to solve main problem
+eg: Longest palindrome Subsequence
+Longest Common Subsequnce
+Min Edit Operation
+
+2. To solve a problem with DP, we need to think of brute force approach.
+Then try to identify repeating steps.
+And store the result of repeating steps in matrix.
+
+3. Note that its not ncessary that DP soution of a problem is always the best.
+
