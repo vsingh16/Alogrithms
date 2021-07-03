@@ -7,7 +7,7 @@
 ** Recursive or brute force approach is:
 ** Keep a pointer at last char of both Strings, if both are equal 1+ LCS(s1,s2,x-1,y-1)
 ** else MAX(LCS(s1,s2,x,y-1) , LCS(s1,s2,x-1,y))
-** Time Complexity : O(xy) stack calls
+** Time Complexity : O(2^n) stack calls in worst case
 **
 ** Approach 2: since its longest, we can relate and see they are some overlapping fun calls, so we can use DP.
 ** Time Complexity : O(xy), Space Complexity : O(xy)
