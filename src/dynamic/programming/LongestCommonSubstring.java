@@ -49,61 +49,62 @@ class Solution
   
   
   //Approach 1
-  static int lcs(int x, int y, String s1, String s2)
-    {
-       if(x == 0 || y == 0){
-         return 0;
-       }
-      
-      if(s1.charAt(x) == s2.charAt(y)){
-        return 1 + lcs(x-1, y-1, s1, s2);
-      }else{
-      return Math.max(lcs(x, y-1, s1, s2),lcs(x-1, y, s1, s2));
-      }
-    
+   int longestCommonSubstr(String s1, String s2, int n, int m, int count){
+        
+        if(n ==0 || m==0){
+	  return count;	
+	}else if(s1.charAt(n-1) == s2.charAt(m-1)){
+		count = longestCommonSubstr(s1, s2, n-1, m-1, count+1);
+	}else{
+		count = longestCommonSubstr(s1, s2, n-1, m-1, 0);
+	}
+	
+	   return count;
     }
-      
+	
   //Approach 2
-  static int lcs(int x, int y, String s1, String s2)
-    {
-        int result[][] = new int[x][y+1];
-        for(int i=0;i<=x;i++){
-            for(int j=0;j<=y;j++){                                
+  int longestCommonSubstr(String s1, String s2, int n, int m){
+        
+        int dp[][] = new int[n+1][m+1];
+        int result = 0;
+        for(int i=0;i<=n;i++){
+            for(int j=0;j<=m;j++){
+                
                 if(i == 0 || j == 0){
-                    result[i][j] = 0;
+                    dp[i][j] = 0;
                 }else if(s1.charAt(i-1) == s2.charAt(j-1)){
-                    result[i][j] = 1 + result[i][j-1];
+                    dp[i][j] = 1 + dp[i-1][j-1];
+                    result = Math.max(result, dp[i][j]);
                 }else{
-                    result[i][j] = Math.max(result[i][j],result[i][j-1]);
+                    dp[i][j] = 0; //discontinue
                 }
             }
         }
         
-        return result[x][y];
+        return result;
     }
   
     //Function to find the length of longest common subsequence in two strings.
     //Approach 3
-    static int lcs(int x, int y, String s1, String s2)
-    {
-        int result[][] = new int[2][y+1];
-        for(int i=0;i<=x;i++){
-            for(int j=0;j<=y;j++){
-                
-                int iFill = (i%2 == 0) ? 0 : 1;
-                int iRefer = (i%2 == 0)? 1 : 0;
+   int longestCommonSubstr(String s1, String s2, int n, int m){
+        
+        int dp[][] = new int[2][m+1];
+        int result = 0;
+        for(int i=0;i<=n;i++){
+            for(int j=0;j<=m;j++){
                 
                 if(i == 0 || j == 0){
-                    result[iFill][j] = 0;
+                    dp[i%2][j] = 0;
                 }else if(s1.charAt(i-1) == s2.charAt(j-1)){
-                    result[iFill][j] = 1 + result[iRefer][j-1];
+                    dp[i%2][j] = 1 + dp[(i+1)%2][j-1];
+                    result = Math.max(result, dp[i%2][j]);
                 }else{
-                    result[iFill][j] = Math.max(result[iRefer][j],result[iFill][j-1]);
+                    dp[i%2][j] = 0;
                 }
             }
         }
         
-        return result[x%2==0 ? 0 : 1][y];
+        return result;
     }
-    
+	
 }
