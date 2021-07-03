@@ -56,10 +56,9 @@ class Solution
 	}else if(s1.charAt(n-1) == s2.charAt(m-1)){
 		count = longestCommonSubstr(s1, s2, n-1, m-1, count+1);
 	}else{
-		count = longestCommonSubstr(s1, s2, n-1, m-1, 0);
+		return max(count, longestCommonSubstr(s1, s2, n-1, m, 0), longestCommonSubstr(s1, s2, n, m-1, 0));
 	}
-	
-	   return count;
+		   
     }
 	
   //Approach 2
