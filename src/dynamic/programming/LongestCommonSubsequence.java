@@ -73,7 +73,7 @@ class Solution
                 }else if(s1.charAt(i-1) == s2.charAt(j-1)){
                     result[i][j] = 1 + result[i][j-1];
                 }else{
-                    result[i][j] = Math.max(result[i][j],result[i][j-1]);
+                    result[i][j] = Math.max(result[i-1][j],result[i][j-1]);
                 }
             }
         }
