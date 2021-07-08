@@ -2,6 +2,7 @@ package dynamic.programming;
 
 /**
  * Created by vishal on 24-Mar-18.
+ ** https://www.youtube.com/watch?v=3_KL0hiPsNE
  */
 public class EditDistance {
 
@@ -28,10 +29,16 @@ public class EditDistance {
      * Last three and first characters are same.  We basically
      * need to convert "un" to "atur".  This can be done using
      * below three operations.
-     * Replace 'n' with 'r', insert t, insert a
+     * Replace 'n' with 'r', insert t, insert a     
      */
 
     /**
+    ** Approach : start traversing from last characters.
+    ** Case 1: if they are same, no operation required, simply move to left i.e i--, j--
+    ** Case 2: If not same, there can be 3 possibility , insert, replace or remove , so 1(1 operation either insert,remove,replace) + 
+    ** insert in string 1, i, j-1
+    ** replace i-1, j-1
+    ** remove/ignore in String 1 i-1, j
      * Time Complexity:exponential
      */
     private static int editDistanceRec(String s1, String s2, int m, int n) {
@@ -99,6 +106,38 @@ public class EditDistance {
         return dp[m][n];
 
     }
+    
+    //Below sol is DP with space optimized i.e space complexity O(n)
+    //Not in array index[i%2] for i-1, (i+1)%2
+    public int editDistance(String s, String t) {
+        
+       int m = s.length();
+        int n = t.length();
+        int dp[][] = new int[2][n+1];
+        
+        for(int i=0;i<=m;i++){
+            for(int j=0;j<=n;j++){
+                
+                //insert extra characerts of string 2 in string 1
+                if(i == 0){
+                    dp[i][j] = j;
+                }
+                //remove extra characerts in string 1
+                else if(j == 0){
+                    dp[i%2][j] = i; //because this is 1 not array index
+                }
+                //if characters are same
+                else if(s.charAt(i-1) == t.charAt(j-1)){
+                    dp[i%2][j] = dp[(i+1)%2][j-1];
+                }else{
+                    int a = dp[i%2][j-1]; //insert in string 1
+                    int b = dp[(i+1)%2][j-1]; //replace
+                    int c = dp[(i+1)%2][j]; //remove/ignore in string 1
+                    dp[i%2][j] = 1 + Math.min(Math.min(a,b),c);
+                }
+                
+            }
+        }
 
     public static void main(String[] args) {
         String str1 = "sunday";
