@@ -33,7 +33,8 @@ class Solution {
         //destination reached
         if(i == m.length - 1 && j == m[0].length-1){
             //print answer
-            path[i][j] = true;
+            path[i][j] = true; // since here we are marking path as true, therefore this condition should be above not move condition if(i == -1 || i == m.length || j == -1 || j == m[0].length 
+        //|| path[i][j] || m[i][j] == 0, else path[i][j] will be true and it wont work
             output.add(result);
             return ;
         }
