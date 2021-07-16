@@ -2,7 +2,9 @@
 ** https://www.geeksforgeeks.org/minimum-steps-reach-target-knight/
 ** Given a square chessboard of N x N size, the position of Knight and position of a target is given.
 ** We need to find out the minimum steps a Knight will take to reach the target position.
-** Approach: We will apply BFS or Node level in tree approach.
+** Approach: Since it is min distance and one path, we will apply BFS
+** https://www.geeksforgeeks.org/difference-between-bfs-and-dfs/#:~:text=BFS%20is%20more%20suitable%20for,used%20in%20games%20or%20puzzles.
+** We will apply BFS or Node level in tree approach.
 ** At every step, we have 8 possible moves for knight. Explore all moves by adding them to queue.
 ** Also mark node which is added to queue as visisted to avoid including node which is already there in answer.
 ** Time Complexity: O(n * n)
