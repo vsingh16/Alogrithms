@@ -3,7 +3,9 @@
 ** https://practice.geeksforgeeks.org/problems/rat-in-a-maze-problem/1#
 ** https://www.youtube.com/watch?v=x1Hp_2Lc0xM
 ** https://www.youtube.com/watch?v=_QPrHo88mAc
-** Approach : There are few cases where we will not move : if (i,j) is out of matrix, if (i,j) = obstacle , if(i,j) = is alreayd included in path
+** Approach : Since it is about exploring all paths and decision making, DFS
+https://www.geeksforgeeks.org/difference-between-bfs-and-dfs/#:~:text=BFS%20is%20more%20suitable%20for,used%20in%20games%20or%20puzzles.
+There are few cases where we will not move : if (i,j) is out of matrix, if (i,j) = obstacle , if(i,j) = is alreayd included in path
 ** To track moves we already have , path[][] matrix is maintained.
 
 Time Complexity: O(4^(n^2)). 
