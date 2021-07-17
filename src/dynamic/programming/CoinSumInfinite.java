@@ -106,6 +106,32 @@ public class CoinSumInfinite {
 
         return count[n];
     }
+    
+    //If space complexity required is O(n)
+    //We can reduce space complexity of any DP problem
+    //by taking dp[2][] as we always refer only previous row.
+    //dp[i][j] = dp[i%2][j] 
+    //dp[i-1][j] = dp[(i+1)%2][j] 
+    public long count(int S[], int m, int n) 
+    { 
+      long dp[][] = new long[2][n+1];
+      for(int i=0;i<m;i++){
+          for(int j=0;j<=n;j++){
+              
+              if(j == 0){
+                  dp[i%2][j] = 1;
+              }else if(S[i] > j){
+                  dp[i%2][j] = (i>0 ? dp[(i+1)%2][j] : 0);
+              }else{
+                  dp[i%2][j] = (i>0 ? dp[(i+1)%2][j] : 0) + dp[i%2][j - S[i]];
+              }
+              
+          }
+          
+      }
+      
+      return dp[(m+1)%2][n];
+    } 
 
     public static void main(String[] args) {
         int s[] = {1, 2, 3}, n = 4;
