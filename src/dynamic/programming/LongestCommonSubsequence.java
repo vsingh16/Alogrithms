@@ -65,7 +65,7 @@ class Solution
   //Approach 2
   static int lcs(int x, int y, String s1, String s2)
     {
-        int result[][] = new int[x][y+1];
+        int result[][] = new int[x+1][y+1];
         for(int i=0;i<=x;i++){
             for(int j=0;j<=y;j++){                                
                 if(i == 0 || j == 0){
