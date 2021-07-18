@@ -2,6 +2,7 @@ package dynamic.programming;
 
 /**
  * Created by vishal on 24-Mar-18.
+ ** https://www.geeksforgeeks.org/edit-distance-dp-5/
  ** https://www.youtube.com/watch?v=3_KL0hiPsNE
  */
 public class EditDistance {
@@ -66,7 +67,7 @@ public class EditDistance {
              * so cost  = 1+min(insert,remove,replace)
              * we will take min of all three operations
              */
-            return Math.min(Math.min(editDistanceRec(s1, s2, m, n - 1),//insert
+            return 1+ Math.min(Math.min(editDistanceRec(s1, s2, m, n - 1),//insert
                     editDistanceRec(s1, s2, m - 1, n)),//remove
                     editDistanceRec(s1, s2, m - 1, n - 1));//replace
 
