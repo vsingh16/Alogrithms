@@ -21,7 +21,10 @@ Explanation: One possible longest palindromic subsequence is "bbbb".
 
 //Time Complexity : 2^n
 public static int lps(String str, int i, int j) {
-        if (i == j) {
+        if(j>i){
+         return 0;
+        }
+        else if (i == j) {
             return 1;
         } else if (i + 1 == j && str.charAt(i) == str.charAt(j)) {
             return 2;
