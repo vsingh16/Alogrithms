@@ -11,6 +11,7 @@
 ** Current string = chart at i
 ** new string= (0,i-1) + (i)
 ** Time complexity : O(n * n!) // permutations of a string n!, so for n no of strings = n * n!
+** https://medium.com/@akshitgrover_/why-do-i-think-time-complexity-of-generating-all-permutations-of-a-string-is-o-n-e68c0ecde5c5
 **/
 
 class Solution {
