@@ -3,8 +3,11 @@ package com.macquarie.shiner.batch.gcs.service;
 /**
  * https://www.geeksforgeeks.org/sum-of-two-linked-lists/
  *
- * Here we will read linked list straight
- *
+ * Approach : In order to add , both list must be of equal size.
+ * So if l1>l2, add zero nodes in beginning to list2.
+ * So if l2>l1, add zero nodes in beginning to list1.
+ * If l1 == l2, we can add.
+ * Since we need to add extreme right digit first, we will call same fun again(recursion).
  * Time Complexity : O(l1+l2)
  */
 public class AddTwoLinkedListStraight {
@@ -45,20 +48,20 @@ public class AddTwoLinkedListStraight {
             //add zeros to list2
             int diff = length1 - length2;
             for (int i = 0; i < diff; i++) {
-                insert(l2, 0);
+                insertBeginning(l2, 0);
             }
         } else {
             //add zeros to list1
             int diff = length2 - length1;
             for (int i = 0; i < diff; i++) {
-                insert(l1, 0);
+                insertBeginning(l1, 0);
             }
         }
 
         LinkedList result = new LinkedList();
         int carry = addEqualSize(l1.head, l2.head, result);
         if (carry > 0) {
-            insert(result, carry);
+            insertBeginning(result, carry);
         }
 
         return result;
@@ -84,12 +87,12 @@ public class AddTwoLinkedListStraight {
         int sum = n.data + m.data + carry;
         carry = sum / 10;
         int r = sum % 10;
-        insert(result, r);
+        insertBeginning(result, r);
 
         return carry;
     }
 
-    private static void insert(LinkedList result, int data) {
+    private static void insertBeginning(LinkedList result, int data) {
 
         Node newNode = new Node(data);
         //list is empty
