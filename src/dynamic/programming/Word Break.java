@@ -55,7 +55,12 @@ class Solution {
         return dp[s.length()];
         
     }
-  //Time Complexity:
+  
+  /**
+  ** Since there will be two case : either entire word is there in dictionary
+  ** else not(case where we partition)
+  ** Time Complexity:O(2^n)
+  **/
   public boolean wordBreak(String s, List<String> wordDict) {
         
         if (wordDict.contains(s)) {
