@@ -52,3 +52,51 @@ class Solution {
       return min;
     }
 }
+
+/**
+** Approach2: DP :
+** We will build palindrome[][] matrix, bottom up approach
+** Similarly, we will build dp[][] for min cuts, where dp[i][j] =
+** First check if Str(i,j) is palindrome , if yes dp[i][j] = 0 else dp[i][j] = Min(min, dp[i][k]+dp[k+1][j]), k=i <j
+** Time Complexity : O(n^3)
+** Space Complexity : O(n^2)
+**/
+class Solution {
+  
+    int palindromicPartition(String str)
+    {
+      int n = str.length();
+        boolean palindrome[][] = new boolean[n][n];
+        for (int l = 1; l <= n; l++) {
+            for (int i = (n - 1) - (l - 1); i >= 0; i--) {
+                int j = i + (l - 1);//j is based on length from i
+                if (l == 1) {
+                    palindrome[i][j] = true;
+                } else if (l == 2 && str.charAt(i) == str.charAt(j)) {
+                    palindrome[i][j] = true;
+                } else {
+                    palindrome[i][j] = (str.charAt(i) == str.charAt(j)) && palindrome[i + 1][j - 1];
+                }
+            }
+        }
+
+        int dp[][] = new int[n][n];
+        for (int l = 1; l <= n; l++) {
+            for (int i = (n - 1) - (l - 1); i >= 0; i--) {
+                int j = i + (l - 1);//j is based on length from i
+                if (palindrome[i][j]) {
+                    dp[i][j] = 0;
+                } else {
+                    int min = Integer.MAX_VALUE;
+                    for (int k = i; k < j; k++) {
+                        min = Math.min(min, dp[i][k] + dp[k + 1][j] + 1);
+                    }
+                    dp[i][j] = min;
+                }
+            }
+        }
+
+        return dp[0][n - 1];
+    }
+}
+
