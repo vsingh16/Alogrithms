@@ -127,21 +127,20 @@ class Solution {
             }
         }
 
-        int dp[][] = new int[n][n];
-        for (int l = 1; l <= n; l++) {
-            for (int i = (n - 1) - (l - 1); i >= 0; i--) {
-                int j = i + (l - 1);//j is based on length from i
-                if (palindrome[i][j]) {
-                    dp[i][j] = 0;
-                } else {
-                    int min = Integer.MAX_VALUE;
-                    for (int k = i; k < j; k++) {
-                        min = Math.min(min, dp[i][k] + dp[k + 1][j] + 1);
+        int dp[] = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (palindrome[0][i]) {
+                dp[i] = 0;
+            } else {
+                int min = Integer.MAX_VALUE;
+                for (int k = 0; k < i; k++) {
+                    if (palindrome[k + 1][i]) { //only consider if partition is palindrome
+                        min = Math.min(min, dp[k] + 1);
                     }
-                    dp[i][j] = min;
                 }
+                dp[i] = min;
             }
         }
 
-        return dp[0][n - 1];
+        return dp[n - 1];
     }
