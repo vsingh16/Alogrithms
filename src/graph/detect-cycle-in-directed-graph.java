@@ -59,4 +59,51 @@ Space Complexity: O(V), visited and order array
         order[V] = false;
         return false;
     }
+
+
+
+/**
+** Approach 2: This is based on topological sorting.
+** In topological sorting, we process elements with 0 inorder.
+** If a graph has cycle, then at end we will be left with elments which has 1 inorder.
+** https://www.youtube.com/watch?v=Hr326wSFTk0&list=PLDdcY4olLQk066ysRibhoGd3UzGr0XSQG&index=12
+** Time Complexity:O(V+E)
+**/
+   class Solution 
+{
+    //Function to detect cycle in a directed graph.
+    public boolean isCyclic(int V, ArrayList<ArrayList<Integer>> adj)
+    {
+        int inDegree[] = new int[V];
+        for(int i=0;i<V;i++){
+            for(int neighbour:adj.get(i)){
+             inDegree[neighbour]++;   
+            }
+        }
+        
+        Queue<Integer> queue = new LinkedList();
+        for(int i=0;i<V;i++){
+            if(inDegree[i] == 0){
+                queue.add(i);
+            }
+        }
+        
+        int c=queue.size();// c is count of 0 in order nodes.
+        while(!queue.isEmpty()){
+            
+            int node = queue.remove();
+            for(int neighbour:adj.get(node)){
+                inDegree[neighbour]--;
+                if(inDegree[neighbour] == 0){
+                    queue.add(neighbour);
+                    c++;
+                }
+            }
+        }
+        
+        return (c != V); // if c ==V, it means all nodes become 0 inorder, that is no cycle else cycle.
+    }
+    
+
+}
 }
