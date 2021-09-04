@@ -6,7 +6,7 @@ package com.macquarie.shiner.batch.gcs.service;
  */
 public class EggDroppingPuzzle {
 
-    //Time Complexity:O(2^n) exponential
+    //Time Complexity:O(2^k) exponential, at each floor we have two options
     public static int find(int n, int k) {
 
         //Base Case
@@ -30,7 +30,8 @@ public class EggDroppingPuzzle {
         return result + 1;
     }
 
-    //Time Complxity :O(n^3)
+    //Time Complxity :O(n*k*k)
+    //Space Complexity: O(n*k)
     public static int findDyn(int n, int k) {
 
         int res[][] = new int[n + 1][k + 1];
