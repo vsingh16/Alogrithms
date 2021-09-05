@@ -1,5 +1,6 @@
 /**
 ** https://www.geeksforgeeks.org/maximize-the-number-of-segments-of-length-p-q-and-r/
+** https://practice.geeksforgeeks.org/problems/cutted-segments1642/1
 ** https://www.youtube.com/watch?v=O0N4xn38Ncg
 ** Given a rod of length L, the task is to cut the rod in such a way that the total number of segments of length p, q and r is maximized. 
 ** The segments can only be of length p, q, and r. 
