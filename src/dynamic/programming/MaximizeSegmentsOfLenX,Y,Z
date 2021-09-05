@@ -30,13 +30,14 @@ public int maxSegmentCount(int n, int x, int y, int z) {
      
      int rx = Integer.MIN_VALUE, ry = Integer.MIN_VALUE, rz = Integer.MIN_VALUE;
      if (i >= x) {
-         rx = 1 + dp[i - x];
+         rx = 1 + maxSegmentCount(n-x,x,y,x);
        }
      if (i >= y) {
-         ry = 1 + dp[i - y];
+         ry = 1 + maxSegmentCount(n-y,x,y,x);
        }
       if (i >= z) {
-         rz = 1 + dp[i - z];
+         rz = 1 + maxSegmentCount(n-z,x,y,x);
        }
-       return Math.max(Math.max(rx, ry), rz);
-    }
+       int result = Math.max(Math.max(rx, ry), rz);
+       return result < 0 ? 0: result;
+}
