@@ -8,12 +8,14 @@ package dynamic.programming;
  * obtainable by cutting up the rod and selling the pieces. For example,
  * if length of the rod is 8 and the values of different pieces are given as following,
  * then the maximum obtainable value is 22 (by cutting in two pieces of lengths 2 and 6)
+ * https://www.geeksforgeeks.org/cutting-a-rod-dp-13/
  */
 public class CuttingRod {
 
 
     /**
-     * Time Complexity:O(l*l)
+     * At each l, we need to make l choices
+     * Time Complexity:O(l^l)
      *
      */
     public static int maxProfit(int price[], int l) {
@@ -24,8 +26,8 @@ public class CuttingRod {
 
         //compare price of cutting at each length
         Integer max = Integer.MIN_VALUE;
-        for (int i = 0; i < l; i++) {
-            max = Math.max(max, price[i] + maxProfit(price, l - i - 1));
+        for (int i = 0; i <l; i++) {
+            max = Math.max(max, price[i] + maxProfit(price, l- 1- i));
         }
 
         return max;
@@ -33,7 +35,7 @@ public class CuttingRod {
 
     /**
      * Time Complexity : O(l *l)
-     *
+     * Space Complexity : O(l)
      */
     public static int maxProfitDyn(int price[], int l) {
 
