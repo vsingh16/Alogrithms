@@ -1,0 +1,42 @@
+/**
+** https://www.geeksforgeeks.org/maximize-the-number-of-segments-of-length-p-q-and-r/
+** https://www.youtube.com/watch?v=O0N4xn38Ncg
+** Given a rod of length L, the task is to cut the rod in such a way that the total number of segments of length p, q and r is maximized. The segments can only be of length p, q, and r. 
+
+Examples: 
+
+Input: l = 11, p = 2, q = 3, r = 5 
+Output: 5 
+Segments of 2, 2, 2, 2 and 3
+
+Input: l = 7, p = 2, q = 5, r = 5 
+Output: 2 
+Segments of 2 and 5
+** Approach: for a length n, we need to try 3 combinations : x, y, x
+** if n >=x , 1 + (n-x)
+** if n >=y , 1 + (n-y)
+** if n >=z , 1 + (n-z)
+** Pick max value of above 3.
+** If none of above conditions satisfied, we can put INTEGER.MIN_VALUE
+**/
+
+/**
+** Time Complexity: O(3^n)
+**/
+public int maxSegmentCount(int n, int x, int y, int z) {
+     if(n == 0){
+       return 0;
+     }
+     
+     int rx = Integer.MIN_VALUE, ry = Integer.MIN_VALUE, rz = Integer.MIN_VALUE;
+     if (i >= x) {
+         rx = 1 + dp[i - x];
+       }
+     if (i >= y) {
+         ry = 1 + dp[i - y];
+       }
+      if (i >= z) {
+         rz = 1 + dp[i - z];
+       }
+       return Math.max(Math.max(rx, ry), rz);
+    }
