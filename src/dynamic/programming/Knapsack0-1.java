@@ -21,12 +21,13 @@
 ** Approach : we will skip an item if its weight is greater than total W
 ** At each  item, we have 2 choices either include or exclude
 ** Max(include(val[i]+fun(n-1,w-wt[i])), exclude(n-1,w))
+** PS: this is no infinite, so we can' use same item hence we do n-1 on including
 **/
 
 /**
-** Time Complexity : 
-**
- static int knapSack(int W, int wt[], int val[], int n)
+** Time Complexity : 2^n. At each level we have two options
+**/
+ int knapSack(int W, int wt[], int val[], int n)
     {
         // Base Case
         if (n == 0 || W == 0)
@@ -48,4 +49,25 @@
                                   val, n - 1),
                        knapSack(W, wt, val, n - 1));
     }
+
+/**
+** DP. Time Complexity : O(n*w)
+** Space Complexity: O(n*w)
+**/
+int knapSack(int W, int wt[], int val[], int n) 
+    { 
+        int dp[][] = new int[n+1][W+1];
+        for(int i=1;i<=n;i++){
+            for(int j=1;j<=W;j++){
+                if(wt[i-1] > j){
+                    dp[i][j] = dp[i-1][j];
+                }else{
+                    dp[i][j] = Math.max(val[i-1]+dp[i-1][j-wt[i-1]]
+                    ,dp[i-1][j]);    
+                }
+            }
+        }
+        
+        return dp[n][W];
+    } 
 
