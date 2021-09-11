@@ -72,4 +72,38 @@ int knapSack(int W, int wt[], int val[], int n)
         return dp[n][W];
     } 
 
+/**
+** Method 2: Other way of looking this problem could be just check if last item can be used give it try
+** and stop when n or w == 0
+** Time Complexity : O(n^n), at each step n choices to make
+**/
+int knapSack(int n, int W, int val[], int wt[])
+    {
+        if(n == 0 || w == 0){
+            return 0;   
+        }
+       int result = 0;
+       for(int i=0;i<n;i++){              
+           if(wt[i] <= w){
+               return Math.max(result, val[i] + knapSack(n, W - wt[i], va, wt));   
+           }   
+       }       
+    }
 
+/**
+** Time Complexity : O(n*w)
+** Space Complexity : O(w)
+**/
+int knapSack(int n, int W, int val[], int wt[])
+    {
+        int dp[] = new int[W+1];
+        for(int i=1;i<=W;i++){
+            for(int j=0;j<n;j++){ // because for each weight , we can pick from n items
+                if(wt[j]<=i){
+                 dp[i] = Math.max(dp[i], val[j]+ dp[i-wt[j]]);   
+                }
+            }
+        }
+        
+        return dp[W];
+    }
