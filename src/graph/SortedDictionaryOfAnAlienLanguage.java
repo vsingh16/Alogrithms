@@ -23,7 +23,7 @@ Output: Order of characters is 'c', 'a', 'b'
 ** If we pay attention we can sense that DFS prints the leaf node first and then backtrack to parent.
 ** Topoligcal sort is start from parent(indegree = 0) and then its children
 ** i.e topoliogcal sort = reverse DFS
-** SO we apply DFS but store result in reverse order.
+** So we apply DFS but store result in reverse order.
 **/
 
 class Solution
@@ -42,13 +42,19 @@ class Solution
         char ch = (char)(node+'a');
         result = ch + result; // result in reverse order
     }
+  /**
+  ** Time Complexity : O(N * L) : N words, l length of each word
+  ** Space Complexity :O(K+K) , to form graph
+  **/ 
     public String findOrder(String [] dict, int N, int K)
     {
         List<List<Integer>> graph = new ArrayList();
+        //O(K)
         for(int i=0;i<K;i++){
             graph.add(new ArrayList());
         }
         
+       //O(N * L)
         for(int i=0;i<N-1;i++){
             String word1 = dict[i];
             String word2 = dict[i+1];
@@ -62,6 +68,8 @@ class Solution
             }
         }                
         boolean visited[] = new boolean[K];
+        // we have graph of K nodes and assume they can have (K-1) edges.
+        // O(V+E) ....O(K+K-1)...O(2k)...O(K)
         for(int i=0;i<graph.size();i++){
             if(!visited[i]){
              DFS(i,graph,visited);   
