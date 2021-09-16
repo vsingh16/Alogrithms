@@ -27,6 +27,10 @@ Approach : We will follow greedy approach.
 **/
 
 // This class represents an undirected graph using adjacency list
+/**
+Time Complexity : O(v*V), because we are visiting all nodes and their neihborus, so if all are connected
+Space Complexity : O(V)
+**/
 class Graph
 {
     private int V;   // No. of vertices
@@ -70,9 +74,20 @@ class Graph
                 if (result[neighbour] != -1)
                     available[result[i]] = false;
             }
-          
-          for(int i){
+          int cr;
+          for(int cr=0;cr<V;cr++){
+              if(available[cr]){
+                  break;
+              }
           }
+          result[u] = cr; // Assign the found color
+ 
+         // Reset the values back to true for the next iteration
+         Arrays.fill(available, true);  
+         // print the result
+        for (int u = 0; u < V; u++)
+            System.out.println("Vertex " + u + " --->  Color "
+                                + result[u]);   
         }
     }
  
