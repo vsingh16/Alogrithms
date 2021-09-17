@@ -8,10 +8,25 @@ package dynamic.programming;
  * <p>
  * Approach:
  * <p>
- * if(char of A matches with char of C, A++ and C++)
+ * if(char of A matches with char of C, A++ and C++) ||
  * if(char of B matches with char of C, B++ and C++)
+ * PS: Note here we have two cases and we need to take either of them
  */
 public class InterLeavingString {
+    
+    
+    public static boolean isInterleaving(String s1, String s2, String s3, int n1, int n2, int n3) {
+
+        //if all string traversal is completed
+        if (n1 == 0 && n2 == 0 && n3 == 0) {
+            return true;
+        } else if (n3 == 0) {
+            return false;//string 3 is completed and we still have characters left in either s1 or s2
+        }
+
+        return s1.charAt(n1-1) == s3.charAt(n3-1) && isInterleaving(s1, s2, s3, n1-1, n2, n3 - 1))
+                || s2.charAt(n2-1) == s3.charAt(n3-1) && isInterleaving(s1, s2, s3, n1, n2 - 1, n3 - 1))
+    }
 
     /**
      * A
