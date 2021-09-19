@@ -49,39 +49,42 @@ public class InterLeavingString {
      * Time Complexity:O(S1*S2)
      * Space Complexity:O(S1*S2)
      */
-    public static boolean isInterleavingDyn(String s1, String s2, String s3) {
-
-        int m = s1.length(), n = s2.length();
-
-        if (m + n != s3.length()) {
-            return false;
-        }
-
-        boolean dp[][] = new boolean[m + 1][n + 1];
-
-        dp[0][0] = true;
-
-        //if s1 is empty compare  s2 and s3
-        for (int j = 1; j < dp[0].length; j++) {
-            dp[0][j] = s2.charAt(j - 1) == s3.charAt(j - 1) ? true : false;
-        }
-
-        //if s2 is empty compare  s1 and s3
-        for (int i = 1; i < dp.length; i++) {
-            dp[i][0] = s1.charAt(i - 1) == s3.charAt(i - 1) ? true : false;
-        }
-
-        for (int i = 1; i < dp.length; i++) {
-            for (int j = 1; j < dp[0].length; j++) {
-                int l = i + j - 1;
-                dp[i][j] = s1.charAt(i - 1) == s3.charAt(l) ? dp[i - 1][j] : false ||
-                        s2.charAt(j - 1) == s3.charAt(l) ? dp[i][j - 1] : false;
+   public boolean isInterLeave(String a,String b,String c)
+	{
+            int n1 = a.length();
+            int n2 = b.length();
+            int n3 = c.length();
+            
+            if(n1+n2!=n3){
+                return false;
             }
-        }
-
-        return dp[m][n];
-    }
-
+            
+            boolean dp[][] = new boolean[n1+1][n2+1];
+            for(int i=0;i<=n1;i++){
+                for(int j=0;j<=n2;j++){
+                    int k = i+j;
+                    if(i == 0 && j== 0){
+                        dp[i][j] = true;
+                    }else if(i == 0){ // if s1 is empty, compare s2 and s3
+                        if (b.charAt(j - 1) == c.charAt(j - 1)){
+                         dp[i][j] = dp[i][j - 1];   
+                        }
+                    }else if(j==0){ // if s2 is empty, compare s1 and s3
+                        if (a.charAt(i - 1) == c.charAt(i - 1)){
+                         dp[i][j] = dp[i-1][j];   
+                        }
+                    }else{
+                        dp[i][j] = 
+                        (a.charAt(i-1) == c.charAt(k-1) ? dp[i-1][j] : false) 
+                        ||
+                        (b.charAt(j-1) == c.charAt(k-1) ? dp[i][j-1] : false) ;
+                    }
+                }
+            }
+            
+            return dp[n1][n2];
+	}
+}
 
     public static void main(String[] args) {
         System.out.println(isInterleaving("xxy", "xxz", "xxzxxy", 0, 0, 0));//true
