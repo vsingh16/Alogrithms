@@ -57,7 +57,7 @@ int countSusbset(int n, int w){
         dp[i][j] = 1;
       }
       //since item > target sum, so exclude
-      else if(arr[i-1][j] > j){
+      else if(arr[i-1] > j){
         dp[i][j] = dp[i-1][j];
       }else{
          //two cases include and exclude
