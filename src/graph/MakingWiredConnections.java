@@ -1,9 +1,12 @@
 /**
 ** https://leetcode.com/problems/number-of-operations-to-make-network-connected/submissions/
 ** https://www.youtube.com/watch?v=gEK7eHce88g
-** There are n computers numbered from 0 to n-1 connected by ethernet cables connections forming a network where connections[i] = [a, b] represents a connection between computers a and b. Any computer can reach any other computer directly or indirectly through the network.
+** There are n computers numbered from 0 to n-1 connected by ethernet cables connections forming a network where connections[i] = [a, b]
+represents a connection between computers a and b. Any computer can reach any other computer directly or indirectly through the network.
 
-Given an initial computer network connections. You can extract certain cables between two directly connected computers, and place them between any pair of disconnected computers to make them directly connected. Return the minimum number of times you need to do this in order to make all the computers connected. If it's not possible, return -1. 
+Given an initial computer network connections. You can extract certain cables between two directly connected computers, and place them between 
+any pair of disconnected computers to make them directly connected. Return the minimum number of times you need to do this in order to make all
+the computers connected. If it's not possible, return -1. 
 
 ** Approach : Basic Concpet: min No of edges required to connect n nodes = n-1
 ** eg 1-2-3 , 3 nodes, 2 edges
