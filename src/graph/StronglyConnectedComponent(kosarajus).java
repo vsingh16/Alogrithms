@@ -1,6 +1,8 @@
 /**
 ** https://www.geeksforgeeks.org/strongly-connected-components/
 ** https://www.youtube.com/watch?v=RwkNLN5mBn8&list=PLDdcY4olLQk066ysRibhoGd3UzGr0XSQG&index=19
+** Note: To find components in undirected graph, we can simply apply DFS. Count when DFS is applied.
+** For directed , we will apply Kosaraju's Algorithm
 ** A directed graph is strongly connected if there is a path between all pairs of vertices. 
 ** A strongly connected component (SCC) of a directed graph is a maximal strongly connected subgraph. For example, there are 3 SCCs in the following graph.
 ** 1----->0------->3
