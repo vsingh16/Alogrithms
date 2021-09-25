@@ -21,6 +21,16 @@ public class LongestIncreasingSubSequence {
         return Math.max(include,exclude);
     }
     
+    /**
+    ** DP: dp[n]
+    ** for all elements dp[i] = 1; becuase if we only include each element, LIS = 1
+    ** j =0 ; j<i : this will give us all elements in combination
+    ** 1 condition = a[j] < a[i] , increasing subsequence
+    ** 2 condition , dp[i]<=dp[j], because we will need max value for dp[i]
+    ** Then dp[i] = 1+dp[j]
+    ** Time Complexity : O(n*n)
+    ** SPace Complexity : O(n)
+    **/
     private static int lis(int a[]) {
         int n = a.length;
 
@@ -34,25 +44,15 @@ public class LongestIncreasingSubSequence {
             lis[i] = 1;
         }
 
+        int max = Intger.MIN_VALUE:
         for (int i = 1; i < n; i++) {
             for (int j = 0; j < i; j++) {
-                if (a[j] < a[i]) {
-                    lis[i] = Math.max(lis[j] + 1, lis[i]);
+                if (a[j] < a[i] && lis[i]<=lis[j]) {
+                    lis[i] = lis[j] + 1;
+                    max = Math.max(max,lis[i]);
                 }
             }
         }
-
-        //find max in LIS[i]
-        int max = Integer.MIN_VALUE;
-        for (int i = 0; i < n; i++) {
-            if (lis[i] > max) {
-                max = lis[i];
-            }
-            System.out.print(lis[i] + " ");
-        }
-
-        System.out.println();
-
         return max;
     }
 
