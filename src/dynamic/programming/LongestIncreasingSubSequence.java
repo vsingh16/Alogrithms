@@ -1,9 +1,25 @@
 package dynamic.programming;
 
 /**
- * Created by vishal on 22-Feb-18.
+ ** Created by vishal on 22-Feb-18.
+ ** https://www.geeksforgeeks.org/longest-increasing-subsequence-dp-3.
+ ** Now, let us discuss the Longest Increasing Subsequence (LIS) problem as an example problem that can be solved using Dynamic Programming. 
+ ** The Longest Increasing Subsequence (LIS) problem is to find the length of the longest subsequence of a given sequence such that all elements of the
+ ** subsequence are sorted in increasing order. For example, the length of LIS for {10, 22, 9, 33, 21, 50, 41, 60, 80} is 6 and LIS is {10, 22, 33, 50, 60, 80}. 
+ ** Approach :
+ ** Recusriion : we have two options either to include or exclude.
  */
 public class LongestIncreasingSubSequence {
+    
+    //Time Complexity : O(2^n)
+    private static int lis(int a[], int n, int previous, int sum) {
+           if(n == 0){
+               return sum;
+           }
+        int exclude = lis(a, n-1, previous, sum);
+        int include = lis(a, n-1, a[n-1], sum+a[n-1]);
+        return Math.max(include,exclude);
+    }
     
     private static int lis(int a[]) {
         int n = a.length;
