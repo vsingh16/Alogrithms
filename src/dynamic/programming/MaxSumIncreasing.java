@@ -8,6 +8,17 @@
 
 class Solution
 {
+	   //Time Complexity : O(2^n)
+    private static int lis(int a[], int n, int previous, int sum) {
+           if(n == 0){
+               return sum;
+           }
+        int exclude = lis(a, n-1, previous, sum);
+        int include = lis(a, n-1, a[n-1], sum+a[n-1]);
+        return Math.max(include,exclude);
+    }
+		
+	
   /**
   ** Approach: By default dp[i] = a[i] i.e single element subseq
   ** j =0 to i
