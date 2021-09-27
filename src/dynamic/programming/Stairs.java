@@ -44,7 +44,7 @@ public class Stairs {
     
     /**
      * Number of ways to reach n stairs in m ways
-     * ways(n, m) = ways(n-1, m) + ways(n-2, m) + ... ways(n-m, m)
+     * ways(n, m) = ways(n-1, m) + ways(n-2, m) + ... ways(n-m, m)(n<=m)
      */
     //Time Complexity:Exponential
     public static int climbStairs(int n, int m) {
@@ -59,6 +59,8 @@ public class Stairs {
 
     //Time Complexity:O(mn)
     //Space Complexity:O(n)
+    // https://www.techiedelight.com/find-total-ways-reach-nth-stair-with-atmost-m-steps/
+    //Below implementation is asked when m>=2
     public static int climbStairsDyn(int n, int m) {
 
         int res[] = new int[n];
