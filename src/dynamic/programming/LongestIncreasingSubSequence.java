@@ -12,12 +12,12 @@ package dynamic.programming;
 public class LongestIncreasingSubSequence {
     
     //Time Complexity : O(2^n)
-    private static int lis(int a[], int n, int previous, int sum) {
+    private static int lis(int a[], int n, int previous,lis) {
            if(n == 0){
-               return sum;
+               return lis;
            }
-        int exclude = lis(a, n-1, previous, sum);
-        int include = lis(a, n-1, a[n-1], sum+a[n-1]);
+        int exclude = lis(a, n-1, previous, lis);
+        int include = lis(a, n-1, a[n-1], lis + 1);
         return Math.max(include,exclude);
     }
     
