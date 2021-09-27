@@ -1,44 +1,47 @@
 package dynamic.programming;
 
 /**
- * Created by vishal on 08-Mar-18.
+ * There are n stairs, a person standing at the bottom wants to reach the top. 
+ * The person can climb either 1 stair or 2 stairs at a time. Count the number of ways, the person can reach the top.
  */
 public class Stairs {
-
+    
     /**
-     * Count number of ways to reach Ath stair if u can take either 1 or 2 step
-     *
-     * count = (n-1)+(n-2) //fabonnaci pattern
-     *
-     * ways(1) = fib(2) = 1
-     ways(2) = fib(3) = 2
-     ways(3) = fib(4) = 3
-     *
-     **
-     * We can alos use fabonnaci numbers
-     *
-     *  {
-     if (n <= 1)
-     return n;
-     return fib(n-1) + fib(n-2);
-     }
-
-     * @param A
-     * @return
-     */
-    public static int climbStairs(int A) {
-
-        if (A == 0) {
-            return 1;
-        }
-        if (A == 1) {
-            return 1;
-        }
-
-        return climbStairs(A - 1) + climbStairs(A - 2);
-
+    ** Approach : for n = 1,
+    ** for n = 2, he has two ways, either in one go or 1 by 1, 2
+    ** f(n) = f(n-1) + f(n-2)
+    ** Time Complexity : (2^n)
+    **/
+    int countWays(int n)
+    {
+        
+       if(n <= 2){
+           return n;
+       }else {
+           return countWays(n-1) + countWays(n-2);
+       }
     }
 
+    /**
+    ** Same above approach is applied in DP.
+    ** Time Complexity : O(n)
+    ** Space Complexity : O(n)
+    **/
+    int countWays(int n)
+    {
+        
+       int dp[] = new int[n+1];
+       for(int i=1;i<=n;i++){
+           if(i<=2){
+               dp[i] = i;
+           }else{
+               dp[i] = (dp[i-1]+dp[i-2])%1000000007;
+           }
+       }
+       
+       return dp[n];
+    }
+    
     /**
      * Number of ways to reach n stairs in m ways
      * ways(n, m) = ways(n-1, m) + ways(n-2, m) + ... ways(n-m, m)
