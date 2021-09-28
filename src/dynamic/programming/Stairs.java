@@ -65,10 +65,11 @@ public class Stairs {
     //Below implementation is asked when m>=2
     public static int climbStairsDyn(int n, int m) {
 
-        int res[] = new int[n];
+        int res[] = new int[n+1];
         res[0] = 1;
         res[1] = 1;
-        for (int i = 2; i < n; i++) {
+        res[2] = 2;
+        for (int i = 3; i <= n; i++) {
             res[i] = 0;
             for (int j = 1; j <= m && j <= i; j++)
                 res[i] += res[i - j];
