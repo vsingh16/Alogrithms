@@ -50,4 +50,21 @@ class Solution
        
        return result;
     }
+    
+    /**
+    ** 2nd Approach: 
+    ** Simply apply DFS.
+    ** Once the processing of a node is completely finished, add it to list
+    ** List in reverse order gives us topo sort.
+    **/
+    private static void topologicalSort(int node, List<List<Edge>> graph, boolean visited[], List<Integer> order) {
+
+        visited[node] = true;
+        for (Edge neighbour : graph.get(node)) {
+            if (!visited[neighbour.target]) {
+                topologicalSort(neighbour.target, graph, visited, order);
+            }
+        }
+        order.add(node); //add element when its processing is completely finished.
+    }
 }
