@@ -1,5 +1,6 @@
 /**
 ** https://www.geeksforgeeks.org/find-longest-path-directed-acyclic-graph/
+** https://www.youtube.com/watch?v=jdTnoCBSOVM&t=493s
 ** Given a Weighted Directed Acyclic Graph (DAG) and a source vertex s in it, find the longest distances from s to all other vertices in the given graph.
 ** 0------> 1(5)
 ** 1------> 4(2),5(5)
