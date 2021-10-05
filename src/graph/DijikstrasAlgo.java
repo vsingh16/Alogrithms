@@ -68,4 +68,78 @@ class Solution
     }
 }
 
+/**
+** Approach 2: Since we need to find node with min distance for processing,
+** we can use Min Heap. Time Complexity to pick min will be O(1) and heapify will be O(log V)
+** So overall Time Complexity of below program is O(V * (V+E))
+** Space Complexity : O(V)
+**/
+
+class Result {
+
+    static class Node implements Comparable<Node> {
+        private Integer node;
+        private Integer weight;
+
+        public Node(Integer node, Integer weight) {
+            this.node = node;
+            this.weight = weight;
+        }
+
+        @Override
+        public int compareTo(Node o) {
+            return weight.compareTo(o.weight);
+        }
+    }
+
+    static int[] dijkstra(int V, ArrayList<ArrayList<ArrayList<Integer>>> adj, int S) {
+
+        int result[] = new int[V];
+        for (int i = 0; i < V; i++) {
+            result[i] = i == S ? 0 : Integer.MAX_VALUE;
+        }
+        Set<Integer> spt = new HashSet<>();
+        //Only add element to queue when we have distance updated
+        Queue<Node> queue = new PriorityQueue<>();
+        queue.add(new Node(S, 0));
+
+        //Now we have distance for 1 vertex and need to find V-1
+        for (int i = 0; i < V - 1; i++) {
+
+            //find node with min distance
+            Node node = findNodeWithMinDistance(queue, spt);
+            int u = node.node;
+            //update distance for  adj list
+            for (List<Integer> edge : adj.get(u)) {
+                int v = edge.get(0);
+                int w = edge.get(1);
+                result[v] = Math.min(result[v], result[u] + w);  // only update distance if new distance is less.
+                queue.add(new Node(v, result[v])); // also add to queue
+            }
+            spt.add(u); // add node to set after its processing is done
+
+        }
+
+        return result;
+    }
+
+    static Node findNodeWithMinDistance(Queue<Node> queue, Set<Integer> spt) {
+
+        // we need to find first node(min) and it should be pending for processing
+        while (!queue.isEmpty()) {
+            Node node = queue.remove();
+            if (!spt.contains(node.node)) {
+                return node;
+            }
+        }
+        return null;
+    }
+
+}
+
+
+
+
+
+
 
