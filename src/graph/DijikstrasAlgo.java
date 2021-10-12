@@ -71,7 +71,7 @@ class Solution
 /**
 ** Approach 2: Since we need to find node with min distance for processing,
 ** we can use Min Heap. Time Complexity to pick min will be O(1) and heapify will be O(log V)
-** So overall Time Complexity of below program is O(V * (V+E))
+** So overall Time Complexity of below program is O(logV * (V+E))
 ** Space Complexity : O(V)
 **/
 
