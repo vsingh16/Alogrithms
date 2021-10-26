@@ -2,7 +2,8 @@
 ** https://www.geeksforgeeks.org/bipartite-graph/
 ** https://www.youtube.com/watch?v=szDk4q4nHF4&list=PLDdcY4olLQk066ysRibhoGd3UzGr0XSQG&index=19
 ** Check whether a given graph is Bipartite or not
-** A Bipartite Graph is a graph whose vertices can be divided into two independent sets, U and V such that every edge (u, v) either connects a vertex from U to V or a vertex from V to U. In other words, for every edge (u, v), either u belongs to U and v to V, or 
+** A Bipartite Graph is a graph whose vertices can be divided into two independent sets, U and V such that every edge (u, v) either
+** connects a vertex from U to V or a vertex from V to U. In other words, for every edge (u, v), either u belongs to U and v to V, or 
 ** u belongs to V and v to U. We can also say that there is no edge that connects vertices of same set.
 ** Approach:
 ** If we start traversing each node and color it(either 1 & 2), so if two adjacent nodes get same color, its not bipartite else it is bipartite.
