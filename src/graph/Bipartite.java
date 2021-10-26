@@ -14,14 +14,14 @@ public class Abc {
     private boolean isNotBipartite;
 
     //Time Complexity : O(V+E)
-    private void isBipartite(ArrayList<ArrayList<Integer>> list, int node, int parent, int color, int visited[]) {
+    private void isBipartite(ArrayList<ArrayList<Integer>> list, int node, int color, int visited[]) {
 
         visited[node] = color;
         for (Integer neighbour : list.get(node)) {
             if (visited[neighbour] == 0) { // not color
-                isBipartite(list, neighbour, node, 3 - color, visited);
+                isBipartite(list, neighbour, node, 3 - color, visited); //doing minus from 3 as we have only two colors 1 & 2, 0 = no color
             } else {
-                if (neighbour != parent && visited[neighbour] == color) { 
+                if (visited[neighbour] == color) { 
                     isNotBipartite = true;
                     break;
                 }
@@ -59,7 +59,7 @@ public class Abc {
         int visited[] = new int[v];
         for (int i = 0; i < v; i++) {
             if (visited[i] == 0) {
-                abc.isBipartite(list, i, i, 1, visited);
+                abc.isBipartite(list, i, 1, visited);
             }
         }
         System.out.println("Printing Colors");
