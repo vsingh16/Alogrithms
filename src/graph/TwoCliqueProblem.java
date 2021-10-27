@@ -46,7 +46,7 @@ class Solution {
 
         for (int i = 0; i < V; i++) {
             for (int j = 0; j < V; j++) {
-                if (j != i && !adj.get(i).contains(j)) {
+                if (j != i && !adj.get(i).contains(j)) { //not same node and nodes which are not there in original adj list
                     complementaryAdj.get(i).add(j);
                 }
             }
