@@ -16,7 +16,7 @@ public class FindFirstAndLast {
         int first = -1, last = -1;
         for (int i = 0; i < a.length; i++) {
             if (a[i] == x) {
-                if (first < 0) {
+                if (first == -1) {
                     first = i;
                 }
                 last = i;
@@ -40,37 +40,81 @@ public class FindFirstAndLast {
 
     public static int findFirst(int a[], int x) {
 
-        int l = 0, h = a.length - 1;
-        while (l <= h) {
-            int mid = (l + h) / 2;
-
-            if ((mid == 0 && (x == a[mid])) || a[mid] == x && a[mid - 1] < x) {
-                return mid;
-            } else if (x <= a[mid]) {
+        int l = 0, h = a.length - 1, pos = -1;
+        while(l<=h){
+            
+            int mid = l + ((h-l)/2);
+            if(a[mid] == x){
+                pos = mid;
                 h = mid - 1;
-            } else {
+                
+            }else if(x<a[mid]){
+                h = mid - 1;
+            }else{
                 l = mid + 1;
             }
         }
-
-        return -1;
+        
+        return pos;
     }
 
     public static int findLast(int a[], int x) {
 
-        int l = 0, h = a.length - 1;
-        while (l <= h) {
-            int mid = (l + h) / 2;
-            if ((mid == a.length - 1 && x == a[mid]) || (a[mid] == x && a[mid + 1] > x)) {
-                return mid;
-            } else if (x >= a[mid]) {
+       int l = 0, h = a.length - 1, pos = -1;
+        while(l<=h){
+            
+            int mid = l + ((h-l)/2);
+            if(a[mid] == x){
+                pos = mid;
                 l = mid + 1;
-            } else {
+                
+            }else if(x<a[mid]){
                 h = mid - 1;
+            }else{
+                l = mid + 1;
             }
         }
+        
+        return pos;
+    }
+     //call from main: first_indexes(a, x, 0, a.length-1, -1)
+     public int first_indexes(long a[], long x, int l, int h, int pos)
+    {
+        
+        if(l<=h){
+            int mid = l + ((h-l)/2);
+            if(a[mid] == x){
+                return first_indexes(a, x, l,mid - 1, mid);
+            }else if(x<a[mid]){
+                return first_indexes(a, x, l,mid - 1, pos);
+            }else{
+                l = mid + 1;
+                return first_indexes(a, x, mid + 1, h , pos);
+            }
+        }
+        
+        return pos;
+        
+    }
 
-        return -1;
+    //call from main: last_indexes(a, x, 0, a.length-1, -1)
+     public int last_indexes(long a[], long x, int l, int h, int pos)
+    {
+        
+        if(l<=h){
+            int mid = l + ((h-l)/2);
+            if(a[mid] == x){
+                return last_indexes(a, x, mid+1,h, mid);
+            }else if(x<a[mid]){
+                return last_indexes(a, x, l,mid - 1, pos);
+            }else{
+                l = mid + 1;
+                return last_indexes(a, x, mid + 1, h , pos);
+            }
+        }
+        
+        return pos;
+        
     }
 
     public static void main(String args[]) {
