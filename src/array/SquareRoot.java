@@ -19,31 +19,30 @@ Keep in mind, if we do mid = (l+h)/2; h= Integer.max , so adding even 1 will giv
 So right way to do mid, is no of elements b/w l & h = (h-l)
 then it starts from l, so mid = l + (h-l)/2
 Also, if mid = INTEGER.MAX, so mid * mid will result in overflow hence we are taking long.
+Ref: https://www.geeksforgeeks.org/square-root-of-an-integer/
+https://leetcode.com/problems/sqrtx/
+https://www.youtube.com/watch?v=6z2HK4o8qcU&t=2502 : Love Babbar
+
 
 class Solution {
     
     public int mySqrt(int x) {
      
-     //Base Cases : 0,1
-    if (x == 0 || x == 1) {
-      return x;
-    }
+      long l = 0; long h=x;
+        long result = 0;
+        while(l<=h){
+            long mid = l + (h-l)/2;
+            long product = (mid * mid);
+            if(product == x){
+                return (int)mid;
+            }else if(product < x){
+                result = mid;
+                l = mid + 1;
+            }else{
+                h = mid - 1;
+            }
+        }
 
-    int result = 1;
-    int l = 1, h = x;
-    while (l <= h) {
-
-      long mid = l + (h - l) / 2;
-      if (mid * mid == x) {
-        return (int) mid;
-      } else if (mid * mid < x) {
-        l = (int) (mid + 1);
-        result = (int) mid;
-      } else {
-        h = (int) mid - 1;
-      }
-    }
-
-    return result;
+        return (int)result;
     }
 }
