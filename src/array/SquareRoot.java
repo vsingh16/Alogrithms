@@ -45,4 +45,32 @@ class Solution {
 
         return (int)result;
     }
+
+  /**
+     * If sqaure root is asked upto certain precision. eg: 37 -> 6.082
+     * @param x : 37
+     * @param ans: 6. absolute square root.
+     * @param precision: 3
+     * @return 6.082
+     * Approach: first find absolute/near square root which we can get mySqrt()/binary search.
+     * factor = 0.1, 6.1, 6.2, 6.3....<x
+     * factor = 0.01,  6.01, 6.02, 6.03....<x
+     * factor = 0.001, 6.001, 6.002, 6.003....<x
+     */
+    public static double mySqrtWithPrecision(int x, double ans, int precision) {
+
+        double factor = 1;
+        for (int i = 0; i < precision; i++) {
+            factor = factor / 10;
+            for (double j = ans; j * j < x; j = j + factor) {
+                ans = j;
+            }
+        }
+
+        return ans;
+    }
+
+ public static void main(String[] args) {
+        System.out.println(mySqrtWithPrecision(37,mySqrt(37),3));
+    }
 }
