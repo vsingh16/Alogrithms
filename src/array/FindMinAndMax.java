@@ -6,4 +6,5 @@
 ** Approach 2: Min = a[0], Max = a[0], iterate afterwards in array, if a[i] < min, min = a[i]
 ** a[i] > max, max = a[i]
 ** Time Complexity: O(n)
+** https://www.geeksforgeeks.org/maximum-and-minimum-in-an-array/
 **/
