@@ -8,3 +8,45 @@
 ** Time Complexity: O(n)
 ** https://www.geeksforgeeks.org/maximum-and-minimum-in-an-array/
 **/
+
+class Solution
+{ 
+  //Time Complexity: 1 + 2*(n-2)
+    public static int findSum(int a[],int n) 
+    {
+       
+       int min, max;
+       if(n == 1){
+           min = a[0];
+           max = a[0];
+       }else {
+           
+           if(a[0]<a[1]){
+               min = a[0];
+               max = a[1];
+           }else{
+               min = a[1];
+               max = a[0];
+           }
+        
+        for(int i=2;i<n;i++){
+            if(min>a[i]){
+                min = a[i];
+            }
+            
+            if(max<a[i]){
+                max = a[i];
+            }
+            
+        }
+           
+       }   
+           
+       
+       
+       return min + max;
+       
+       
+    }
+}
+
