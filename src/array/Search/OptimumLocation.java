@@ -6,7 +6,7 @@
 ** We need to find a point on line. If we start from left point -10^6, distance will decrease
 ** and we will reach a point where distance is min but after that point distance will start increasing.
 ** This creates a distance parabola graph and we know we can apply ternary search on parabola/unimodal function.
-** https://www.youtube.com/watch?v=w6SrH5dgAbg&list=PL-Jc9J83PIiGiFr2WFAiS9nEssqEoCKC4&index=9
+** https://www.youtube.com/watch?v=FPvvzOPXsrM&list=PL-Jc9J83PIiGiFr2WFAiS9nEssqEoCKC4&index=2
 **/
 
 // A Java program to find optimum location
