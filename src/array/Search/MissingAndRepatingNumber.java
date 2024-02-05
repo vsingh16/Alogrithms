@@ -11,6 +11,9 @@
 ** With above approach we can find separate x and y but we dont know which one is missing and duplicate.
 ** we can traverse array one more time and put counter. If couter ==0 , then x is missing and y is duplicate else vice versa.
 ** Time Complexity: O(n) && Space Complexity: O(n)
+** https://www.youtube.com/watch?v=XcSr6TIMl7w&list=PL-Jc9J83PIiFJRioti3ZV7QabwoJK6eKe&index=3 : Prepcoding
+** https://www.youtube.com/watch?v=pnx5JA9LNM4&list=PL-Jc9J83PIiFJRioti3ZV7QabwoJK6eKe&index=9
+** 
 **/
 
 //{ Driver Code Starts
