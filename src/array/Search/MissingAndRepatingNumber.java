@@ -7,7 +7,7 @@
 ** We will apply xor on all elements. This will result in xory.
 ** But till now we dont know separate value of x and y.
 ** We can find rsb of xory.  Then we can classify elements in two categories where either bit corresponding to rsb is 0 or 1.
-** RSB of x = x & x 2s complement (2s complement = -x)
+** RSB of x = x & x 2s complement. 2s complement = flip x  + 1 . or (2s complement = -x)
 ** With above approach we can find separate x and y but we dont know which one is missing and duplicate.
 ** we can traverse array one more time and put counter. If couter ==0 , then x is missing and y is duplicate else vice versa.
 ** Time Complexity: O(n) && Space Complexity: O(n)
