@@ -94,6 +94,8 @@ public int FindMaxSum(int a[], int n)
 
 /**
 ** One More DP Way:https://www.youtube.com/watch?v=VT4bZV24QNo PrepCoding
+** Time Complexity: O(n)
+ ** Space Complexity :O(1)
 **/
     public int FindMaxSum(int a[], int n)
     {
