@@ -99,3 +99,24 @@ public int FindMaxSum(int a[], int n)
        
        return previous;
     }
+
+
+/**
+** One More DP Way:https://www.youtube.com/watch?v=VT4bZV24QNo PrepCoding
+**/
+    public int FindMaxSum(int a[], int n)
+    {
+         // Your code here
+        int include = a[0];
+        int exclude = 0;
+
+        for(int i=1;i<n;i++){
+
+            int newInclude = a[i]+ exclude; //Becuase we cant take adjacent
+            int newExclude = Math.max(include,exclude);
+            include = newInclude;
+            exclude = newExclude;
+        }
+
+        return Math.max(include,exclude);
+    }
