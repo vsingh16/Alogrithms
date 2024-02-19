@@ -21,29 +21,20 @@ Approach : There will be two case either include or exclude element.
  /**
  ** Time Complexity: O(2^n)
  **/
- public static int findMaxSumSubsequence(int[] arr, int i, int n, int prev)
-    {
-        // base case: all elements are processed
-        if (i == n) {
-            return 0;
-        }
- 
-        // recur by excluding the current element
-        int excl = findMaxSumSubsequence(arr, i + 1, n, prev);
- 
-        int incl = 0;
- 
-        // include current element only if it's not adjacent to
-        // the previous element
-        if (prev + 1 != i) {
-            incl = findMaxSumSubsequence(arr, i + 1, n, i) + arr[i];
-        }
- 
-        // return maximum sum we get by including or excluding
-        // current item
-        return Integer.max(incl, excl);
-    }
-}
+ // Function to find the maximum sum
+  static int rec(int nums[], int idx,int N)
+  {
+      if (idx >= N)
+          return 0;
+      return Math.max(nums[idx] + rec(nums, idx + 2, N), //skip adjacent
+                 rec(nums, idx + 1, N)); //adjacent
+  }
+   
+  // Function to find the maximum sum
+  static int findMaxSum(int[] arr, int N)
+  {
+      return rec(arr, 0, N);
+  }
 
 /**
 DP:
