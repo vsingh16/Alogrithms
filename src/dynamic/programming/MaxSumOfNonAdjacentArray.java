@@ -56,8 +56,8 @@ public int FindMaxSum(int a[], int n)
        }
        for(int i=2;i<n;i++){
            int exclude = dp[i-1];
-           int include = a[i]+ dp[i-2];
-           dp[i] = Math.max(a[i],Math.max(exclude,include));
+           int include = a[i]+ dp[i-2];//skip adjacent
+           dp[i] = Math.max(exclude,include);
        }
        
        return dp[n-1];
