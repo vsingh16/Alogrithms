@@ -47,6 +47,8 @@ and this is our desired state, now we can return median based on even and odd le
 
 if maxLeftX>=minRightY, we need to move more towards left i.e h = partitionx-1 else l = partitionx+1
 Result is in double as we may have cases like (2+3)/2 = 2.5 
+** Time Complexity: O(min(log M, log N)), Since binary search is being applied on the smaller of the 2 arrays
+** Space Complexity: O(1)
 **/
 
 
