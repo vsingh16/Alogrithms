@@ -38,71 +38,37 @@ Space Complexity: O(1)
 **/
 class Solution {
     
-    public long kthElement( int nums1[], int nums2[],int n ,int m, int k) {
+   public long kthElement( int a[], int b[], int x, int y, int k) {
         
-        int x = nums1.length;
-        int y= nums2.length;
-        
-        //traverse in small array
-        if(y<x){
-      		return kthElement(nums2,nums1,n,m,k);
-		    }
-        
-       if(k == 1){
-          
-          if(x > 1 && y >1){
-               return min(nums1[0],nums2[0]); 
-           }else if(x > 1){
-               return nums1[0];
-           }else if(y > 1){
-                return nums2[0];
-           }
-        }else if(x+y == k){
-            return max(nums1[x-1],nums2[y-1]);
-        }else if(k<1){
-            return 0;
-        }else if(k>x+y){
-            return 0;
+            if(y<x){
+                return kthElement(b, a, y, x, k);
+            }        
+
+        //if any array size is less than k, we can take all elements of it
+	//case if x<k, we can take all elements of x. l=0, h=x
+	//case if y<k, we can take all elements of y. Then we have to take y-k elements from x. l= (y-k)
+        int l = y<k ? (k-y) : 0, h= Math.min(x,k);
+        while(l<=h){
+            int mid = l + (h-l)/2;
+            int partitionx = mid;
+            int partitiony = k - partitionx;
+            
+            int maxLeftx= partitionx <= 0 ? Integer.MIN_VALUE : a[partitionx-1];
+            int maxLefty= partitiony <= 0 ? Integer.MIN_VALUE : b[partitiony-1];
+            
+            int minRightx= partitionx == x ? Integer.MAX_VALUE : a[partitionx];
+            int minRighty= partitiony == y ? Integer.MAX_VALUE : b[partitiony];
+            
+            if(maxLeftx<=minRighty && maxLefty<= minRightx){
+                return Math.max(maxLeftx,maxLefty);
+            }else if(maxLeftx > minRighty){
+                h = mid - 1;
+            }else{
+                l = mid + 1;
+            }
         }
         
-        
-        // if y is less than k, and then if we take all elements of second array
-        // we have to take at least k - y elements from first array
-		int l= y < k ? (k-y) : 0;
-		//Since we can't have elements more than x so either k or x
-		int h = min(k,x);
-		
-		
-		while(l <=h ){
-		    
-		    int partitionX = l + (h-l)/2;
-		    int partitionY = k - partitionX;
-		    
-		        int maxLeftX = partitionX == 0 ? Integer.MIN_VALUE : nums1[partitionX-1];
-            int minRightX = partitionX == x ? Integer.MAX_VALUE : nums1[partitionX];
-            
-            int maxLeftY = partitionY == 0 ? Integer.MIN_VALUE : nums2[partitionY-1];
-            int minRightY = partitionY == y ? Integer.MAX_VALUE : nums2[partitionY];
-            
-            if(maxLeftX<=minRightY && maxLeftY <= minRightX){
-                return max(maxLeftX,maxLeftY);
-            }else if(maxLeftX > minRightY){
-                h = partitionX - 1;
-            }else{
-                l = partitionX + 1;
-            }
-		}
-            
-        //Only we we can come here is if input arrays were not sorted. Throw in that scenario.
-        throw new IllegalArgumentException();
-	}
-        
-    int max(int a, int b){
-        return a>=b? a:b;
-    }
-    
-    int min(int a, int b){
-        return a<=b? a:b;
+        return -1;
     }
     
 }
