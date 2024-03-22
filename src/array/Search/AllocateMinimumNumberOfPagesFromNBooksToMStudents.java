@@ -10,10 +10,11 @@
 ** Output: 113
 ** Approach 1:
 ** Ref Link: https://www.youtube.com/watch?v=YTTdLgyqOLY
+** Similar Problem: Painters Partition Problem, Aggressive cows	etc
 ** We can create search space, starting from 0 to sum of array.
 ** Since array is sorted and we need to assign consecutive pages, we can apply binary search in this search space.
 ** We can find mid.
-** Check if mid is possible solution, if yes, since we need to find min, store the ans & h = mid - 1
+** Check if mid is a possible solution, if yes, since we need to find min, store the ans & h = mid - 1
 ** if not a solution, l = mid + 1;
 ** Conditions for not a solution
 ** if no of students > m || a[i] > mid (any page itself is greater than mid value)
