@@ -32,6 +32,7 @@ BST: Implementing auto-completion in a BST is more complex and less efficient, a
 Character by Character Comparison
 Trie: Tries inherently work on a character-by-character basis, making them more intuitive and faster for prefix searches.
 BST: In a BST, comparisons are made between whole strings, which is less direct and less efficient when working with prefixes.
+Ref: https://www.youtube.com/watch?v=m9zawMC6QAI&pp=ygUgdHJpZSBkYXRhIHN0cnVjdHVyZSBhcG5hIGNvbGxlZ2U%3D
  */
 public class Trie {
 
@@ -52,6 +53,10 @@ public class Trie {
         }
     }
 
+    /**
+    ** Time Complexity: O( maxLengthOfWord)
+       Auxiliary Space: O(maxLengthOfWord)
+    **/
     public void insert(String word) {
 
         Node pCrwal = root;
@@ -67,6 +72,10 @@ public class Trie {
 
     }
 
+     /**
+    ** Time Complexity: O( maxLengthOfWord)
+     **  Auxiliary Space: O(maxLengthOfWord)
+    **/
     public Boolean search(String word) {
 
         Node pCrwal = root;
