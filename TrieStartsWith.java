@@ -8,6 +8,7 @@
 ** goo -> false
 ** ma -> false
 ** Appraoch: We can use Trie and apply search. Only diff with search() is that we dont need to check for end of word.
+** Time Complexity: O(n) . length of prefix
 **/
 
 public class Trie {
