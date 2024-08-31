@@ -40,7 +40,13 @@ class Solution {
 
         return answer;
     }
+
+    /**
+    ** Time Complexity: for each word, we are doing a depth-first search in Trie.
+    ** Trie Height will be the length of the max word.
+    ** O(n * L), n = no of wrods in array. L = Length of max word.
     
+    **/
      public static void longestString(TrieNode root, StringBuilder temp) {
 
         if (root == null) {
