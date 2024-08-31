@@ -124,23 +124,7 @@ public class Trie {
         ptr.setEndOfWord(true);
 
     }
-
-    boolean search(String word) {
-
-        TrieNode ptr = root;
-        for (int i = 0; i < word.length(); i++) {
-
-            int pos = word.charAt(i) - 'a';
-            if (ptr.getChildren()[pos] == null) {
-                return false;
-            }
-            ptr = ptr.getChildren()[pos];
-        }
-
-        return ptr.isEndOfWord();
-
-    }
-
+ 
 }
 
 class TrieNode {
