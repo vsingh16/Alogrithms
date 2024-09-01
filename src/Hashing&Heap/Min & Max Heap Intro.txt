@@ -1,5 +1,6 @@
-Heap: It is a complete(where each node other than leaves has two children) binary tree.
+Heap: It is a complete(where each node other than leaves has two children) binary tree that comes with a heap priority order.
 https://web.cecs.pdx.edu/~sheard/course/Cs163/Doc/FullvsComplete.html
+https://www.youtube.com/watch?v=NKJnHewiGdc&t=15s
 
 A full binary tree (sometimes proper binary tree or 2-tree) is a tree in which every node other than the leaves has two children.
 A complete binary tree is a binary tree in which every level, except possibly the last, is completely filled, and all nodes are as far left as possible.
