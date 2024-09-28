@@ -1,3 +1,16 @@
+Ref: Apna College. Graph Data Structure | Tutorial for Graphs in Data Structures
+https://www.youtube.com/watch?v=59fUtYYz7ZU&t=84s
+A graph consists of nodes/vertex. Edges connect vertexes.
+Graph Application: Map, Social Media(To Find connections)
+4 Ways to Represent Graph
+
+1) Adjacency List : List<Edge> graph[v]. Graph array size is equal to the vertex. Each index contains a list of neighbours.
+Space Optimized as we only store neighbours and the time complexity to find neighbours is also O(neighbours).
+2) 2D Matrix : V * V Matrix. 1 where egde eixts else 0. This is not space-optimized as we are storing v*v and time-optimized as we need to traverse O(V) to print neighbours.
+3) Edge List: List<Edge> . This can be used when we need to sort edges. eg: MST. Minimum Spanning Tree.
+4) Impcit Graph: Where in question the graph is already given in some form. eg: find the shortest path in a matrix.
+
+
 Graph : It is represented by HashMap. Map<Int, List<Int>> where key is its vertexes and List of vertexes it is connected to.
 https://www.geeksforgeeks.org/introduction-to-graphs/
 eg:
