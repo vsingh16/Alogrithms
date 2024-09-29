@@ -1,6 +1,8 @@
 /**
 ** https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/
 ** https://practice.geeksforgeeks.org/problems/bfs-traversal-of-graph/1
+** https://www.youtube.com/watch?v=59fUtYYz7ZU&t=84s
+** Apna College: Graph Data Structure | Tutorial for Graphs in Data Structures
 ** BFS Traversal of graph is same as tree. The only difference is that we need to keep visited[], so that
 ** we don't visit same node again.
 ** Approach : Simimlar to tree, we will keep queue and add start node to it. also mark this as visited.
@@ -79,3 +81,59 @@ class Solution
         return result;
     }
 }
+
+/**
+** If the graph is disconnected and we are asked to cover disconnected nodes in BFS.
+** We can apply BFS() for all non visited nodes in the graph
+**/
+
+public class Solution {
+
+    public ArrayList<Integer> bfsOfGraph(ArrayList<ArrayList<Integer>> adj, int source, boolean[] visited) {
+
+        ArrayList<Integer> result = new ArrayList<>();
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(source);
+        visited[source] = true;
+
+        while (!queue.isEmpty()) {
+            int node = queue.remove();
+            result.add(node);
+            for (Integer neighbour : adj.get(node)) {
+                if (!visited[neighbour]) {
+                    queue.add(neighbour);
+                    visited[neighbour] = true;
+                }
+            }
+        }
+
+        return result;
+
+    }
+
+    public ArrayList<Integer> bfsOfGraph(int V, ArrayList<ArrayList<Integer>> adj) {
+
+        ArrayList<Integer> result = new ArrayList<>();
+        if (V == 0) {
+            return result;
+        }
+        boolean visited[] = new boolean[V];
+        for (int i = 0; i < V; i++) {
+            if (!visited[i]) {
+                result.addAll(bfsOfGraph(adj, i, visited));
+            }
+        }
+
+        return result;
+    }
+
+}
+
+
+
+
+
+
+
+
+
