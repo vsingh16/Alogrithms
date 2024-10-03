@@ -1,6 +1,7 @@
 /**
 ** https://www.geeksforgeeks.org/topological-sorting/
 ** https://www.youtube.com/watch?v=QaI45-uf6iE&list=PLDdcY4olLQk066ysRibhoGd3UzGr0XSQG&index=11
+** https://www.youtube.com/watch?v=59fUtYYz7ZU&t=9169s. Apna College Graph
 ** Topological sorting for Directed Acyclic Graph (DAG) is a linear ordering of vertices such that for every directed edge u v, vertex u comes before v in 
 ** the ordering. Topological Sorting for a graph is not possible if the graph is not a DAG.
 ** For example, a topological sorting of the following graph is “5 4 2 3 1 0”. There can be more than one topological sorting for a graph. For example, another topological sorting of the following graph is “4 5 2 3 1 0”. The first vertex in topological sorting is always a vertex with in-degree as 0 (a vertex with no incoming edges).
@@ -12,6 +13,11 @@
 ** Step 3: When u pop a node from queue add it to result, also decrement incount for its neighbours.
 ** Step4: Any neighbour with zero count add it to result.
 ** Time Complexity: O(V+E), Space Complexity: O(V)
+
+** Approach2:
+** Topological Sorting is print all the nodes such that u ->v
+** That means if we do traversal and once we finish complete processing of a node i.e there no further edges to go from here.
+** That means it is a V. We can store it in result. But we store v after u, so we can store in array from last index.
 **/
 class Solution
 {
@@ -57,14 +63,40 @@ class Solution
     ** Once the processing of a node is completely finished, add it to list
     ** List in reverse order gives us topo sort.
     **/
-    private static void topologicalSort(int node, List<List<Edge>> graph, boolean visited[], List<Integer> order) {
+   public class Solution {
 
-        visited[node] = true;
-        for (Edge neighbour : graph.get(node)) {
-            if (!visited[neighbour.target]) {
-                topologicalSort(neighbour.target, graph, visited, order);
+    private static int result[];
+    private static int index;
+
+    static int[] topoSort(int V, ArrayList<ArrayList<Integer>> adj) {
+
+        result = new int[V];
+        index = V - 1;
+        boolean visited[] = new boolean[V];
+        for (int i = 0; i < adj.size(); i++) {
+            if (!visited[i]) {
+                dfs(adj, i, visited);
+            }
+
+        }
+
+        return result;
+
+    }
+
+    static void dfs(ArrayList<ArrayList<Integer>> adj, int current, boolean visited[]) {
+
+        visited[current] = true;
+        for (int neighbour : adj.get(current)) {
+            if (!visited[neighbour]) {
+                dfs(adj, neighbour, visited);
             }
         }
-        order.add(node); //add element when its processing is completely finished.
+
+        result[index--] = current;
+
     }
+
+}
+
 }
