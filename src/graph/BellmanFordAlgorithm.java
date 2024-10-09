@@ -13,7 +13,7 @@
 ** In this algo, we performa relaxation V-1 times to find shortest path.
 ** V-1 This is because the shortest path in a graph without a negative cycle can have at most V-1 edges.
 ** Relaxation: distance[u] + weight < distance[v]
-** - Cycle Graph : If there is a cycle in  graph and it has -ve edge, the more no of times we visit cycle, distance will reduce.
+** -ve Cycle Graph : If there is a cycle in  graph and it has -ve edge, the more no of times we visit cycle, distance will reduce.
 ** This is the case where even Bellman Ford fails. 
 ** To Detect -ve cycle , we can traverse graph one more time and if distance is further relaxed, that means -ve cycle exists.
 ** eg: A->B : 8
