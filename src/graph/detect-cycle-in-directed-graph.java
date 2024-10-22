@@ -18,9 +18,28 @@ Approach:
 We keep two arrays one is visited[] and order[].
 We apply DFS. The extra array order[] is needed and we may visit same node again but that is not loop.
 Loop is considered when node is visted on same path i.e on a order.
-
 Time Complexity : O(V+E). DFS
 Space Complexity: O(V), visited and order array
+
+Ques) Why we track path in directed graph but not in undirected graph for cycle.
+Ans) Undirected graph, we can travel both ways. So if an edge exists which leads to already visited(excluding parent), then it is a cycle but the same is not true for directed graph
+1 - 2
+|  |
+0  -
+Undirected graph 
+0 -> 1,2
+1 -> 0,2
+2 -> 1,0
+
+Directed Graph
+1 -> 2
+^
+|  |
+0  
+
+0 -> 1,2
+1 -> 2
+2 -> 
 **/
 
  //Function to detect cycle in a directed graph.
