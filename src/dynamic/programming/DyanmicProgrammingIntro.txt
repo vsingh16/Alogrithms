@@ -13,4 +13,6 @@ And store the result of repeating steps in matrix.
 3. Note that its not ncessary that DP soution of a problem is always the best.
 Ref: https://www.youtube.com/watch?v=PGsgv6nXhLw&list=PLDzeHZWIZsTomOPnCiU3J95WufjE36wsb&index=2
 https://www.geeksforgeeks.org/program-for-nth-fibonacci-number/
+Top Down = Where We split a bigger problem. Recursion + Memorization
+Bottom Up = Small First. Tabular
 
