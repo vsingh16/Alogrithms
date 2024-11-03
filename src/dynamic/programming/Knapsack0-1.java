@@ -25,49 +25,162 @@
 **/
 
 /**
-** Time Complexity : 2^n. At each level we have two options
+** Top Down(Recursion)
+** Time Complexity: O(2^n)
+** Space Complexity: O(n)
 **/
- int knapSack(int W, int wt[], int val[], int n)
-    {
-        // Base Case
-        if (n == 0 || W == 0)
-            return 0;
- 
-        // If weight of the nth item is
-        // more than Knapsack capacity W,
-        // then this item cannot be included
-        // in the optimal solution
-        if (wt[n - 1] > W)
-            return knapSack(W, wt, val, n - 1);
- 
-        // Return the maximum of two cases:
-        // (1) nth item included
-        // (2) not included
-        else
-            return max(val[n - 1]
-                       + knapSack(W - wt[n - 1], wt,
-                                  val, n - 1),
-                       knapSack(W, wt, val, n - 1));
-    }
 
-/**
-** DP. Time Complexity : O(n*w)
-** Space Complexity: O(n*w)
-**/
-int knapSack(int W, int wt[], int val[], int n) 
-    { 
-        int dp[][] = new int[n+1][W+1];
-        for(int i=1;i<=n;i++){
-            for(int j=1;j<=W;j++){
-                if(wt[i-1] > j){
-                    dp[i][j] = dp[i-1][j];
-                }else{
-                    dp[i][j] = Math.max(val[i-1]+dp[i-1][j-wt[i-1]]
-                    ,dp[i-1][j]);    
-                }
+class Solution {
+    
+    static int knapSack(int capacity, int val[], int wt[], int index) {
+
+     //Base Case: Single Item
+        if (index == 0) {
+            if (wt[index] <= capacity) {
+                return val[index];
+            } else {
+                return 0;
             }
         }
-        
-        return dp[n][W];
-    } 
+
+
+        int include = (wt[index] <= capacity) ? val[index] + knapSack(capacity - wt[index], val, wt, index - 1) : 0;
+        int exclude = knapSack(capacity, val, wt, index - 1);
+
+        return Math.max(include, exclude);
+    }
+    
+    // Function to return max value that can be put in knapsack of capacity.
+    static int knapSack(int capacity, int val[], int wt[]) {
+        return knapSack(capacity, val, wt, wt.length-1);
+    }
+}
+=====================================================================================
+/**
+** Top Down(Recursion) + Memorization
+** Time Complexity: O(capacity*val.length)
+** Space Complexity: O(capacity*val.length)
+**/
+class Solution {
+    
+     static int knapSack(int capacity, int val[], int wt[], int index, int dp[][]) {
+
+        //Base Case: Single Item
+        if (index == 0) {
+            if (wt[index] <= capacity) {
+                return val[index];
+            } else {
+                return 0;
+            }
+        } else if (dp[capacity][index] != -1) { //Result already computed
+            return dp[capacity][index];
+        }
+
+
+        int include = (wt[index] <= capacity) ? val[index] + knapSack(capacity - wt[index], val, wt, index - 1, dp) : 0;
+        int exclude = knapSack(capacity, val, wt, index - 1, dp);
+
+        dp[capacity][index] = Math.max(include, exclude);
+
+        return dp[capacity][index];
+    }
+    
+    // Function to return max value that can be put in knapsack of capacity.
+    static int knapSack(int capacity, int val[], int wt[]) {
+        int dp[][] = new int[capacity + 1][wt.length];
+        for (int i = 0; i < dp.length; i++) {
+            for (int j = 0; j < dp[0].length; j++) {
+                dp[i][j] = -1;
+            }
+        }
+        return knapSack(capacity, val, wt, wt.length - 1, dp);
+    }
+}
+
+========================================================================================
+/**
+** Bottom Up DP
+** Time Complexity: O(capacity*val.length)
+** Space Complexity: O(capacity*val.length)
+**/
+class Solution {
+    
+    // Function to return max value that can be put in knapsack of capacity.
+    static int knapSack(int capacity, int val[], int wt[]) {
+          int dp[][] = new int[capacity + 1][wt.length];
+
+        //Single Item
+        if (val.length == 1) {
+            if (wt[0] <= capacity) {
+                return val[0];
+            } else {
+                return 0;
+            }
+        }
+
+        //Single Item Initialization. j =0
+        for (int i = 0; i <= capacity; i++) {
+            dp[i][0] = wt[0] <= i ? val[0] : 0;
+        }
+
+        for (int i = 1; i <= capacity; i++) {
+            for (int j = 1; j < val.length; j++) {
+                int include = (wt[j] <= i) ? val[j] + dp[i - wt[j]][j - 1] : 0;//(wt[index] <= capacity) ? val[index] + knapSack(capacity - wt[index], val, wt, index - 1, dp) : 0;
+                int exclude = dp[i][j - 1]; // knapSack(capacity, val, wt, index - 1, dp);
+
+                dp[i][j] = Math.max(include, exclude);
+            }
+
+        }
+
+
+        return dp[capacity][wt.length - 1];
+    }
+}
+========================================================================================
+/**
+** Bottom Up DP + Space Optimized
+** Time Complexity: O(capacity*val.length)
+** Space Complexity: O(capacity)
+**/
+class Solution {
+    
+    // Function to return max value that can be put in knapsack of capacity.
+    static int knapSack(int capacity, int val[], int wt[]) {
+    
+     
+     int previous[] = new int[capacity + 1];
+        int current[] = new int[capacity + 1];
+
+        //Single Item
+        if (val.length == 1) {
+            if (wt[0] <= capacity) {
+                return val[0];
+            } else {
+                return 0;
+            }
+        }
+
+        //Single Item Initialization. j = 0
+        for (int i = 0; i <= capacity; i++) {
+            previous[i] = wt[0] <= i ? val[0] : 0;
+        }
+
+
+        for (int j = 1; j < val.length; j++) {
+            for (int i = 1; i <= capacity; i++) { // Since we are updating capacity for all combination, hence moved weight inside
+                int include = (wt[j] <= i) ? val[j] + previous[i - wt[j]] : 0;//(wt[index] <= capacity) ? val[index] + knapSack(capacity - wt[index], val, wt, index - 1, dp) : 0;
+                int exclude = previous[i];                 // knapSack(capacity, val, wt, index - 1, dp);
+
+                current[i] = Math.max(include, exclude);
+            }
+            // Copy current results to previous for the next iteration
+            System.arraycopy(current, 0, previous, 0, capacity + 1);
+        }
+
+
+        return previous[capacity];
+    }
+}
+
 
