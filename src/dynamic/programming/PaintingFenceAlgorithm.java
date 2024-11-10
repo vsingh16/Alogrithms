@@ -22,6 +22,11 @@ Output : 6
 ** If we have 3 posts, two cases
 ** Paint last 2 With Same Colour = solve(n-2)*(k-1) //Since we have painted last 2 same colurs, n-2 more gate color we need to find. k-1 becuase l1st and 2 nd gate need to have different color
 ** Paint last 2 With different Colour = solve(n-1)*(k-1) //Since we have painted last 2 different colurs, we are only sure of last gate colour . n-1 more gate color we need to find. k-1 becuase 2 and 3 nd gate need to have different color
+
+** solve(n,k) = last 2 same + last 2 different color
+** last 2 same = solve(n-2, k) * (k-1)
+** last 2 different = solve(n-1,k) * (k-1)
+** solve(n,k) = solve(n-2, k) * (k-1) + solve(n-1,k) * (k-1)
 **/
 
 /**
