@@ -18,6 +18,7 @@ public class Stairs {
     ** for n = 2, he has two ways, either in one go or 1 by 1, 2
     ** f(n) = f(n-1) + f(n-2)
     ** Time Complexity : (2^n)
+    ** Space Complexity: O(n)
     **/
     int countWays(int n)
     {
