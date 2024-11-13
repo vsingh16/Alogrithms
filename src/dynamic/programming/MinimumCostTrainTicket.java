@@ -33,7 +33,7 @@ We need to explore 3 points.
 **/
 
 /**
-** Top Down + Recursion
+** Bottom Up + Recursion
 ** Time Complexity: O(3^n)
 ** Space Complexity: O(n)
 **/
