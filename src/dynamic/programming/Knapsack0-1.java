@@ -25,7 +25,7 @@
 **/
 
 /**
-** Top Down(Recursion)
+** Bottm Up(Recursion)
 ** Time Complexity: O(2^n)
 ** Space Complexity: O(n)
 **/
@@ -57,7 +57,7 @@ class Solution {
 }
 =====================================================================================
 /**
-** Top Down(Recursion) + Memorization
+** Bottm Up(Recursion) + Memorization
 ** Time Complexity: O(capacity*val.length)
 ** Space Complexity: O(capacity*val.length)
 **/
@@ -99,7 +99,7 @@ class Solution {
 
 ========================================================================================
 /**
-** Bottom Up DP
+** Top Down DP
 ** Time Complexity: O(capacity*val.length)
 ** Space Complexity: O(capacity*val.length)
 **/
@@ -139,7 +139,7 @@ class Solution {
 }
 ========================================================================================
 /**
-** Bottom Up DP + Space Optimized
+** Top Down DP + Space Optimized
 ** Time Complexity: O(capacity*val.length)
 ** Space Complexity: O(capacity)
 **/
