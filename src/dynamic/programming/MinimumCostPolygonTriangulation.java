@@ -24,7 +24,10 @@ This problem has recursive substructure. The idea is to divide the polygon into 
 
 /**
 ** Top Down(Becuase starting point is 0, start) + Recursion
-** Time Complexity: O(2^n) or O(n^n)
+** Time Complexity: O(2^n)
+** Recursive Calls per Level: Although there is a loop running for 𝑘. k values (approximately n iterations for the initial call), it does not imply that each recursive call spawns 
+** n branches. Each level of recursion spawns up to 𝑛 −2 different recursive paths based on the loop in the current call. However, subsequent recursive calls do not continue to branch 
+** n times for each call.
 ** Space Complexity: O(n)
 **/
 
