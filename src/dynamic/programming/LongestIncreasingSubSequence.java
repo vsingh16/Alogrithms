@@ -159,3 +159,43 @@ class Solution {
     }
 }
 =================================================
+    /**
+** Using Binary Search
+** We can take a list of subSeq.
+** We can add first element to it.
+** Now we can traverse array, if we find any element which is less than the last element in Sub Seq Array List, we can add element to list
+** If not we can find a position for array element to be inserted in sub seq list.
+** Why are we doing so because this is like we can have one more possible ans for sub seq whihc will be of same length which we have find so far but just need to replace.
+** Ref video at 28:03
+** Time Complexity: O(n*logn)
+** Space Complexity: O(n)
+**/
+
+class Solution {
+ 
+    public int lengthOfLIS(int[] a) {
+     int n = a.length;
+        List<Integer> subSeqList = new ArrayList<>();
+
+        if (n == 0) {
+            return 0;
+        }
+
+        subSeqList.add(a[0]);
+        for (int i = 1; i < n; i++) {
+            if (subSeqList.get(subSeqList.size() - 1) < a[i]) {
+                subSeqList.add(a[i]);
+            } else {
+
+              //find index in subSeq List for which a[i] is smallest
+                int index = Collections.binarySearch(subSeqList, a[i]);
+                if (index < 0) {
+                    index = Math.abs(index) - 1; //Handling of binarySearch fun return value
+                }
+                subSeqList.set(index, a[i]);
+            }
+        }
+
+        return subSeqList.size();
+    }
+}
