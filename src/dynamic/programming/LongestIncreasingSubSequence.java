@@ -200,13 +200,15 @@ class Solution {
     }
 }
 ===================================================
-Russian Doll Problme Leet Code:
-https://leetcode.com/problems/russian-doll-envelopes/submissions/1461737013/
-https://www.youtube.com/watch?v=MYHajVcnXSA : 40:16
+/**
+** Russian Doll Problme Leet Code:
+** https://leetcode.com/problems/russian-doll-envelopes/submissions/1461737013/
+** https://www.youtube.com/watch?v=MYHajVcnXSA : 40:16
 ** Time Complexity: O(n*logn)
 ** Space Complexity: O(n)
-Approach: Sort envelops by width and width are same, sort by height
-    Then extract 1D Array by height and apply Longest Increasing SubSequence
+** Approach: Sort envelops by width and width are same, sort by height. Because if two envelopes has same width, we can't put them with one another inside.
+** Then extract 1D Array by height and apply Longest Increasing SubSequence
+ **/   
 class Solution {
 
  static int longestSubsequence(int a[]) {
