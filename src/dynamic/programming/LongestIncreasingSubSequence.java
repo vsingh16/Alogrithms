@@ -199,3 +199,59 @@ class Solution {
         return subSeqList.size();
     }
 }
+===================================================
+Russian Doll Problme Leet Code:
+https://leetcode.com/problems/russian-doll-envelopes/submissions/1461737013/
+https://www.youtube.com/watch?v=MYHajVcnXSA : 40:16
+** Time Complexity: O(n*logn)
+** Space Complexity: O(n)
+Approach: Sort envelops by width and width are same, sort by height
+    Then extract 1D Array by height and apply Longest Increasing SubSequence
+class Solution {
+
+ static int longestSubsequence(int a[]) {
+
+        int n = a.length;
+        List<Integer> subSeqList = new ArrayList<>();
+
+        if (n == 0) {
+            return 0;
+        }
+
+        subSeqList.add(a[0]);
+        for (int i = 1; i < n; i++) {
+            if (subSeqList.get(subSeqList.size() - 1) < a[i]) {
+                subSeqList.add(a[i]);
+            } else {
+
+                //find index in subSeq List for which a[i] is smallest
+                int index = Collections.binarySearch(subSeqList, a[i]);
+                if (index < 0) {
+                    index = Math.abs(index) - 1; //Handling of binarySearch fun return value. CHeck implementation of this in built function
+                }
+                subSeqList.set(index, a[i]);
+            }
+        }
+
+        return subSeqList.size();
+
+    }
+
+    public int maxEnvelopes(int[][] envelopes) {
+    Arrays.sort(envelopes, (e1, e2) -> {
+            if (e1[0] != e2[0]) {
+                return e1[0] - e2[0]; //asc by width
+            } else {
+                return e2[1] - e1[1]; //desc by height
+            }
+        });
+
+        // Extract a 1D array with only height values (heights)
+        int[] height = new int[envelopes.length];
+        for (int i = 0; i < envelopes.length; i++) {
+            height[i] = envelopes[i][1];
+        }
+
+        return longestSubsequence(height);
+    }
+}
