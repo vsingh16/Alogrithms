@@ -206,9 +206,38 @@ class Solution {
 ** https://www.youtube.com/watch?v=MYHajVcnXSA : 40:16
 ** Time Complexity: O(n*logn)
 ** Space Complexity: O(n)
-** Approach: Sort envelops by width and width are same, sort by height. Because if two envelopes has same width, we can't put them with one another inside.
+** Approach 1: Sort envelops by width and height in ascending order.
+** Apply Longest Increasing SubSequence. When comparing next element can be added, check both width and height. 
+** Approach 2: Sort envelops by width and width are same, sort by height. Because if two envelopes has same width, we can't put them with one another inside.
 ** Then extract 1D Array by height and apply Longest Increasing SubSequence
  **/   
+
+    //Approach 1:
+    public static int longestSubsequenceEnvelope(int[][] envelopes) {
+        int n = envelopes.length;
+        int dp[][] = new int[n + 1][n + 1]; // required in dp[n][n] but wer have ref currentIndex + 1 or indexOfLastElementInSubsequence + 1. To Handle this dp[n+1][n+1]. Base case is already handle to be 0
+        for (int currentIndex = n - 1; currentIndex >= 0; currentIndex--) {
+            for (int indexOfLastElementInSubsequence = currentIndex - 1; indexOfLastElementInSubsequence >= -1; indexOfLastElementInSubsequence--) {
+
+                int include = 0;
+                if (indexOfLastElementInSubsequence == -1 || (envelopes[indexOfLastElementInSubsequence][0] < envelopes[currentIndex][0]
+                        && envelopes[indexOfLastElementInSubsequence][1] < envelopes[currentIndex][1])) {
+                    include = 1 + dp[currentIndex + 1][currentIndex + 1]; //The dp[][] table's columns are indexed by indexOfLastElementInSubsequence + 1, Hence in dp column we need to + 1
+                }
+
+                int exclude = dp[currentIndex + 1][indexOfLastElementInSubsequence + 1]; //Since -1 is not a valid index , handled by +1
+
+                dp[currentIndex][indexOfLastElementInSubsequence + 1] = Math.max(include, exclude);
+
+            }
+
+        }
+
+        return dp[0][0]; //dp[0][-1] but -1 is not valid index hence -1 +1
+    }
+
+
+//Approach 2    
 class Solution {
 
  static int longestSubsequence(int a[]) {
