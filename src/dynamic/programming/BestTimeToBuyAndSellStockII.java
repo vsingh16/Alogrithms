@@ -143,40 +143,6 @@ import java.util.Arrays;
 
 class Solution {
 
-    public static int maxProfit(int[] prices, int i, int canBuy, int profit, int dp[][]) {
-
-        //Base Case
-        if (i == prices.length) {
-            return 0;
-        } else if (dp[i][canBuy] != -1) { //Already Calculated
-            return dp[i][canBuy];
-        }
-
-        if (canBuy == 1) { //Buy Case
-
-            int exclude = maxProfit(prices, i + 1, 1, profit, dp);
-            int include = (profit - prices[i]) + maxProfit(prices, i + 1, 0, profit, dp);
-            dp[i][canBuy] = Math.max(exclude, include);
-
-        } else { //sell
-            int exclude = maxProfit(prices, i + 1, 0, profit, dp);
-            int include = (profit + prices[i]) + maxProfit(prices, i + 1, 1, profit, dp);
-            dp[i][canBuy] = Math.max(exclude, include);
-        }
-
-
-        return dp[i][canBuy];
-    }
-
-    public static int maxProfit(int[] prices) {
-        int n = prices.length;
-        int dp[][] = new int[n][2]; //variables changing index, canBuy flag
-        for (int i = 0; i < n; i++) {
-            Arrays.fill(dp[i], -1);
-        }
-        return maxProfit(prices, 0, 1, 0, dp);
-    }
-
     public static int maxProfitTab(int[] prices) {
         int n = prices.length;
         int dp[][] = new int[n + 1][2]; //variables changing index n+1 to handle array out of bound index, canBuy flag
@@ -220,40 +186,6 @@ class Solution {
 import java.util.Arrays;
 
 class Solution {
-
-    public static int maxProfit(int[] prices, int i, int canBuy, int profit, int dp[][]) {
-
-        //Base Case
-        if (i == prices.length) {
-            return 0;
-        } else if (dp[i][canBuy] != -1) { //Already Calculated
-            return dp[i][canBuy];
-        }
-
-        if (canBuy == 1) { //Buy Case
-
-            int exclude = maxProfit(prices, i + 1, 1, profit, dp);
-            int include = (profit - prices[i]) + maxProfit(prices, i + 1, 0, profit, dp);
-            dp[i][canBuy] = Math.max(exclude, include);
-
-        } else { //sell
-            int exclude = maxProfit(prices, i + 1, 0, profit, dp);
-            int include = (profit + prices[i]) + maxProfit(prices, i + 1, 1, profit, dp);
-            dp[i][canBuy] = Math.max(exclude, include);
-        }
-
-
-        return dp[i][canBuy];
-    }
-
-    public static int maxProfit(int[] prices) {
-        int n = prices.length;
-        int dp[][] = new int[n][2]; //variables changing index, canBuy flag
-        for (int i = 0; i < n; i++) {
-            Arrays.fill(dp[i], -1);
-        }
-        return maxProfit(prices, 0, 1, 0, dp);
-    }
 
     public static int maxProfitTab(int[] prices) {
         int n = prices.length;
