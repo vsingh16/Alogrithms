@@ -3,12 +3,13 @@ package dynamic.programming;
 /**
  * Created by vishal on 24-Mar-18.
  ** https://www.geeksforgeeks.org/edit-distance-dp-5/
- ** https://www.youtube.com/watch?v=3_KL0hiPsNE
+ ** https://leetcode.com/problems/edit-distance/description/
+ ** https://www.youtube.com/watch?v=8HEjwf28LyE&list=PLDzeHZWIZsTomOPnCiU3J95WufjE36wsb&index=36 . Love Babbar
  */
 public class EditDistance {
 
     /**
-     * Given two strings str1 and str2 and below operations that can performed on str1. Find minimum number of edits (operations) required to convert ‘str1’ into ‘str2’.
+     * Given two strings str1 and str2 and below operations that can performed on str1. Find the minimum number of edits (operations) required to convert ‘str1’ into ‘str2’.
      * *
      * Insert
      * Remove
@@ -34,116 +35,193 @@ public class EditDistance {
      */
 
     /**
-    ** Approach : start traversing from last characters.
-    ** Case 1: if they are same, no operation required, simply move to left i.e i--, j--
-    ** Case 2: If not same, there can be 3 possibility , insert, replace or remove , so 1(1 operation either insert,remove,replace) + 
-    ** insert in string 1, i, j-1
-    ** replace i-1, j-1
-    ** remove/ignore in String 1 i-1, j
-     * Time Complexity:exponential
+    ** Approach: start traversing from fthe irst characters.
+    ** Case 1: if they are the same, no operation is required, simply move to next i.e i+1, j+1
+    ** Case 2: If not same, there can be 3 possibility, insert, replace or remove, so 1(1 operation either insert,remove,replace) + 
+    ** insert in string 1, i, j+1
+    ** replace i+1, j+1
+    ** remove/ignore in String 1 i+1, j
      */
-    private static int editDistanceRec(String s1, String s2, int m, int n) {
+   /**
+** Recursion(Top Down Approach, as starting from Left 0th Index):
+** Time Complexity: O(3^n)
+** Space Complexity: O(n)
+**/
+class Solution {
 
-        //Base Case
-        /**
-         * if string 1 is empty insert all characters of string 2
-         */
-        if (m == 0) {
-            return n;
-        }
-        /**
-         * if string 2 is empty, remove all characters from string 1
-         */
-        if (n == 0) {
-            return m;
+    public static int minDistance(String word1, String word2, int i, int j) {
+
+        //Base Case : If Word1 is short and word 2 remains, we can insert remaining of word 2 in word 1
+        if (i == word1.length()) {
+            return word2.length() - j;
         }
 
-        //if last characters are same, don't do anything
-        if (s1.charAt(m - 1) == s2.charAt(n - 1)) {
-            return editDistanceRec(s1, s2, m - 1, n - 1);
+        //Base Case : If Word1 is longer and word 2 ends, we can delete remaining of word 1
+        if (j == word2.length()) {
+            return word1.length() - i;
+        }
+
+        //If Both character are same, no operation
+        if (word1.charAt(i) == word2.charAt(j)) {
+            return minDistance(word1, word2, i + 1, j + 1);
         } else {
-            /**
-             * if characters are not same , we need to do one operation
-             * so cost  = 1+min(insert,remove,replace)
-             * we will take min of all three operations
-             */
-            return 1+ Math.min(Math.min(editDistanceRec(s1, s2, m, n - 1),//insert
-                    editDistanceRec(s1, s2, m - 1, n)),//remove
-                    editDistanceRec(s1, s2, m - 1, n - 1));//replace
+            //We have 3 choices and we will take min of all 3
+            int insert = 1 + minDistance(word1, word2, i, j + 1);
+            int replace = 1 + minDistance(word1, word2, i + 1, j + 1);
+            int delete = 1 + minDistance(word1, word2, i + 1, j);
 
+            return Math.min(Math.min(insert, replace), delete);
         }
 
     }
 
-    /**
-     * Time Complexity:O(m*n)
-     * Time Complexity:O(m*n)
-     */
-    private static int editDistanceDyn(String s1, String s2) {
-
-        int m = s1.length();
-        int n = s2.length();
-
-        int dp[][] = new int[m + 1][n + 1];//m+1 to avoid -1 index error
-        for (int i = 0; i <= m; i++) {
-            for (int j = 0; j <= n; j++) {
-
-                if (i == 0)
-                    dp[i][j] = j;  // Min. operations = j
-
-                else if (j == 0)
-                    dp[i][j] = i; // Min. operations = i
-
-                    //if last characters are same, don't do anything
-                else if (s1.charAt(i - 1) == s2.charAt(j - 1)) {
-                    dp[i][j] = dp[i - 1][j - 1];
-                } else {
-                    dp[i][j] = 1 + Math.min(Math.min(dp[i][j - 1], dp[i - 1][j]), dp[i - 1][j - 1]);
-
-                }
-            }
-        }
-
-        return dp[m][n];
-
+    public static int minDistance(String word1, String word2) {
+        return minDistance(word1, word2, 0, 0);
     }
-    
-    //Below sol is DP with space optimized i.e space complexity O(n)
-    //Not in array index[i%2] for i-1, (i+1)%2
-    public int editDistance(String s, String t) {
-        
-       int m = s.length();
-        int n = t.length();
-        int dp[][] = new int[2][n+1];
-        
-        for(int i=0;i<=m;i++){
-            for(int j=0;j<=n;j++){
-                
-                //insert extra characerts of string 2 in string 1
-                if(i == 0){
-                    dp[i][j] = j;
-                }
-                //remove extra characerts in string 1
-                else if(j == 0){
-                    dp[i%2][j] = i; //because this is 1 not array index
-                }
-                //if characters are same
-                else if(s.charAt(i-1) == t.charAt(j-1)){
-                    dp[i%2][j] = dp[(i+1)%2][j-1];
-                }else{
-                    int a = dp[i%2][j-1]; //insert in string 1
-                    int b = dp[(i+1)%2][j-1]; //replace
-                    int c = dp[(i+1)%2][j]; //remove/ignore in string 1
-                    dp[i%2][j] = 1 + Math.min(Math.min(a,b),c);
-                }
-                
-            }
-        }
 
     public static void main(String[] args) {
-        String str1 = "sunday";
-        String str2 = "saturday";
-        System.out.println(editDistanceDyn(str1, str2));
+        System.out.println(minDistance("intention", "execution"));
+    }
+}
+==========================================================
+/**
+** Recursion(Top Down) + Memorization
+** Time Complexity: O(n1*n2)  //n1,n2 string length
+** Space Complexity: O(n1*n2) //n1,n2 string length
+**/
+import java.util.Arrays;
+
+class Solution {
+
+    public static int minDistance(String word1, String word2, int i, int j, int[][] dp) {
+
+        //Base Case : If Word1 is short and word 2 remains, we can insert remaining of word 2 in word 1
+        if (i == word1.length()) {
+            return word2.length() - j;
+        }
+
+        //Base Case : If Word1 is longer and word 2 ends, we can delete remaining of word 1
+        if (j == word2.length()) {
+            return word1.length() - i;
+        } else if (dp[i][j] != -1) { //Already Calculated
+            return dp[i][j];
+        }
+
+
+        //If Both character are same, no operation
+        if (word1.charAt(i) == word2.charAt(j)) {
+            dp[i][j] = minDistance(word1, word2, i + 1, j + 1, dp);
+        } else {
+            //We have 3 choices and we will take min of all 3
+            int insert = 1 + minDistance(word1, word2, i, j + 1, dp);
+            int replace = 1 + minDistance(word1, word2, i + 1, j + 1, dp);
+            int delete = 1 + minDistance(word1, word2, i + 1, j, dp);
+
+            dp[i][j] = Math.min(Math.min(insert, replace), delete);
+        }
+
+        return dp[i][j];
+
     }
 
+    public static int minDistance(String word1, String word2) {
+        int dp[][] = new int[word1.length()][word2.length()];
+        for (int i = 0; i < dp.length; i++) {
+            Arrays.fill(dp[i], -1);
+        }
+        return minDistance(word1, word2, 0, 0, dp);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(minDistance("intention", "execution"));
+    }
+}
+==========================================================
+/**
+** Bottom Up Approach(Because Starting from last index). Tabluar Approach is just opposite of recursion.
+** This is opposite of recursion but we need to handle few scenarios.
+
+** Time Complexity: O(n1*n2)  //n1,n2 string length
+** Space Complexity: O(n1*n2) //n1,n2 string length
+**/
+
+class Solution {
+    
+    public static int minDistance(String word1, String word2) {
+        int dp[][] = new int[word1.length() + 1][word2.length() + 1]; //+1 to handle array out of bound index
+
+        for (int i = word1.length(); i >= 0; i--) { //Recursion : i = 0 to word1.length() , tabular opposite
+            for (int j = word2.length(); j >= 0; j--) { //Recursion : i = 0 to word2.length() , tabular opposite
+
+                //Base Case : If Word1 is short and word 2 remains, we can insert remaining of word 2 in word 1
+                if (i == word1.length()) {
+                    dp[i][j] = word2.length() - j;
+                } else if (j == word2.length()) {  //Base Case : If Word1 is longer and word 2 ends, we can delete remaining of word 1
+                    dp[i][j] = word1.length() - i;
+                } else if (word1.charAt(i) == word2.charAt(j)) {
+                    dp[i][j] = dp[i + 1][j + 1];
+                } else {
+                    //We have 3 choices and we will take min of all 3
+                    int insert = 1 + dp[i][j + 1];
+                    int replace = 1 + dp[i + 1][j + 1];
+                    int delete = 1 + dp[i + 1][j];
+
+                    dp[i][j] = Math.min(Math.min(insert, replace), delete);
+                }
+            }
+
+        }
+
+        return dp[0][0]; // Recursion : minDistance(word1, word2, 0, 0, dp);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(minDistance("intention", "execution"));
+    }
+}
+=================================================
+/**
+** Space Optimized DP
+** Time Complexity: O(n1*n2)  //n1,n2 string length
+** Space Complexity: O(n2) //n2 string length
+**/
+import java.util.Arrays;
+
+class Solution {
+
+    public static int minDistance(String word1, String word2) {
+        //+1 to handle array out of bound index
+        int prevDp[] = new int[word2.length() + 1];
+        int currentDp[] = new int[word2.length() + 1];
+
+        for (int i = word1.length(); i >= 0; i--) { //Recursion : i = 0 to word1.length() , tabular opposite
+            for (int j = word2.length(); j >= 0; j--) { //Recursion : i = 0 to word2.length() , tabular opposite
+
+                //Base Case : If Word1 is short and word 2 remains, we can insert remaining of word 2 in word 1
+                if (i == word1.length()) {
+                    currentDp[j] = word2.length() - j;
+                } else if (j == word2.length()) {  //Base Case : If Word1 is longer and word 2 ends, we can delete remaining of word 1
+                    currentDp[j] = word1.length() - i;
+                } else if (word1.charAt(i) == word2.charAt(j)) {
+                    currentDp[j] = prevDp[j + 1];
+                } else {
+                    //We have 3 choices and we will take min of all 3
+                    int insert = 1 + currentDp[j + 1];
+                    int replace = 1 + prevDp[j + 1];
+                    int delete = 1 + prevDp[j];
+
+                    currentDp[j] = Math.min(Math.min(insert, replace), delete);
+                }
+            }
+
+            //Copy current to prev
+            prevDp = Arrays.copyOf(currentDp, currentDp.length);
+        }
+
+        return prevDp[0]; // Recursion : minDistance(word1, word2, 0, 0, dp);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(minDistance("intention", "execution"));
+    }
 }
