@@ -46,8 +46,8 @@ public static int lps(String str, int i, int j) {
 
         int n = str.length();
         int dp[][] = new int[n][n];
-        for (int i = n - 1; i >= 0; i--) {
-            for (int j = 0; j < n; j++) {
+        for (int i = n - 1; i >= 0; i--) { //Recuraion: i=0 to n-1
+            for (int j = 0; j < n; j++) { //Recuraion: j=n-1 to 0
 
                 //one length
                 if (i == j) {
@@ -64,5 +64,5 @@ public static int lps(String str, int i, int j) {
                 }
             }
         }
-        return dp[0][n - 1];
+        return dp[0][n - 1]; //Recurtsion lps(String str, 0, int n-1) 
     }
