@@ -50,6 +50,11 @@ class Solution {
 
     /**
      * Approach: This is recursive approach.
+     * We need to explore all slices. Each slice either include or exclude.
+     * For 0th Index Slice, we need to hanle the traversal space.
+     * Mid Indexes , its straightforward and done in maxSizeSlices(int[] slices, int startIndex, int endIndex, int k)
+     * Once we hit the last index, no need to explore again as we have already explored.
+     * Note here we just need to return max sum of slice picked by self.
      * Either it will eat first slice or not.
      * When it eats first slice, start Index will be startIndex+2 as it cant eat next clockwise and end Index will be n-2 as it cant eat anticlockwise
      * When it skip first slice, start Index will be startIndex+1 as it cant eat next clockwise and end Index will be n-1 as it cant eat anticlockwise
