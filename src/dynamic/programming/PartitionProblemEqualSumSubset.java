@@ -113,8 +113,8 @@ class Solution {
 
 ==========================================================
 /**
-** Bottom Up Approach(Because Starting from last index). Tabluar Approach is just opposite of recursion.
-** This is opposite of recursion but we need to handle few scenarios.
+** Bottom Up Approach(Because Starting from last index). Tabular Approach is just the opposite of recursion.
+** This is the opposite of recursion but we need to handle few scenarios.
 
 ** Time Complexity: O(n*sum/2)
 ** Space Complexity: O(n*sum/2) 
@@ -124,28 +124,34 @@ class Solution {
 
     static boolean isSusbset(int nums[], int targetSum) {
 
-        boolean dp[][] = new boolean[nums.length + 1][targetSum + 1]; // +1 to handle Array out of bound
+       boolean dp[][] = new boolean[nums.length + 1][targetSum + 2]; // nums.length + 1 to avoid Array out of Bound Index && targetSum + 2, +1 as sum/2 we need array index +1, +1 for Array out of Bound Index
+        for (int index = nums.length - 1; index >= 0; index--) { //Recursion: index = 0 to nums.length - 1
+            for (int sum = 0; sum <= targetSum; sum++) { //Recursion: sum = targetSum to 0
 
-        //Base Case Handling
-        for (int i = 0; i < nums.length; i++) {
-            dp[i][0] = true;
-        }
+                //Base Case
+                if (sum == 0) {
+                    dp[index][sum] = true;
+                } else if (index == nums.length) {
+                    dp[index][sum] = false;
+                } else {
 
-        for (int i = nums.length - 1; i >= 0; i--) {
-            for (int sum = targetSum; sum > 0; sum--) { //Since sum=0, already calculated
+                    boolean include = false;
+                    if (nums[index] <= sum) {
+                        include = dp[index + 1][sum - nums[index]];
+                    }
 
-                boolean include = false;
-                if (nums[i] <= sum) {
-                    include = dp[i + 1][sum - nums[i]];
+                    boolean exclude = dp[index + 1][sum];
+
+                    boolean result = include || exclude;
+                    dp[index][sum] = result;
+
                 }
-
-                boolean exclude = dp[i + 1][sum];
-                dp[i][sum] = include || exclude;
 
             }
         }
 
-        return dp[0][targetSum];
+
+        return dp[0][targetSum]; //Recursion isSusbset(nums, 0, sum / 2)
 
     }
 
