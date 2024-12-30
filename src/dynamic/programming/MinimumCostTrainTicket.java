@@ -1,5 +1,9 @@
 /**
-** 983. Minimum Cost For Tickets
+** 
+Ref:
+https://leetcode.com/problems/minimum-cost-for-tickets/description/
+https://www.youtube.com/watch?v=U5f__4we_Jc&list=PLDzeHZWIZsTomOPnCiU3J95WufjE36wsb&index=13
+983. Minimum Cost For Tickets
 Solved
 Medium
 Topics
