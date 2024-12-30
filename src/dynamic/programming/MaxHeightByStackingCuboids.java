@@ -58,12 +58,12 @@ class Solution {
         //Sort all cuboids based on their dimensions
         Arrays.sort(cuboids, (c1, c2) -> {
 
-            if (c1[0] != c2[0]) { //width
+            if (c1[0] != c2[0]) { //length
                 return c1[0] - c2[0];
-            } else if (c1[1] != c2[1]) { //height
+            } else if (c1[1] != c2[1]) { //width
                 return c1[1] - c2[1];
             } else {
-                return c1[2] - c2[2];
+                return c1[2] - c2[2]; //height
             }
         });
 
