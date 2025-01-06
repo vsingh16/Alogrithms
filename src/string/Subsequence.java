@@ -15,6 +15,8 @@ import java.util.Set;
  * <p>
  * Input : aaa
  * Output : a, aa, aaa
+ ** Ref: https://www.youtube.com/watch?v=V0IgCltYgg4&t=975s
+ ** https://www.geeksforgeeks.org/print-subsequences-string/
  */
 public class Subsequence {
 
@@ -55,4 +57,45 @@ public class Subsequence {
         subsequence(s, st);
         System.out.println(st);
     }
+}
+=======================================================================================================
+    Approach 2: Use Recursion, either pick a character or exlcude
+    
+import java.util.HashSet;
+import java.util.Set;
+
+class Solution {
+
+    /**
+    ** Time Complexity: O(n*2^n) . Since Incude or Exclude 2^n for every subsequence we are adding it to Set. Total SUbsequences 2^n and in worst case Set length n
+    ** Space Complexity. O(n*2^n) . Recursive Space : O(n). Total Subsequences 2^n and in worst case Set length n. Each stored subsequence can have a length of up to n. O(n) space for each subsequence.
+    ** Thus, the total space for the HashSet is O(n*2^n)    
+    **/
+    static void printSubsequences(String str, int i, String ans, Set<String> subsequences) {
+
+        //Base Case
+        if (i == str.length()) {
+            subsequences.add(ans);
+            return;
+        }
+
+        //Exclude
+        printSubsequences(str, i + 1, ans, subsequences);
+
+        //Include
+        printSubsequences(str, i + 1, ans + str.charAt(i), subsequences);
+
+
+    }
+
+    public static void main(String[] args) {
+        String str = "abc";
+        Set<String> subsequences = new HashSet<>();
+        printSubsequences(str, 0, "", subsequences);
+        subsequences.stream().forEach(System.out::println);
+
+
+    }
+
+
 }
