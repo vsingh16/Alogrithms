@@ -42,6 +42,10 @@ public class UnionOfArrays {
 Approach (Handling Unsorted Arrays Without Extra Space)
 Sort both arrays using an efficient sorting algorithm (e.g., Arrays.sort() in Java, which uses Timsort with O(n log n) complexity).
 Use two-pointer technique to find and print the union of the arrays efficiently.
+Compare elements:
+If both elements are equal, print one and move both pointers.
+If one element is smaller, print it and move that pointer.
+If one array is exhausted, print remaining elements from the other.
 Skip duplicates while processing.
 Time Complexity:
 O(m log m + n log n) → Sorting both arrays.
