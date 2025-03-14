@@ -109,6 +109,94 @@ public class UnionUnsortedArrays {
         System.out.println();
     }
 }
-    
+=========================================================================
+WAP to print intersection of two arrays
 
+Approach 1: Using HashSet (Efficient)
+Store elements of the first array in a HashSet.
+Traverse the second array and check if elements exist in the HashSet.
+If an element is found in the set, print it and remove it to avoid duplicates.
+Time Complexity:
+O(m + n) → HashSet operations are O(1) on average.
+Space Complexity:
+O(min(m, n)) → To store intersection elements.
+
+import java.util.HashSet;
+
+public class IntersectionOfArrays {
+    public static void main(String[] args) {
+        int[] arr1 = {1, 2, 2, 3, 4, 5};
+        int[] arr2 = {2, 2, 3, 5, 6};
+
+        printIntersection(arr1, arr2);
+    }
+
+    public static void printIntersection(int[] arr1, int[] arr2) {
+        HashSet<Integer> set = new HashSet<>();
+        HashSet<Integer> intersection = new HashSet<>();
+
+        // Store elements of arr1 in HashSet
+        for (int num : arr1) {
+            set.add(num);
+        }
+
+        // Check for intersection in arr2
+        for (int num : arr2) {
+            if (set.contains(num)) {
+                intersection.add(num);
+            }
+        }
+
+        // Print intersection
+        System.out.println("Intersection of two arrays: " + intersection);
+    }
+}
+
+Approach 2: Using Two-Pointer Technique (Without Extra Space)
+Sort both arrays (if not already sorted).
+Use two-pointer technique to find the intersection efficiently.
+Skip duplicates to avoid repetition.
+Time Complexity:
+O(m log m + n log n) → Sorting both arrays.
+O(m + n) → Two-pointer traversal.
+Overall: O(m log m + n log n).
+Space Complexity:
+O(1) → No extra space used.
+    
+import java.util.Arrays;
+
+public class IntersectionWithoutExtraSpace {
+    public static void main(String[] args) {
+        int[] arr1 = {1, 2, 2, 3, 4, 5};
+        int[] arr2 = {2, 2, 3, 5, 6};
+
+        printIntersection(arr1, arr2);
+    }
+
+    public static void printIntersection(int[] arr1, int[] arr2) {
+        Arrays.sort(arr1); // Sort both arrays
+        Arrays.sort(arr2);
+
+        int i = 0, j = 0;
+        System.out.print("Intersection of two arrays: ");
+
+        while (i < arr1.length && j < arr2.length) {
+            if (arr1[i] < arr2[j]) {
+                i++;
+            } else if (arr1[i] > arr2[j]) {
+                j++;
+            } else { // Common element found
+                System.out.print(arr1[i] + " ");
+                i++;
+                j++;
+
+                // Skip duplicates in both arrays
+                while (i < arr1.length && arr1[i] == arr1[i - 1]) i++;
+                while (j < arr2.length && arr2[j] == arr2[j - 1]) j++;
+            }
+        }
+        System.out.println();
+    }
+}
+    
     
