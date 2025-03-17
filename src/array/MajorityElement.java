@@ -16,7 +16,7 @@ import java.util.Map;
 ** Approach1: Maintain Freq of element in Map and we can traverse map to check if count >n/2
 **  Time Complexity:O(n) & Space Complexity:O(n)
 **
-** Approach 2: 
+** Approach 2: Moores'Voting
 ** Consider first element as majority element. C = 1
 ** Compare with other elements. If same, c++ else c--
 ** if c==0, then this number can't majority number. Becuase majority number will appear at least n/2 + 1
@@ -26,6 +26,7 @@ import java.util.Map;
 ** Time Complexity:O(n) & Space Complexity:O(1)
 ** Ref: https://www.youtube.com/watch?v=YXywKwT9EKA
 ** https://www.youtube.com/watch?v=3tbjwaGC-ng
+** https://www.youtube.com/watch?v=_xqIp2rj8bo&list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt&index=11
 **/
 
 public class MajorityElement {
@@ -70,7 +71,10 @@ public class MajorityElement {
                 c = 1;
             }
         }
-        
+
+        /** If question says majority element will always exist. No need to check below.
+        ** But if not, we can further check the frequency of the majority element found if it is greater than n/2. we got the right answer, else the majority elementdoes  not exist.
+        **/
         c=0;
         for(int i=0;i<n;i++){
             if(a[i] == ma){
