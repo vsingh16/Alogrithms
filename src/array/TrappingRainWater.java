@@ -28,6 +28,9 @@ Approach 2: We see we have two variables l and r.
 	Time Complexity: O(n)
 	Space Complexity: O(1)
 
+PS: I got confused b/w Area of the Histogram and this question. But the difference is Here water can come b/w two heights, they do not need to be continuous.
+	But for histograms, continuous bars are required.
+
 class Solution {
     public int maxArea(int[] height) {
         int l = 0, r = height.length - 1;
