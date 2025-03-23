@@ -18,7 +18,17 @@ import java.util.Stack;
  *
  * 2)else,find are for top element of stack.
  * which will be a[stack.pop()] * (right(i-1)-left(stack.peek()))
+ * 
+ * Width : When Stack is empty, i
+ * This means that the popped element was the smallest element in the histogram so far.
+* Since there is no left boundary restricting the rectangle, it extends from index 0 to i - 1, meaning width = i.
  *
+ Stack is Not Empty (i - 1 - stack.peek())
+ * Here, there is a previous smaller bar (at stack.peek()), so the rectangle width is restricted.
+
+The width is calculated as: width=i−1−stack.peek()
+This ensures that the rectangle extends only between the previous smaller bar and the current index.
+ 
  * Time Complexity:O(n) since we traversed element in one go
  * Space Complexity: O(n) because of Stack
  */
