@@ -53,7 +53,7 @@ class Solution
         if(m > n){ //no of student is greater than books
             return -1;
         }
-        int l =0; //Since Array is not sorted either we take min value of all or 0.
+        int l =0; //Since Array is not sorted either we take max(books) of all or 0.
         int h = Arrays.stream(a).sum();
         int ans = -1;
         
