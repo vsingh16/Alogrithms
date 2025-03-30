@@ -9,7 +9,7 @@
 **
 ** Output: 113
 ** Approach 1:
-** Ref Link: https://www.youtube.com/watch?v=YTTdLgyqOLY
+** Ref Link: https://www.youtube.com/watch?v=YTTdLgyqOLY . Love Babbar
 ** Similar Problem: Painters Partition Problem, Aggressive cows	etc
 ** We can create search space, starting from 0 to sum of array.
 ** We need to assign consecutive pages, we can apply binary search in this search space.
