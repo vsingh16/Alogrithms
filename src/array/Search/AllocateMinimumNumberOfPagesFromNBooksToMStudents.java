@@ -12,7 +12,7 @@
 ** Ref Link: https://www.youtube.com/watch?v=YTTdLgyqOLY
 ** Similar Problem: Painters Partition Problem, Aggressive cows	etc
 ** We can create search space, starting from 0 to sum of array.
-** Since array is sorted and we need to assign consecutive pages, we can apply binary search in this search space.
+** We need to assign consecutive pages, we can apply binary search in this search space.
 ** We can find mid.
 ** Check if mid is a possible solution, if yes, since we need to find min, store the ans & h = mid - 1
 ** if not a solution, l = mid + 1;
@@ -53,7 +53,7 @@ class Solution
         if(m > n){ //no of student is greater than books
             return -1;
         }
-        int l =0;
+        int l =0; //Since Array is not sorted either we take min value of all or 0.
         int h = Arrays.stream(a).sum();
         int ans = -1;
         
