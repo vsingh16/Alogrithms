@@ -19,6 +19,9 @@
 ** Conditions for not a solution
 ** if no of students > m || a[i] > mid (any page itself is greater than mid value)
 ** Time Complexity: O(nlogn)
+** Binary Search Iterations	O(log M)  where M = Sum of pages
+** Feasibility Check per Iteration	O(N)
+** Total Time Complexity	O(N log M)
 ** Space Complexity: O(1)
 **/
 
