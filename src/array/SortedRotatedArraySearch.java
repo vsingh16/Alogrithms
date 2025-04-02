@@ -16,7 +16,7 @@ package com.macquarie.shiner.batch.gcs.processor;
 ** if yes, we can check the element in this search space. a[l] <= search <= a[mid], return h = mid - 1, if no l = mid + 1
 ** Case 3: if case 2 fails, that means a[mid] is where array is rotated, we should check is right part.
 ** if(a[mid] <= s <= a[h]), l = mid +1 else h = mid - 1;
-** Time Complexity : O(long)
+** Time Complexity : O(logn)
 ** Ref: https://www.youtube.com/watch?v=e8RueNh2CRg
 **/
 
