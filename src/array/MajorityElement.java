@@ -27,6 +27,7 @@ import java.util.Map;
 ** Ref: https://www.youtube.com/watch?v=YXywKwT9EKA
 ** https://www.youtube.com/watch?v=3tbjwaGC-ng
 ** https://www.youtube.com/watch?v=_xqIp2rj8bo&list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt&index=11
+** https://leetcode.com/problems/majority-element/
 **/
 
 public class MajorityElement {
