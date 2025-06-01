@@ -25,6 +25,8 @@ not in fun call.
  *     ListNode(int val) { this.val = val; }
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
+ * Time Complexity: O(n)
+ * Space Complexity: O(n), recursion stack
  */
 class Solution {
     
@@ -51,4 +53,51 @@ class Solution {
         
         return result;
     }
+}
+========================================================================================
+class Solution {
+
+    private static boolean result = true;
+    private static LinkedList.ListNode left;
+
+    public static boolean isPalindrome(LinkedList.ListNode head) {
+
+        if (head == null) {
+            return true;
+        }
+
+        left = head;
+        isPalindromeUtil(head);
+
+        return result;
+
+    }
+
+    public static void isPalindromeUtil(LinkedList.ListNode right) {
+
+        //Base Case
+        if (result == false) {
+            return;
+        }
+        if (right == null) {
+            return;
+        }
+
+        isPalindromeUtil(right.next);
+
+        //Back Tracking
+        if (left.val != right.val) {
+            result = false;
+        }
+        left = left.next;
+
+    }
+
+
+    public static void main(String[] args) {
+        LinkedList list = LinkedList.fromArray(new int[]{1});
+        System.out.println(isPalindrome(list.getHead()));
+
+    }
+
 }
