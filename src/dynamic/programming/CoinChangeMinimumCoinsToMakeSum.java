@@ -1,5 +1,6 @@
 /**
 ** https://www.geeksforgeeks.org/find-minimum-number-of-coins-that-make-a-change/
+** https://leetcode.com/problems/coin-change/description/
 ** https://www.youtube.com/watch?v=A3FHNCAkhxE&list=PLDzeHZWIZsTomOPnCiU3J95WufjE36wsb&index=4&t=1633s. Love Babar Code Help
 ** Given an array coins[] of size N and a target value sum, where coins[i] represents the coins of different denominations.
 ** You have an infinite supply of each of coins. The task is to find minimum number of coins required to make the given value sum. 
@@ -32,28 +33,28 @@ Any DP problem we can solve, recursion, Top Down+Memorisation, Bottom Up
 **/
 
  Recursive Approach
- Time Complexity: O(m^sum)
+ Time Complexity: O(coins^sum)
  Space: O(sum)
- public static int minCoins(int coins[], int M, int sum) {
-
-        if (sum == 0) {
+ public static int coinChange(int[] coins, int amount) {
+	 
+        //Base Case
+        if (amount == 0) {
             return 0;
-        } else if (sum < 0) {
-            return -1;
         }
 
-
-        int min = Integer.MAX_VALUE;
+        Integer minCoinsCount = Integer.MAX_VALUE;
         for (int i = 0; i < coins.length; i++) {
-            int result = minCoins(coins, M, sum - coins[i]);
-            if (result >= 0) {
-                min = Math.min(min, 1 + result);
+            if (coins[i] <= amount) {
+                int coinsCount = coinChange(coins, amount - coins[i]);
+                if (coinsCount >= 0) {
+                    minCoinsCount = Math.min(minCoinsCount, 1 + coinsCount);
+                }
             }
         }
 
-        return min == Integer.MAX_VALUE ? -1 : min;
+        return (minCoinsCount == Integer.MAX_VALUE) ? -1 : minCoinsCount;
     }
-	=========================
+================================================================================================================
 	Top Down + Memorization
 	class Solution {
 
@@ -62,38 +63,50 @@ Any DP problem we can solve, recursion, Top Down+Memorisation, Bottom Up
   ** Time Complexity: O(Sum * Coin)
   ** Space Complexity: O(Sum)
   **/
-    public int minCoins(int coins[], int M, int sum,int results[]) {
-        if (sum == 0) {
+class Solution {
+
+    public static int coinChangeUtil(int[] coins, int amount, int dp[]) {
+
+        //Base Case
+        if (amount == 0) {
             return 0;
-        } else if (sum < 0) {
-            return -1;
-        } else if (results[sum] != -1) {
-            return results[sum];
+        } else if (dp[amount] != -10) { //Already Calculated, Since we also have -1 as result , therefore using -10
+            return dp[amount];
         }
 
-
-        int min = Integer.MAX_VALUE;
+        Integer minCoinsCount = Integer.MAX_VALUE;
         for (int i = 0; i < coins.length; i++) {
-            int result = minCoins(coins, M, sum - coins[i], results);
-            if (result >= 0) {
-                min = Math.min(min, 1 + result);
+            if (coins[i] <= amount) {
+                int coinsCount = coinChangeUtil(coins, amount - coins[i], dp);
+                if (coinsCount >= 0) {
+                    minCoinsCount = Math.min(minCoinsCount, 1 + coinsCount);
+                }
             }
         }
-        results[sum] = min == Integer.MAX_VALUE ? -1 : min;
 
-        return results[sum];
+        dp[amount] = (minCoinsCount == Integer.MAX_VALUE) ? -1 : minCoinsCount;
+
+        return dp[amount];
     }
-    
-     public int minCoins(int coins[], int M, int sum) {
 
-        int results[] = new int[sum + 1];
-        for (int i = 0; i < results.length; i++) {
-            results[i] = -1;
-        }
+    public static int coinChange(int[] coins, int amount) {
 
-        return minCoins(coins, M, sum, results);
+        int dp[] = new int[amount + 1];
+        //Pre Initialize
+        Arrays.fill(dp, -10);
+
+        return coinChangeUtil(coins, amount, dp);
 
     }
+
+    public static void main(String[] args) {
+        int coins[] = {1, 2, 5};
+        int amount = 11;
+        System.out.println(coinChange(coins, amount));
+
+
+    }
+
 }
 =========================
 Bottom Up
@@ -104,35 +117,33 @@ Bottom Up
 **/
 class Solution {
 
-    public static int minCoins(int coins[], int M, int sum) {
+    public int coinChange(int[] coins, int totalAmount) {
+    
+        int dp[] = new int[totalAmount + 1];
 
-        if (sum == 0) {
-            return 0;
-        } else if (sum < 0) {
-            return -1;
-        }
+        for (int amount = 0; amount < dp.length; amount++) { //Just opposite of recursion, copy past recurisve code
 
-        int results[] = new int[sum + 1];
-        results[0] = 0;
+            //Base Case
+            if (amount == 0) {
+                dp[amount] = 0;
+            } else {
 
-        for (int i = 1; i < results.length; i++) {
-            int min = Integer.MAX_VALUE;
-            for (int j = 0; j < coins.length; j++) {
-                int result = ((i - coins[j]) < 0) ? -1 : results[(i - coins[j])];
-                if (result >= 0) {
-                    min = Math.min(min, 1 + result);
+                Integer minCoinsCount = Integer.MAX_VALUE;
+                for (int i = 0; i < coins.length; i++) {
+                    if (coins[i] <= amount) {
+                         int coinsCount = dp[amount - coins[i]];
+                        if (coinsCount >= 0) {
+                            minCoinsCount = Math.min(minCoinsCount, 1 + coinsCount);
+                        }
+                    }
                 }
+
+                dp[amount] = (minCoinsCount == Integer.MAX_VALUE) ? -1 : minCoinsCount;
             }
-            results[i] = min == Integer.MAX_VALUE ? -1 : min;
+
         }
 
-        return results[sum];
-
-    }
-
-    public static void main(String[] args) {
-        int coins[] = {25, 10, 5};
-        System.out.println(minCoins(coins, coins.length, 30));
+        return dp[totalAmount];
     }
 }
 =========================================
