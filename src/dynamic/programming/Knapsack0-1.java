@@ -32,27 +32,33 @@
 
 class Solution {
     
-    static int knapSack(int capacity, int val[], int wt[], int index) {
+     static int knapsack(int W, int val[], int wt[], int index) {
 
-     //Base Case: Single Item
+      //Base Case, Single Item	  
         if (index == 0) {
-            if (wt[index] <= capacity) {
+           if (wt[index] <= W) {
                 return val[index];
             } else {
                 return 0;
             }
+        } else if (W == 0) {
+            return 0;
         }
 
 
-        int include = (wt[index] <= capacity) ? val[index] + knapSack(capacity - wt[index], val, wt, index - 1) : 0;
-        int exclude = knapSack(capacity, val, wt, index - 1);
+        int include = Integer.MIN_VALUE;
+        if (wt[index] <= W) {
+            include = val[index] + knapsack(W - wt[index], val, wt, index - 1);
+        }
+
+        int exclude = knapsack(W, val, wt, index - 1);
 
         return Math.max(include, exclude);
+
     }
     
-    // Function to return max value that can be put in knapsack of capacity.
-    static int knapSack(int capacity, int val[], int wt[]) {
-        return knapSack(capacity, val, wt, wt.length-1);
+    static int knapsack(int W, int val[], int wt[]) {
+        return knapsack(W, val, wt, wt.length - 1);        
     }
 }
 =====================================================================================
@@ -63,37 +69,37 @@ class Solution {
 **/
 class Solution {
     
-     static int knapSack(int capacity, int val[], int wt[], int index, int dp[][]) {
+static int knapsackUtil(int W, int val[], int wt[], int index, int dp[][]) {
 
-        //Base Case: Single Item
-        if (index == 0) {
-            if (wt[index] <= capacity) {
-                return val[index];
-            } else {
-                return 0;
-            }
-        } else if (dp[capacity][index] != -1) { //Result already computed
-            return dp[capacity][index];
+        //Base Case
+        if (index < 0) {
+            return 0;
+        } else if (W == 0) {
+            return 0;
+        } else if (dp[W][index] != -1) { //Already Calculated
+            return dp[W][index];
         }
 
 
-        int include = (wt[index] <= capacity) ? val[index] + knapSack(capacity - wt[index], val, wt, index - 1, dp) : 0;
-        int exclude = knapSack(capacity, val, wt, index - 1, dp);
+        int include = Integer.MIN_VALUE;
+        if (wt[index] <= W) {
+            include = val[index] + knapsackUtil(W - wt[index], val, wt, index - 1, dp);
+        }
 
-        dp[capacity][index] = Math.max(include, exclude);
+        int exclude = knapsackUtil(W, val, wt, index - 1, dp);
 
-        return dp[capacity][index];
+        dp[W][index] = Math.max(include, exclude);
+
+        return dp[W][index];
     }
+
     
-    // Function to return max value that can be put in knapsack of capacity.
-    static int knapSack(int capacity, int val[], int wt[]) {
-        int dp[][] = new int[capacity + 1][wt.length];
+    static int knapsack(int W, int val[], int wt[]) {
+        int dp[][] = new int[W + 1][wt.length];
         for (int i = 0; i < dp.length; i++) {
-            for (int j = 0; j < dp[0].length; j++) {
-                dp[i][j] = -1;
-            }
+            Arrays.fill(dp[i], -1);
         }
-        return knapSack(capacity, val, wt, wt.length - 1, dp);
+        return knapsackUtil(W, val, wt, wt.length - 1, dp);     
     }
 }
 
@@ -105,37 +111,37 @@ class Solution {
 **/
 class Solution {
     
-    // Function to return max value that can be put in knapsack of capacity.
-    static int knapSack(int capacity, int val[], int wt[]) {
-          int dp[][] = new int[capacity + 1][wt.length];
+    static int knapsack(int targetWeight, int val[], int wt[]) {
 
-        //Single Item
-        if (val.length == 1) {
-            if (wt[0] <= capacity) {
-                return val[0];
-            } else {
-                return 0;
+        int dp[][] = new int[targetWeight + 1][wt.length];
+
+        for (int index = 0; index < wt.length; index++) {
+
+            for (int W = 0; W <= targetWeight; W++) {
+                //Base Case
+                if (index == 0) {
+                    dp[W][index] = (wt[index] <= W) ? val[index] : 0;
+                } else if (W == 0) {
+                    dp[W][index] = 0;
+                } else {
+
+                    int include = Integer.MIN_VALUE;
+                    if (wt[index] <= W) {
+                        include = val[index] + dp[W - wt[index]][index - 1];
+                    }
+
+                    int exclude = dp[W][index - 1];
+
+                    dp[W][index] = Math.max(include, exclude);
+                }
+
             }
         }
 
-        //Single Item Initialization. j =0
-        for (int i = 0; i <= capacity; i++) {
-            dp[i][0] = wt[0] <= i ? val[0] : 0;
-        }
 
-        for (int i = 1; i <= capacity; i++) {
-            for (int j = 1; j < val.length; j++) {
-                int include = (wt[j] <= i) ? val[j] + dp[i - wt[j]][j - 1] : 0;//(wt[index] <= capacity) ? val[index] + knapSack(capacity - wt[index], val, wt, index - 1, dp) : 0;
-                int exclude = dp[i][j - 1]; // knapSack(capacity, val, wt, index - 1, dp);
-
-                dp[i][j] = Math.max(include, exclude);
-            }
-
-        }
-
-
-        return dp[capacity][wt.length - 1];
+        return dp[targetWeight][wt.length - 1];
     }
+
 }
 ========================================================================================
 /**
@@ -144,42 +150,39 @@ class Solution {
 ** Space Complexity: O(capacity)
 **/
 class Solution {
+
     
-    // Function to return max value that can be put in knapsack of capacity.
-    static int knapSack(int capacity, int val[], int wt[]) {
-    
-     
-     int previous[] = new int[capacity + 1];
-        int current[] = new int[capacity + 1];
+    static int knapsack(int targetWeight, int val[], int wt[]) {
+        int currentDp[] = new int[targetWeight + 1];
+        int previousDp[] = new int[targetWeight + 1];
 
-        //Single Item
-        if (val.length == 1) {
-            if (wt[0] <= capacity) {
-                return val[0];
-            } else {
-                return 0;
+        for (int index = 0; index < wt.length; index++) {
+
+            for (int W = 0; W <= targetWeight; W++) {
+                //Base Case
+                if (index == 0) {
+                    currentDp[W] = (wt[index] <= W) ? val[index] : 0;
+                } else if (W == 0) {
+                    currentDp[W] = 0;
+                } else {
+
+                    int include = Integer.MIN_VALUE;
+                    if (wt[index] <= W) {
+                        include = val[index] + previousDp[W - wt[index]];
+                    }
+
+                    int exclude = previousDp[W];
+
+                    currentDp[W] = Math.max(include, exclude);
+                }
+
             }
-        }
-
-        //Single Item Initialization. j = 0
-        for (int i = 0; i <= capacity; i++) {
-            previous[i] = wt[0] <= i ? val[0] : 0;
+            //Copy current to previous
+            previousDp = Arrays.copyOf(currentDp, currentDp.length);
         }
 
 
-        for (int j = 1; j < val.length; j++) {
-            for (int i = 1; i <= capacity; i++) { // Since we are updating capacity for all combination, hence moved weight inside
-                int include = (wt[j] <= i) ? val[j] + previous[i - wt[j]] : 0;//(wt[index] <= capacity) ? val[index] + knapSack(capacity - wt[index], val, wt, index - 1, dp) : 0;
-                int exclude = previous[i];                 // knapSack(capacity, val, wt, index - 1, dp);
-
-                current[i] = Math.max(include, exclude);
-            }
-            // Copy current results to previous for the next iteration
-            System.arraycopy(current, 0, previous, 0, capacity + 1);
-        }
-
-
-        return previous[capacity];
+        return previousDp[targetWeight];
     }
 }
 
