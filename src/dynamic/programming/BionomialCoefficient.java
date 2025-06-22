@@ -19,6 +19,11 @@ package dynamic.programming;
  * = n * (n-1) * (n-2).......*(n-k+1)/(k * k-1 * ...1)
  * Time Complexity:O(k)
  * Space Complexity:O(1)
+
+ ** One More Simple Approach : 
+ ncr = npr/r!
+ We can calculate npr = n * (n-1)*....upto r places
+ Refer https://github.com/vsingh16/Alogrithms/blob/master/src/dynamic/programming/PermutationCoefficientProblem.java and then find r factorial.
  */
 /**
 ** Bottm Up(Recursion)
