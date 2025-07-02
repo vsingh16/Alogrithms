@@ -128,7 +128,42 @@ public class Solution {
     }
 
 }
+=======================================================================
+    class Solution {
+    // Function to return Breadth First Search Traversal of given graph.
+    public ArrayList<Integer> bfs(ArrayList<ArrayList<Integer>> adj) {
+        boolean visited[] = new boolean[adj.size()];
+        ArrayList<Integer> result = new ArrayList<>();
+        for (int i = 0; i < adj.size(); i++) {
+            if (!visited[i]) {
+                result.addAll(bfsUtil(i, visited, adj));
+            }
+        }
 
+        return result;
+        
+    }
+    
+     public ArrayList<Integer> bfsUtil(int v, boolean visited[], ArrayList<ArrayList<Integer>> adj) {
+
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(v);
+        ArrayList<Integer> result = new ArrayList<>();
+        while (!queue.isEmpty()) {
+            int node = queue.remove();
+            result.add(node);
+            visited[node] = true;
+            ArrayList<Integer> neighbours = adj.get(node);
+            for (Integer neighbour : neighbours) {
+                if (!visited[neighbour] && !queue.contains(neighbour)) { //!queue.contains(neighbour): This is to avoid duplicate nodes or while adding to result itself as adding to queue means processing
+                    queue.add(neighbour);
+                }
+            }
+        }
+
+        return result;
+    }
+}
 
 
 
