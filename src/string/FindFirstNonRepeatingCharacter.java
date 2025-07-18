@@ -97,3 +97,65 @@ public class FindFirstNonRepeatingCharacter {
         //System.out.println(findFirstNonRepeating("geeks"));
     }
 }
+=====================================================================================================================================
+    /**
+    ** Leetocde: https://leetcode.com/problems/first-unique-character-in-a-string/description/
+    ** Given a string s, find the first non-repeating character in it and return its index. If it does not exist, return -1.
+
+ 
+
+Example 1:
+
+Input: s = "leetcode"
+
+Output: 0
+
+Explanation:
+
+The character 'l' at index 0 is the first character that does not occur at any other index.
+
+Example 2:
+
+Input: s = "loveleetcode"
+
+Output: 2
+
+Example 3:
+
+Input: s = "aabb"
+
+Output: -1
+
+ 
+
+Constraints:
+
+1 <= s.length <= 105
+s consists of only lowercase English letters.
+
+
+Approach: LinkedHashMap ensures insertion order.
+This will only have entries as per String's character only.
+Time Complexity: O(n)
+Space Complexity: O(Unique Characters)  Approx O(n)
+    **/
+    class Solution {
+    public int firstUniqChar(String s) {
+    Map<Character, Integer> frequencyMap = new LinkedHashMap<>();
+        for (char ch : s.toCharArray()) {
+            if (!frequencyMap.containsKey(ch)) {
+                frequencyMap.put(ch, 1);
+            } else {
+                frequencyMap.put(ch, frequencyMap.get(ch) + 1);
+            }
+        }
+
+        Optional<Map.Entry<Character, Integer>> optionalEntry = frequencyMap.entrySet().stream().filter(entry -> entry.getValue() == 1).findFirst();
+        if (optionalEntry.isPresent()) {
+            char ch = optionalEntry.get().getKey();
+            return s.indexOf(ch);
+        } else {
+            return -1;
+        }
+    }
+}
