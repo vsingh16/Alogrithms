@@ -137,7 +137,7 @@ s consists of only lowercase English letters.
 Approach: LinkedHashMap ensures insertion order.
 This will only have entries as per String's character only.
 Time Complexity: O(n)
-Space Complexity: O(Unique Characters)  Approx O(n)
+Space Complexity: O(1)  Since string is alphanumeric and we are storing key in map. No matter how legnthy string is max key will be 26 ONly. O(1)
     **/
     class Solution {
     public int firstUniqChar(String s) {
