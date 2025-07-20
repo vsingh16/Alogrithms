@@ -89,6 +89,47 @@ class Solution
         }
         
        return result.toString();
-    }
-    
+            }   
 }
+========================================================
+Approach: We need Uniqueness and Insertion Order.
+LinkedHashSet ensures both. We will take set one for unique and other for duplicate.
+For ans we will get from unique set.
+Time Complexity: O(n)
+Space Complexity :O(1) Since set will only contains 26 character not matter how lon string is.
+import java.util.LinkedHashSet;
+import java.util.Set;
+
+class Solution {
+
+    public static String FirstNonRepeating(String s) {
+
+        StringBuilder result = new StringBuilder();
+        Set<Character> uniqueCharacters = new LinkedHashSet<>();
+        Set<Character> duplicateCharacters = new LinkedHashSet<>();
+        for (char ch : s.toCharArray()) {
+            if (!uniqueCharacters.contains(ch) && !duplicateCharacters.contains(ch)) {
+                uniqueCharacters.add(ch);
+            } else {
+                uniqueCharacters.remove(ch);
+                duplicateCharacters.add(ch);
+            }
+            result.append(uniqueCharacters.isEmpty() ? '#' : uniqueCharacters.iterator().next());
+        }
+
+        return result.toString();
+    }
+
+    public static void main(String[] args) {
+        String input = "wwpyedwrebkbvmvkvvesansqszwtrknvehhgdiqnhietykcgujlclwgyluryjfiaeelhefputiuxtbaedbtlzegpwhmiloosqefh";
+        System.out.println(FirstNonRepeating(input));
+
+    }
+
+}
+    
+
+
+
+    
+
