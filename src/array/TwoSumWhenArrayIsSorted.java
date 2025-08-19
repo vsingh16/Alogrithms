@@ -1,6 +1,6 @@
 /**
 ** Ref: https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/
-** https://www.youtube.com/watch?v=_xqIp2rj8bo&list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt&index=11. Apna College
+** https://www.youtube.com/watch?v=0Fxc_jKj2vo&t=1209s. Apna College
 ** Approach: Since Array is already sorted, we can use two pointer approach.
 ** l=0, h=a[length]-1;
 ** Sum them if sum == target sum, we have hit right ans
