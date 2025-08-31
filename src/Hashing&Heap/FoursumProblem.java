@@ -1,6 +1,7 @@
 /**
 ** https://leetcode.com/problems/4sum/
 ** https://www.youtube.com/watch?v=8ViERnSgPKs&t=312s
+** https://www.youtube.com/watch?v=X6sL8JTROLY&t=2s Apna College
 ** Given an array nums of n integers, return an array of all the unique quadruplets [nums[a], nums[b], nums[c], nums[d]] such that:
 
 0 <= a, b, c, d < n
@@ -83,47 +84,50 @@ class Solution {
   ** Skip same element.
   ** Time Complexity: O(n^3)
   **/
-  public List < List < Integer >> fourSum(int[] arr, int target) {
-    List < List < Integer >> result = new ArrayList();
-    Arrays.sort(arr);
-    int n = arr.length;
-    for (int i = 0; i < n - 3; i++) {
-      if (i > 0 && arr[i - 1] == arr[i]) {
-        continue;
-      }
-      for (int j = i + 1; j < n - 2; j++) {
-        if (j > i + 1 && arr[j - 1] == arr[j]) {
-          continue;
+  public static List<List<Integer>> fourSum(int[] a, int target) {
+
+        Arrays.sort(a);
+
+        List<List<Integer>> result = new ArrayList<>();
+        for (int i = 0; i < a.length - 3; i++) {
+
+            if (i > 0 && a[i - 1] == a[i]) { //Skip a[i] Duplicates
+                continue;
+            }
+            for (int j = i + 1; j < a.length - 2; j++) {
+
+                if (j > 1 + i && a[j - 1] == a[j]) { //Skip a[j] Duplicates
+                    continue;
+                }
+
+                int l = j + 1;
+                int h = a.length - 1;
+                while (l < h) {
+
+                    long sum = (long) a[i] + a[j] + a[l] + a[h];
+                    if (sum == target) {
+                        result.add(List.of(a[i], a[j], a[l], a[h]));
+                        l++;
+                        h--;
+
+                        while (l < h && a[l - 1] == a[l]) {
+                            l++;
+                        }
+                    } else if (a[i] + a[j] + a[l] + a[h] < target) {
+                        l++;
+                    } else {
+                        h--;
+                    }
+
+                }
+
+            }
+
         }
 
-        int left = j + 1;
-        int right = n - 1;
-        while (left < right) {
-          if(left > j+1 && arr[left] == arr[left-1]){
-              left++;
-          }  
-          else if(right < n-1 && arr[right] == arr[right+1]){
-              right --;
-          }else{
-          int sum = arr[i] + arr[j] + arr[left] + arr[right];
-          if (sum == target) {
-            List < Integer > list = List.of(arr[i], arr[j], arr[left], arr[right]);
-            result.add(list);
-            left++;
-          } else if (sum > target) {
-            right--;
-          } else {
-            left++;
-          }    
-          }
-          
-        }
-      }
+        return result;
+
     }
-    return result;
-  }
-}
- }
 
 PS: Sometimes it is asked to print one of such quads, then in that case we use Map but with hashmap usage we face problem of duplicates in result which are hard to 
 eliminate considering their order.
