@@ -1,7 +1,7 @@
 package dynamic.programming;
 
 /**
-* Ref: https://www.geeksforgeeks.org/dsa/permutation-coefficient/
+** https://www.geeksforgeeks.org/dsa/binomial-coefficient-dp-9/
  * Created by vishal on 06-Mar-18.
  * <p>
  * C(n,k) = n!/(n-k)!*k!
@@ -162,4 +162,5 @@ class Solution {
         return previousDp[r1];
     }
 }
+
 
