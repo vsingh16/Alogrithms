@@ -47,57 +47,62 @@ Follow up:
 
 Could you solve it in-place with O(1) extra space?
 
-Approach: In order to do it in O(1), we will take two pointers l = starting , h =end
-swap(char at l, char at h)
-First we will swap individual words
-Then swap whole sentence
-eg: hey ram
-Individual Word Reversal: yeh mar
-Whole Sentence Reversal: ram hey
-
+Approach:
+We will reverse the given String. This way, we will have words in the expected places.
+Then we can reverse individual words.
 trim(): trim will remove leading and trailing space
 replaceAll() : \\s+ extra space, is replaced with one space
 **/
 
 class Solution {
-    
-    public String reverseWords(String s) {
-        
-        s = s.trim().replaceAll("\\s+"," "); // trim will remove leading and trailing space
-        char str[] = s.toCharArray();
-            
-        int l=0,h=0;
-        for(int i=0;i<str.length;i++){
-            
-             if(str[i] == ' '){
-                reverse(str,l,h-1);
-                l = i+1;
-                h = l;
-            }else{
-             h++;    
-            }
-            
-        }
-        
-        //last word
-        reverse(str,l,h-1);        
-        reverse(str,0,str.length-1);
-        
-        return String.valueOf(str);
-    }
-    
-    private void reverse(char str[], int l, int h){
-        
-        while(l<h){
-            swap(str,l++,h--);
-        }
-    }
-    
-    private void swap(char str[], int l, int h){
 
-        char temp = str[l];
-        str[l] = str[h];
-        str[h] = temp;
-        
+    private static void reverse(char s[], int l, int h) {
+
+        while (l < h) {
+
+            //Swap chart at l and h
+            char temp = s[l];
+            s[l] = s[h];
+            s[h] = temp;
+            l++;
+            h--;
+
+        }
+
+    }
+
+    public static String reverseWords(String s) {
+
+        s = s.trim().replaceAll("\\s+", " "); // trim(): trim will remove leading and trailing space . replaceAll(): \\s+ extra space, is replaced with one space
+        char ch[] = s.toCharArray();
+        reverse(ch, 0, s.length() - 1); //Reverse given string this way we will have words at expected places but they are reversed which we need to correct
+
+        //Now we will reverse individual words
+        int l = 0, h = 0;
+        while (h < ch.length) {
+
+            if (ch[h] == ' ') { //When encountered a space
+                reverse(ch, l, h - 1);
+                l = h + 1; //h is at space
+                h++;
+            } else {
+                h++;
+            }
+
+        }
+
+        //Reversing last word
+        reverse(ch, l, h - 1);
+
+        return String.valueOf(ch);
+    }
+
+    public static void main(String[] args) {
+
+        System.out.println(reverseWords("the sky is blue"));
+        System.out.println(reverseWords("  hello world  "));
+        System.out.println(reverseWords("a good   example"));
+
+
     }
 }
