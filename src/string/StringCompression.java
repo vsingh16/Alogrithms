@@ -2,39 +2,64 @@ package com.macquarie.shiner.batch.gcs.config;
 
 /**
  * https://www.geeksforgeeks.org/run-length-encoding/
+ ** https://leetcode.com/problems/string-compression/description/
  */
-public class StringCompression {
+class Solution {
 
-    public static String compress(String str) {
+    public static int compress(char[] chars) {
 
-        if (str == null || str.isEmpty()) {
-            return str;
-        }
-
-        char chArr[] = str.toCharArray();
-        char ch = chArr[0];
+        int pos = 0; // This is to track unique characters
         int counter = 1;
-        StringBuilder compressedString = new StringBuilder();
-        for (int i = 1; i < chArr.length; i++) {
+        int totalLength = 0;
+        char[] counterCharacter = {};
+        int lastUpdatedPos = 0; //Last pos since we are updating the original string
+        for (int i = 1; i < chars.length; i++) {
 
-            if (ch == chArr[i]) {
+            if (chars[i] == chars[pos]) {
                 counter++;
             } else {
-                compressedString = counter > 1 ? compressedString.append(ch).append(counter) : compressedString.append(ch);
-                ch = chArr[i];
+                chars[lastUpdatedPos++] = chars[pos];
+                totalLength++;
+                //add counter in String
+                if (counter > 1) {
+                    counterCharacter = String.valueOf(counter).toCharArray();
+                    for (int j = 0; j < counterCharacter.length; j++) {
+                        chars[lastUpdatedPos++] = counterCharacter[j];
+                    }
+                    totalLength = totalLength + counterCharacter.length;
+                }
+                pos = i;
                 counter = 1;
             }
         }
 
-        compressedString = counter > 1 ? compressedString.append(ch).append(counter) : compressedString.append(ch);
+        //Last character
+        chars[lastUpdatedPos++] = chars[pos];
+        totalLength++;
+        //add counter in String
+        if (counter > 1) {
+            counterCharacter = String.valueOf(counter).toCharArray();
+            for (int j = 0; j < counterCharacter.length; j++) {
+                chars[lastUpdatedPos++] = counterCharacter[j];
+            }
+            totalLength = totalLength + counterCharacter.length;
+        }
 
-        return compressedString.toString();
+
+        System.out.println(chars);
+        return totalLength;
+
     }
-
 
     public static void main(String[] args) {
 
-        System.out.println(compress("aaabbaa"));
-        
+        char[] chars = {'a'};
+        System.out.println("Original String");
+        System.out.println(chars);
+        System.out.println(compress(chars));
+
     }
+
+
 }
+
