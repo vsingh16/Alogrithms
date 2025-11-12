@@ -1,5 +1,6 @@
 /**
-** Ref: https://www.geeksforgeeks.org/dsa/kmp-algorithm-for-pattern-searchi
+** Ref: https://www.geeksforgeeks.org/dsa/kmp-algorithm-for-pattern-searching/
+** https://www.geeksforgeeks.org/problems/search-pattern0205/1
 ** KMP uses Longest Prefix Suffix String to decide in case of mismatch from which index we can start in pattern.
 ** LPS: https://github.com/vsingh16/Alogrithms/blob/master/src/string/LongestPrefixSuffix.java
 ** Time Complexity: O(n) //Given String
