@@ -3,7 +3,8 @@
 ** https://www.youtube.com/watch?v=H4VrKHVG5qI
 ** Rabin-Karp is:
 
-A string matching algorithm
+A string matching algorithm: There are many string matching algo. eg: Rabin Karp, KMP Algo. KMP is more sufficent than Rabin Karp.
+Rabin karp depends on hashing bad hashing can increase time complexity.
 Uses rolling hash to find all occurrences of a pattern in a text
 Optimized for cases where multiple patterns or repeated matching is required
 ** We have taken formulae for hash, opposite to the one in video.
