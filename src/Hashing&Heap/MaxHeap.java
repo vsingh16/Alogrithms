@@ -137,3 +137,103 @@ public class MaxHeap {
         Arrays.stream(this.a).forEach(System.out::println);
     }
 }
+=============================================================================================================
+    package com.vishal.ds;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class MaxHeap {
+
+    private List<Integer> a;
+
+    // Constructor
+    public MaxHeap() {
+        // Initialize your data members
+        a = new ArrayList<>();
+    }
+
+    /**
+     * insert x at last pos.
+     * Then compare with parent and move upward
+     * Time: O(logn)
+     * Space:O(n) . ArrayList
+     */
+    public void push(int x) {
+        // Insert x into the heap
+        a.add(x);
+        int currentPos = a.size() - 1;
+        while (currentPos > 0) {
+
+            int parentPos = (currentPos - 1) / 2;
+            if (a.get(currentPos) > a.get(parentPos)) {
+                swap(a, currentPos, parentPos);
+                currentPos = parentPos;
+            } else {
+                return;
+            }
+
+        }
+
+    }
+
+    /**
+     * Copy last element at top. Then compare this with left and right and move downward.
+     * Time: O(logn)
+     * Space:O(n) . ArrayList
+     */
+    public void pop() {
+
+        if (a.isEmpty()) {
+            return;
+        } else if (a.size() == 1) {
+            a.remove(0);
+            return;
+        }
+
+        int last = a.remove(a.size() - 1);
+        a.set(0, last);
+
+        int currentPos = 0;
+        while (currentPos < a.size()) {
+
+            int leftPos = 2 * currentPos + 1;
+            int rightPos = 2 * currentPos + 2;
+
+            int maxPos = currentPos;
+            if (leftPos < a.size() && a.get(leftPos) > a.get(maxPos)) {
+                maxPos = leftPos;
+            }
+            if (rightPos < a.size() && a.get(rightPos) > a.get(maxPos)) {
+                maxPos = rightPos;
+            }
+            if (maxPos != currentPos) {
+                swap(a, maxPos, currentPos);
+                currentPos = maxPos;
+            } else {
+                return;
+            }
+
+        }
+    }
+
+    public int peek() {
+        // Return the top element or -1 if empty
+        return !a.isEmpty() ? a.get(0) : -1;
+    }
+
+    public int size() {
+        return a.size();
+    }
+
+    private void swap(List<Integer> a, int xpos, int ypos) {
+
+        int temp = a.get(xpos);
+        a.set(xpos, a.get(ypos));
+        a.set(ypos, temp);
+
+    }
+
+}
+
+    
