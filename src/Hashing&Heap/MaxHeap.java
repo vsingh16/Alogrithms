@@ -179,6 +179,7 @@ public class MaxHeap {
 
     /**
      * Copy last element at top. Then compare this with left and right and move downward.
+     * Also, while removing we need to update heap size. Therefore we copy last element at top and then remove last element.
      * Time: O(logn)
      * Space:O(n) . ArrayList
      */
